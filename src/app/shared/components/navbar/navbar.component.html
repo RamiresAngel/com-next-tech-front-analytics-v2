@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg bg-white py-1">
+   <div class="container-fluid">
+      <a (click)="toggleOverlaySidebar()" class="btn btn-link d-lg-none">
+         <span class="material-symbols-outlined align-middle">menu</span>
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            <li class="nav-item" ngbDropdown>
+               <a class="nav-link no-caret" ngbDropdownToggle>
+                  <span class="material-symbols-outlined align-middle">
+                     dashboard
+                  </span>
+               </a>
+               <div class="dropdown-menu-end" ngbDropdownMenu style="width: 300px;">
+                  <div class="container">
+                     <div class="row">
+                        <div class="col-4">
+                           <a (click)="router.navigateByUrl('/suite')" class="btn btn-primary w-100 btn-sm">
+                              <span class="material-symbols-outlined align-middle">widgets</span><br>
+                              Suite
+                           </a>
+                        </div>
+                        <div class="col-4">
+                           <a class="btn btn-success w-100 btn-sm">
+                              <span class="material-symbols-outlined align-middle">home</span><br>
+                              Home
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link avatar-option" nzTrigger="click" nz-dropdown [nzDropdownMenu]="menu"
+                  nzPlacement="bottomRight">
+                  <nz-avatar class="me-2" [nzSrc]="userDataAuth0?.picture"></nz-avatar>
+                  <div>
+                     <p class="mb-0 name-avatar fw-bold">{{ userDataAuth0?.name }}</p>
+                     <p class="mb-0 rol-avatar">Administrador</p>
+                  </div>
+               </a>
+               <nz-dropdown-menu #menu="nzDropdownMenu">
+                  <ul nz-menu>
+                     <li nz-menu-item (click)="auth.logout({ logoutParams: { returnTo: documento.location.origin } })">
+                        <span class="material-symbols-outlined align-middle me-1">logout</span>
+                        Cerrar sesión
+                     </li>
+                  </ul>
+               </nz-dropdown-menu>
+            </li>
+         </ul>
+      </div>
+   </div>
+</nav>

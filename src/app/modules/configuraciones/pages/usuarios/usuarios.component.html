@@ -1,0 +1,57 @@
+<div class="container-fluid p-4">
+   <div class="row align-items-center">
+      <div class="col-12">
+         <h3 class="mb-0">Usuarios</h3>
+      </div>
+   </div>
+   <div class="row mt-3 align-items-end">
+      <div class="col-lg-4 col-xxl-3">
+         <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
+            <div class="col-12">
+               <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+                  [(ngModel)]="nivelAcceso" (ngModelChange)="getListUsers()">
+                  <nz-option nzValue="" nzLabel=""></nz-option>
+                  <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
+                     [nzLabel]="hotel.hotel"></nz-option>
+               </nz-select>
+            </div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-xxl-5">
+         <app-modal-crear-usuario (actualizarUsuarios)="getListUsers()" *ngIf="verificaFuncionalidad" [corporativo]="dataUser.corporativo"
+            [nivelAccesoSelected]="nivelAcceso" [catalogoNiveles]="dataUser.catalogo_niveles"
+            [nombreNivelAcceso]="dataUser.nombre_nivel_acceso" [emailUser]="dataUser.email"></app-modal-crear-usuario>
+      </div>
+      <div class="col-lg-5 col-xxl-4">
+         <div class="row align-items-center">
+            <label class="text-end mb-0 col-3 basic-label text-secondary">Buscar:</label>
+            <div class="col-9">
+               <input nz-input />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row mt-4">
+      <div class="col-md-12">
+         <app-loader *ngIf="isLoading" class="mt-5"></app-loader>
+         <ngx-datatable [scrollbarH]="true" *ngIf="!isLoading" #table class="material table-analytics"
+            [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+            [limit]="10" [rows]="dataTable">
+            <ngx-datatable-column [name]="dataUser.nombre_nivel_acceso" prop="hotel"></ngx-datatable-column>
+            <ngx-datatable-column name="Nombre" prop="nombre_completo"></ngx-datatable-column>
+            <ngx-datatable-column name="Correo" prop="email"></ngx-datatable-column>
+            <ngx-datatable-column name="Télefono" prop="telefono"></ngx-datatable-column>
+            <ngx-datatable-column name="Estatus" prop="estatus"></ngx-datatable-column>
+            <ngx-datatable-column name="Acciones">
+               <ng-template let-row="row" ngx-datatable-cell-template>
+                  <p class="mb-0 text-center">
+                     <app-modal-editar-rol (actualizarUsuarios)="getListUsers()" [dataUser]="dataUser" [userSelected]="row"></app-modal-editar-rol>
+                     <app-modal-editar-usuario (actualizarUsuarios)="getListUsers()" [userSelected]="row" [dataUser]="dataUser"></app-modal-editar-usuario>
+                  </p>
+               </ng-template>
+            </ngx-datatable-column>
+         </ngx-datatable>
+      </div>
+   </div>
+</div>

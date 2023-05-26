@@ -1,0 +1,54 @@
+<div class="sidebar-principal" id="sidebar-principal"
+   [ngClass]="isCollapsed ? 'toggled' : '' || isCollapsedMobile ? 'responsive-sidebar-toggled' : ''">
+   <div class="logo">
+      <div class="row h-100 align-items-center">
+         <div class="col-9" *ngIf="isCollapsed === false">
+            <img src="https://com-next-analytics-marriott.web.app/reports/image/intelligence_logo-white.png"
+               class="img-fluid">
+         </div>
+         <div [ngClass]="isCollapsed ? 'col-12 text-center d-none d-lg-block' : 'col-3 text-end d-none d-lg-block'">
+            <a (click)="toggleSidebar()" class="text-light">
+               <span class="material-symbols-outlined">
+                  menu
+               </span>
+            </a>
+         </div>
+      </div>
+   </div>
+
+   <ul class="list-group menu-sidebar">
+      <li class="list-group-item label-sidebar-menu" *ngIf="isCollapsed === false">
+         Menú
+      </li>
+      <ng-container *ngFor="let options of menuOptions | sortId: 'id'">
+         <li *ngIf="options.componentes.length === 0">
+            <a (click)="goToPage(options.href, 'option', options.id)" [id]="'option-menu-' + options.id"
+               class="list-group-item list-group-item-action option-sidebar-menu rounded-0">
+               <span class="icon-menu-sidebar material-symbols-outlined">home</span>
+               <span class="text-option-menu" *ngIf="isCollapsed === false">{{ options.label }}</span>
+            </a>
+         </li>
+         <li *ngIf="options.componentes.length >= 1">
+            <a [ngClass]="options.status ? 'collapsed-option-submenu' : ''" [id]="'option-menu-' + options.id"
+               (click)="options.status = !options.status"
+               class="list-group-item list-group-item-action option-sidebar-submenu rounded-0"
+               (mouseover)="overlapedSidebar(options.id)" (mouseleave)="leaveOverlapedSidebar(options.id)">
+               <span class="icon-menu-sidebar material-symbols-outlined">dashboard</span>
+               <span class="text-option-menu" *ngIf="isCollapsed === false">{{ options.label }}</span>
+               <span class="arrow-submenu-sidebar" *ngIf="isCollapsed === false"></span>
+            </a>
+            <ul (mouseover)="overlapedSidebar(options.id)" (mouseleave)="leaveOverlapedSidebar(options.id)"
+               [id]="'submenu-menu-' + options.id" class="list-group submenu-sidebar rounded-0"
+               [@collapse]="options.status">
+               <li *ngFor="let subOptions of options.componentes | sortId: 'id'">
+                  <a (click)="goToPage(subOptions.href, 'suboption', subOptions.id)" [id]="'option-submenu-' + subOptions.id"
+                     class="list-group-item list-group-item-action suboption-sidebar-menu rounded-0">
+                     <span class="icon-menu-sidebar material-symbols-outlined">home</span>
+                     <span class="text-option-menu">{{ subOptions.label }}</span>
+                  </a>
+               </li>
+            </ul>
+         </li>
+      </ng-container>
+   </ul>
+</div>

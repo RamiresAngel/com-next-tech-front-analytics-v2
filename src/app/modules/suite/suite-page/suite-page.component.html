@@ -1,0 +1,48 @@
+<div class="container-fluid suite-page">
+   <button class="btn btn-white d-flex align-items-center btn-top-user rounded-pill px-4" nzTrigger="hover" nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+      <nz-avatar [nzSize]="38" class="me-2" [nzSrc]="userDataAuth0?.picture"></nz-avatar>
+      <div>
+         <p class="mb-0 name-avatar fw-bold basic-label">{{ userDataAuth0?.name }}</p>
+         <p class="mb-0 rol-avatar basic-paragraph">Administrador</p>
+      </div>
+   </button>
+   <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+         <li nz-menu-item (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })">
+            <span class="material-symbols-outlined align-middle me-1">logout</span>
+            Cerrar sesión
+         </li>
+      </ul>
+   </nz-dropdown-menu>
+
+   <img src="../../../../assets/img/analytics_analytics-beyond-original-white.png" class="logo-top-suite">
+   <img src="../../../../assets/img/intelligence_nti-logo-mono-black.png" class="logo-bottom-suite">
+   <div class="container">
+      <div class="row">
+         <div class="col-12" style="position: relative;">
+            <swiper [config]="config" class="animate__animated animate__fadeInDown py-3 swiper-suite">
+               <ng-template swiperSlide *ngFor="let card of appsData | sortId: 'id'">
+                  <div nz-tooltip nzTooltipTitle="{{ card.mensaje }}"
+                     [ngClass]="{'not-enabled': card.contratado === false ,'not-authorized': card.permiso === false}"
+                     class="card card-suite border-0"
+                     (click)="goToView(card.identificador, card.permiso, card.contratado, card.mensaje)">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-12 text-center">
+                              <img height="80" src="../../../../assets/{{ card.icono }}">
+                           </div>
+                        </div>
+                        <div class="row mt-3">
+                           <h6 class="col-12 text-center text-white mb-0">{{ card.label }}</h6>
+                        </div>
+                     </div>
+                  </div>
+               </ng-template>
+            </swiper>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+         </div>
+      </div>
+   </div>
+   <app-loader-principal *ngIf="isLoading"></app-loader-principal>
+</div>

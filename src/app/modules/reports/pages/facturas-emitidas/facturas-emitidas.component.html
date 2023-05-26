@@ -1,0 +1,44 @@
+<div class="container-fluid px-4">
+   <div class="row mt-4 align-items-center">
+      <div class="col-12">
+         <h3 class="mb-0">Reportes generados</h3>
+      </div>
+   </div>
+   <div class="row mt-4 align-items-center">
+      <div class="col-lg-8 col-xxl-8">
+         <button (click)="refreshTable()" class="btn btn-primary shadow-sm btn-sm">
+            <span class="material-symbols-outlined align-middle me-1">cached</span>
+            Actualizar
+         </button>
+      </div>
+      <div class="col-lg-4 col-xxl-4">
+         <div class="row align-items-center">
+            <label class="text-end mb-0 col-3 basic-label">Buscar:</label>
+            <div class="col-9">
+               <input nz-input />
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row mt-3">
+      <div class="col-12">
+         <app-loader *ngIf="isLoading" class="mt-5"></app-loader>
+         <ngx-datatable *ngIf="!isLoading" #table class="material table-analytics" [columns]="columns"
+            [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+            [rows]="dataTable">
+            <ngx-datatable-column name="Nombre" prop="nombre_reporte"></ngx-datatable-column>
+            <ngx-datatable-column name="Nombre" prop="tipo_reporte"></ngx-datatable-column>
+            <ngx-datatable-column name="Fecha de creación" prop="fecha_creacion_date"></ngx-datatable-column>
+            <ngx-datatable-column name="Estatus" prop="status"></ngx-datatable-column>
+            <ngx-datatable-column [width]="40" name="Descarga">
+               <ng-template let-row="row" ngx-datatable-cell-template>
+                  <p class="mb-0 text-center">
+                     <app-modal-download-report [identificador]="row.identificador"
+                        [fechaCreacion]="row.fecha_creacion_date" [estatus]="row.status" [nombreReporte]="row.nombre_reporte"></app-modal-download-report>
+                  </p>
+               </ng-template>
+            </ngx-datatable-column>
+         </ngx-datatable>
+      </div>
+   </div>
+</div>

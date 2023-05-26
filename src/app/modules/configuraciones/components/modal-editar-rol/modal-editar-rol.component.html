@@ -1,0 +1,33 @@
+<button (click)="showModalMiddle()" nz-tooltip nzTooltipTitle="Asignar rol" class="btn btn-sm btn-warning me-3">
+   <span class="material-symbols-outlined align-middle">
+      supervisor_account
+   </span>
+</button>
+<nz-modal [(nzVisible)]="isVisibleMiddle" nzTitle="Asignar rol" nzCentered [nzClosable]="false" [nzFooter]="null"
+   [nzBodyStyle]="{ 'padding-bottom': '0', 'padding-top': '0' }">
+   <ng-container *nzModalContent>
+      <form class="container" [formGroup]="formEditRol" (ngSubmit)="handleOkMiddle()">
+         <div class="row mt-3">
+            <div class="col-lg-12" *ngIf="isLoading">
+               <app-loader></app-loader>
+            </div>
+            <div class="col-lg-12" *ngIf="!isLoading">
+               <div class="row">
+                  <label class="col-12 mb-1 basic-label text-secondary">Seleccionar rol</label>
+                  <div class="col-12">
+                     <nz-select class="w-100" formControlName="rol">
+                        <nz-option *ngFor="let roles of ListaRoles" [nzValue]="roles.nombre_rol" [nzLabel]="roles.nombre_rol"></nz-option>
+                     </nz-select>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row mt-4 py-3 border-top align-items-center">
+            <div class="col-12 text-end">
+               <button (click)="handleCancelMiddle()" type="button" class="btn btn-danger shadow-sm btn-sm me-3">Cancelar</button>
+               <button type="submit" class="btn btn-primary btn-sm shadow-sm">Agregar</button>
+            </div>
+         </div>
+      </form>
+   </ng-container>
+</nz-modal>

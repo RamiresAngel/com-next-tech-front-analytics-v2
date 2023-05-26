@@ -2,3 +2,126 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+@import '../node_modules/swiper/swiper.scss';
+@import '../node_modules/swiper/modules/pagination/pagination.scss';
+@import '../node_modules/swiper/modules/navigation/navigation.scss';
+@import '../node_modules/@swimlane/ngx-datatable/index.css';
+@import '../node_modules/@swimlane/ngx-datatable/themes/material.scss';
+@import '../node_modules/@swimlane/ngx-datatable/assets/icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body,
+html {
+   overflow: hidden;
+   font-family: 'Montserrat', sans-serif !important;
+}
+
+.swiper-suite {
+   .swiper-slide {
+      display: flex;
+      justify-content: center;
+   }
+}
+
+.form-control {
+   &:focus {
+      box-shadow: none;
+   }
+}
+
+.sidebar-principal {
+   height: 100vh;
+}
+
+.btn {
+   &:focus {
+      box-shadow: none !important;
+   }
+
+   .material-symbols-outlined {
+      font-size: 19px;
+   }
+}
+
+.btn-sm {
+   padding-left: 0.75rem;
+   padding-right: 0.75rem;
+}
+
+.btn-primary {
+   background-color: #244478;
+   border-color: #244478;
+
+   &:hover {
+      background-color: darken($color: #244478, $amount: 10);
+      border-color: darken($color: #244478, $amount: 10);
+   }
+}
+
+#overlay-sidebar {
+   background-color: rgba($color: #000000, $alpha: 0.8);
+   position: absolute;
+   z-index: 10;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 100%;
+}
+
+.table-analytics {
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+   border-radius: 8px;
+
+   datatable-header {
+      .datatable-header-cell {
+         background-color: #fdfdfd !important;
+      }
+   }
+
+   .datatable-body-cell {
+      border: 1px solid rgb(241, 241, 241);
+      padding: 0.5rem 1rem !important;
+   }
+}
+
+.basic-label {
+   font-size: 13px;
+}
+
+.basic-paragraph {
+   font-size: 12px;
+}
+
+.form-label-acceso {
+   background-color: transparent;
+   border: 0;
+   font-size: 15px;
+   font-weight: 600;
+}
+
+.ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+   color: #000;
+}
+
+.ant-select-selection-item-content {
+   font-size: 11px;
+}
+
+.ant-select-selection-item-disabled {
+   font-size: 11px;
+}
+
+.custom-multi-select .ant-select-selector {
+   height: auto;
+   min-height: 32px;
+   max-height: 32px;
+   overflow-y: auto;
+ }
+
+.ant-input {
+   &.ng-invalid {
+      &.ng-touched {
+         border: 1px solid red;
+      }
+   }
+}
