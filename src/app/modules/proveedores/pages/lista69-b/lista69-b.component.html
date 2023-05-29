@@ -1,0 +1,62 @@
+<div class="container-fluid p-4">
+
+  <div class="row align-items-center">
+    <div class="col-12">
+      <h3 class="mb-0">Lista 69 B</h3>
+    </div>
+  </div>
+
+  <div class="row mt-3 align-items-end">
+    <div class="col-lg-3 col-xxl-2">
+      <div class="row align-items-center">
+        <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
+        <div class="col-12">
+          <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+            [(ngModel)]="nivelAcceso" (ngModelChange)="getRfcHotelUser()" nzShowSearch>
+            <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
+              [nzLabel]="hotel.hotel"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-3">
+      <div class="row align-items-center">
+        <label class="mb-1 col-12 basic-paragraph text-secondary">RFC</label>
+        <div class="col-12">
+          <nz-select class="w-100" [nzMaxTagCount]="5" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+            [(ngModel)]="filtroRfcHotelUser">
+            <nz-option *ngFor="let rfc of listRFC" [nzLabel]="rfc" [nzValue]="rfc"></nz-option>
+          </nz-select>
+          <ng-template #tagPlaceHolder let-selectedList>y {{ selectedList.length }} más seleccionados
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5 col-xxl-7">
+      <button class="btn btn-sm btn-primary shadow-sm" (click)="getLista69_B()">
+        <span class="material-symbols-outlined align-middle">search</span>
+        Buscar
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <app-loader *ngIf="isLoading" class="mt-5"></app-loader>
+      <input type="text" style="padding:8px;margin:15px auto;width:30%;" *ngIf="!isLoading"
+        placeholder="Busca por Razón Social" (keyup)="updateFilter($event)" />
+      <ngx-datatable [scrollbarH]="true" *ngIf="!isLoading" #table class="material table-analytics" [columns]="columns"
+        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [rows]="dataTable">
+        <ngx-datatable-column name="RFC Receptor" prop="rfc_receptor"></ngx-datatable-column>
+        <ngx-datatable-column name="Proveedor" prop="rfc_emisor"></ngx-datatable-column>
+        <ngx-datatable-column name="Razón social" prop="razon_social_receptor"></ngx-datatable-column>
+        <ngx-datatable-column name="Situación del proveedor" prop="situacion_del_contribuyente"></ngx-datatable-column>
+        <ngx-datatable-column name="Fecha primer factura" prop="primer_factura"></ngx-datatable-column>
+        <ngx-datatable-column name="Fecha última factura" prop="ultima_factura"></ngx-datatable-column>
+        <ngx-datatable-column name="Importe" prop="importe"></ngx-datatable-column>
+        <ngx-datatable-column name="Fecha primera publicación" prop="fecha_primera_publicacion"></ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+
+</div>

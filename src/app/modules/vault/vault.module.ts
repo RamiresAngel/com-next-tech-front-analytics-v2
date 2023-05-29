@@ -8,12 +8,14 @@ import { FacturasEmitidasComponent } from './pages/facturas-emitidas/facturas-em
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FiltroEmisionComponent } from './pages/filtro-emision/filtro-emision.component';
 
 
 @NgModule({
   declarations: [
     VaultPageComponent,
-    FacturasEmitidasComponent
+    FacturasEmitidasComponent,
+    FiltroEmisionComponent
   ],
   imports: [
     CommonModule,

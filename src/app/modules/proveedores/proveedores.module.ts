@@ -11,12 +11,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { Lista69BComponent } from './pages/lista69-b/lista69-b.component';
 
 @NgModule({
   declarations: [
     ProveedoresPageComponent,
     Lista69Component,
-    HomeComponent
+    HomeComponent,
+    Lista69BComponent
   ],
   imports: [
     CommonModule,
