@@ -9,13 +9,13 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./filtro-emision.component.scss']
 })
 export class FiltroEmisionComponent {
-  public visible = true;
+  public visible = false;
   public nivelAccesoSelected: any;
   public dataUser!: UserData;
   public formFilters: FormGroup = new FormGroup({});
-  public tipo_factura: string = '';
+  public tipo_factura: string = 'Emision';
   public efecto_comprobante: string = '';
-  public rango_estatus: string = '';
+  public rango_estatus: string = 'Vigentes/Canceladas';
   public date_factura = null;
   public date_rango = null;
   public dateFormat = 'dd/MM/yyyy';
@@ -29,7 +29,6 @@ export class FiltroEmisionComponent {
     this.iniciaFormFiltro();
   }
 
-  /* inicializa Form Filtro */
   iniciaFormFiltro(): void {
     this.formFilters = new FormGroup({
       nivel_acceso: new FormControl(this.nivelAccesoSelected),

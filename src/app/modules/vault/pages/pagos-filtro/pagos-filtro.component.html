@@ -1,1 +1,198 @@
-<p>pagos-filtro works!</p>
+<div class="container-fluid p-4">
+
+  <form [formGroup]="formFilters">
+    <div class="row mt-3 align-items-end">
+      <div class="col-lg-3 col-xxl-2">
+        <div class="row align-items-center">
+          <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
+          <div class="col-12">
+            <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+              formControlName="nivel_acceso">
+              <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
+                [nzLabel]="hotel.hotel"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xxl-2">
+        <button class="btn btn-primary btn-sm" (click)="open()">
+          <span class="material-symbols-outlined align-middle">filter_alt</span>
+          Filtro
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
+  nzTitle="Filtro" [nzFooter]="footerTpl" (nzOnClose)="close()">
+
+  <ng-container *nzDrawerContent>
+    <!-- Formulario para filtro de tabla  -->
+    <form [formGroup]="formFilters">
+      <div class="row mt-3 align-items-end">
+
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Emision'">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Emisor*</label>
+            <div class="col-12">
+              <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+                formControlName="rfc_emisor">
+                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
+                  [nzLabel]="hotel.hotel"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Emision'">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Receptor</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="rfc_receptor">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Recepcion' ">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Receptor*</label>
+            <div class="col-12">
+              <nz-select formControlName="rfc_receptor" class="w-100"
+                [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true">
+                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
+                  [nzLabel]="hotel.hotel"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Recepcion' ">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Emisor</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="rfc_emisor">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Tipo</label>
+            <div class="col-12">
+              <nz-select formControlName="tipo_factura" nzShowSearch nzAllowClear [(ngModel)]="tipo_factura"
+                (ngModelChange)="getTipoFactura($event)" Seleccioné="Seleccine un tipo">
+                <nz-option nzLabel="Emisión" nzValue="Emision" selected></nz-option>
+                <nz-option nzLabel="Recepción" nzValue="Recepcion"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Serie Hotel</label>
+            <div class="col-12">
+              <nz-select formControlName="serie_hotel" class="w-100"
+                [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true">
+                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
+                  [nzLabel]="hotel.hotel"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Serie</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="serie">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Folio</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="folio">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Código Postal </label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="codigo_postal">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">RFC PAC </label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="rfc_pac">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Efecto de Comprobante</label>
+            <div class="col-12">
+              <nz-select nzShowSearch nzAllowClear [(ngModel)]="efecto_comprobante"
+                (ngModelChange)="getEfectoComprobante(efecto_comprobante)" Seleccioné="Seleccine un tipo"
+                nzPlaceHolder="Selecciona" formControlName="efecto_comprobante">
+                <nz-option nzLabel="I" nzValue="I"></nz-option>
+                <nz-option nzLabel="E" nzValue="E"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Folio Fiscal</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="uuid">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Rango de Estatus Factura </label>
+            <div class="col-12">
+              <nz-select [(ngModel)]="rango_estatus" (ngModelChange)="selectedVigencia($event)"
+                formControlName="rango_estatus">
+                <nz-option nzLabel="Vigentes/Canceladas" nzValue="Vigentes/Canceladas" selected></nz-option>
+                <nz-option nzLabel="Vigentes" nzValue="Vigentes"></nz-option>
+                <nz-option nzLabel="Canceladas" nzValue="Canceladas"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-xxl-6 mt-3" *ngIf="vista_Fecha">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Fecha Factura</label>
+            <div class="col-12">
+              <nz-range-picker [nzFormat]="'yyyy/MM/dd'" [(ngModel)]="date_factura" (ngModelChange)="onChange($event)"
+                [ngModelOptions]="{standalone: true}"></nz-range-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-xxl-6 mt-3" *ngIf="vista_Rango">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Rango de Fecha Cancelación</label>
+            <div class="col-12">
+              <nz-range-picker [nzFormat]="'yyyy/MM/dd'" [(ngModel)]="date_rango" (ngModelChange)="
+              rangoCancelacion($event)" [ngModelOptions]="{standalone: true}"></nz-range-picker>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button nz-button class="btn btn-danger btn-sm" style="margin-right: 8px;" (click)="close()">Cancel</button>
+      <button nz-button class="btn btn-primary btn-sm" (click)="filtrar()">Consultar</button>
+    </div>
+  </ng-template>
+</nz-drawer>
