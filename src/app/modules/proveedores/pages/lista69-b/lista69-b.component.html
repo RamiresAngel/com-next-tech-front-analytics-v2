@@ -43,7 +43,7 @@
   <div class="row mt-3">
     <div class="col-md-12">
       <app-loader *ngIf="isLoading" class="mt-5"></app-loader>
-      <input type="text" style="padding:8px;margin:15px auto;width:30%;" *ngIf="!isLoading"
+      <input nz-input type="text" style="padding:8px;margin:15px auto;width:30%;" *ngIf="!isLoading"
         placeholder="Busca por Razón Social" (keyup)="updateFilter($event)" />
       <ngx-datatable [scrollbarH]="true" *ngIf="!isLoading" #table class="material table-analytics" [columns]="columns"
         [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5" [rows]="dataTable">
