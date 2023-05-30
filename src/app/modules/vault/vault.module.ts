@@ -12,13 +12,21 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { PagosEmitidosComponent } from './pages/pagos-emitidos/pagos-emitidos.component';
+import { PagosFiltroComponent } from './pages/pagos-filtro/pagos-filtro.component';
+import { FacturasPPDComponent } from './pages/facturas-ppd/facturas-ppd.component';
+import { PPDFiltroComponent } from './pages/ppd-filtro/ppd-filtro.component';
 
 
 @NgModule({
   declarations: [
     VaultPageComponent,
     FacturasEmitidasComponent,
-    FiltroEmisionComponent
+    FiltroEmisionComponent,
+    PagosEmitidosComponent,
+    PagosFiltroComponent,
+    FacturasPPDComponent,
+    PPDFiltroComponent
   ],
   imports: [
     CommonModule,
