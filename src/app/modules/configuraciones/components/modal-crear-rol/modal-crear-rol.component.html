@@ -1,0 +1,36 @@
+<button (click)="showModalMiddle()" class="btn btn-primary shadow-sm btn-sm">
+   <span class="material-symbols-outlined align-middle me-1">add</span>
+   Agregar rol
+</button>
+<nz-modal [(nzVisible)]="isVisibleMiddle" nzTitle="Agregar rol" [nzBodyStyle]="{ 'padding-bottom': '0' }"
+   [nzFooter]="null" [nzClosable]="false" nzCentered>
+   <ng-container *nzModalContent>
+      <form class="container" [formGroup]="formCrearRol" (ngSubmit)="handleOkMiddle()">
+         <div class="row">
+            <label class="col-12 mb-1">Nombre del rol</label>
+            <div class="col-12">
+               <input nz-input type="text" formControlName="nombre_rol" />
+            </div>
+         </div>
+         <div class="row mt-3">
+            <label class="col-12 mb-1">Lista de funcionalidades</label>
+            <div class="col-12">
+               <nz-select class="w-100 custom-multi-select" [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder"
+                  nzMode="multiple" formControlName="funcionalidades">
+                  <nz-option *ngFor="let funcionalidad of listaFuncionalidades" [nzLabel]="funcionalidad"
+                     [nzValue]="funcionalidad"></nz-option>
+               </nz-select>
+               <ng-template #tagPlaceHolder let-selectedList>y {{ selectedList.length }} más
+                  seleccionados</ng-template>
+            </div>
+         </div>
+         <div class="row mt-4 py-3 border-top align-items-center">
+            <div class="col-12 text-end">
+               <button (click)="handleCancelMiddle()" type="button"
+                  class="btn btn-danger shadow-sm btn-sm me-3">Cancelar</button>
+               <button type="submit" class="btn btn-primary btn-sm shadow-sm">Agregar</button>
+            </div>
+         </div>
+      </form>
+   </ng-container>
+</nz-modal>

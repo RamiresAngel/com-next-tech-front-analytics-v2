@@ -1,4 +1,5 @@
-import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { bodyGetListUsers, bodyRfcHotelUser } from 'src/app/shared/entities/bodys.model';
 import { TablaUsuarios } from 'src/app/shared/entities/configuraciones.model';
@@ -21,6 +22,7 @@ export class UsuariosComponent implements OnInit {
   public verificaFuncionalidad!:boolean;
   public rowsTable:Array<TablaUsuarios> = [];
   public dataTable: Array<any> = [];
+  @ViewChild(DatatableComponent) table!: DatatableComponent;
 
   constructor(
     private configuracionesService:ConfiguracionesService,
@@ -38,7 +40,6 @@ export class UsuariosComponent implements OnInit {
         this.verificaFuncionalidad = response;
       }, (error:any) => {
         if (error.status === 401) {
-          localStorage.clear();
           this.notificationService.error("¡Error!", "Su token ha expirado, por favor, inicie sesión nuevamente.")
           this.autenticacionService.cerrarSesion();
         }
@@ -110,6 +111,21 @@ export class UsuariosComponent implements OnInit {
         this.notificationService.error("¡Error!", error.error);
       }
     )
+  }
+
+  public updateFilter(event:any) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.rowsTable.filter(function (d) {
+      return d.nombre_completo?.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.dataTable = temp;
+    
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
   }
 
   columns = [

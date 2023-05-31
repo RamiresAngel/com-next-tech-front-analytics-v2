@@ -94,7 +94,6 @@ export class SuitePageComponent implements AfterViewInit {
           this.router.navigate(['/', modulo]);
         }, (error: any) => {
           if (error.status === 401) {
-            localStorage.clear();
             this.autenticacion.cerrarSesion();
           }
         }

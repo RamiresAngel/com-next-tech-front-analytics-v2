@@ -81,4 +81,28 @@ export interface bodyEditarUsuario {
    estatus: string
    identificador: string
    hotel: string
+}
+
+export interface bodyCrearRol {
+   nombre_rol: string
+   funcionalidades: string[]
+   corporativo: string
+}
+
+export interface bodyRFCUser {
+   email: string
+   corporativo: string
+   nivel_acceso: string
+   rol: string
+}
+
+export interface bodyCrearRFCCorporativo {
+   rfc: string
+   id_corporativo: number
+   razon_social: string
+   file_cer: string
+   file_key: string
+   corporativo: string
+   password: string
+   nivel_acceso: string
  }

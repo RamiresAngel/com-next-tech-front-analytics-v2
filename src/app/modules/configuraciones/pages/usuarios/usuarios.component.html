@@ -9,7 +9,7 @@
          <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
             <div class="col-12">
-               <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+               <nz-select nzShowSearch class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
                   [(ngModel)]="nivelAcceso" (ngModelChange)="getListUsers()">
                   <nz-option nzValue="" nzLabel=""></nz-option>
                   <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
@@ -27,7 +27,7 @@
          <div class="row align-items-center">
             <label class="text-end mb-0 col-3 basic-label text-secondary">Buscar:</label>
             <div class="col-9">
-               <input nz-input />
+               <input nz-input type="text" (keyup)="updateFilter($event)" />
             </div>
          </div>
       </div>

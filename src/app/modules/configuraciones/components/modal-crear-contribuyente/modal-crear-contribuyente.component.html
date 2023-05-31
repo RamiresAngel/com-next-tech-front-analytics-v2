@@ -1,0 +1,150 @@
+<button class="btn btn-sm btn-primary shadow-sm" (click)="showModalMiddle()">
+   <span class="material-symbols-outlined align-middle me-1">add</span>
+   Agregar contribuyente
+</button>
+<nz-modal [(nzVisible)]="isVisibleMiddle" nzTitle="Crear contribuyente" nzCentered [nzFooter]="null"
+   [nzBodyStyle]="{ 'padding-bottom': '0px' }" [nzWidth]="800" [nzClosable]="false">
+   <ng-container *nzModalContent>
+      <form class="container" [formGroup]="formAddContribuyente" (ngSubmit)="handleOkMiddle()" autocomplete="off">
+         <div class="row">
+            <div class="col-lg-6">
+               <div class="row">
+                  <label class="col-12 mb-1 basic-label">RFC</label>
+                  <div class="col-12">
+                     <input nz-input type="text" formControlName="rfc" />
+                  </div>
+               </div>
+               <div class="row mt-3">
+                  <label class="col-12 mb-1 basic-label">Razón social</label>
+                  <div class="col-12">
+                     <input nz-input type="text" formControlName="razon_social" autocomplete="off" />
+                  </div>
+               </div>
+               <div class="row mt-3">
+                  <label class="col-12 mb-1 basic-label">Password</label>
+                  <div class="col-12">
+                     <input nz-input type="password" formControlName="password" autocomplete="off" />
+                  </div>
+               </div>
+
+               <div class="row mt-4 align-items-center">
+                  <label class="col-5 mb-0 basic-label d-flex align-items-center">Archivo .CER
+                     <span *ngIf="cerDataFile.length > 0 ? true : false"
+                        class="ms-2 material-symbols-outlined align-middle text-success animate__animated animate__fadeIn">
+                        check_circle
+                     </span>
+                  </label>
+                  <div class="col-7 ps-0">
+                     <input #inputCERFile type="file" [hidden]="true" accept=".cer" name="hola4" id="inputCERFile"
+                        (change)="uploadCerFile($event)">
+                     <label *ngIf="cerDataFile.length > 0 ? false : true" for="inputCERFile"
+                        class="btn btn-sm btn-primary">
+                        <span class="material-symbols-outlined align-middle basic-label me-1">upload</span>
+                        Subir archivo
+                     </label>
+                  </div>
+                  <div class="col-12 mt-3" *ngIf="cerDataFile.length > 0">
+                     <div class="card animate__animated animate__fadeIn">
+                        <div class="card-body py-2">
+                           <div class="row">
+                              <div class="col-2 d-flex align-items-center">
+                                 <span class="material-symbols-outlined align-middle text-secondary">description</span>
+                              </div>
+                              <label class="mb-0 col-8 ps-0 basic-label text-truncate">
+                                 {{ cerDataFile[0].name }}
+                              </label>
+                              <div class="col-2 text-end">
+                                 <a (click)="removeCerFile()" title="Eliminar archivo" class="text-danger">
+                                    <span class="material-symbols-outlined align-middle">delete</span>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <hr>
+               <div class="row mt-3 align-items-center">
+                  <label class="col-5 mb-0 basic-label d-flex align-items-center">Archivo .KEY
+                     <span *ngIf="keyDataFile.length > 0 ? true : false"
+                        class="ms-2 material-symbols-outlined align-middle text-success animate__animated animate__fadeIn">
+                        check_circle
+                     </span>
+                  </label>
+                  <div class="col-7 ps-0">
+                     <input #inputKEYFile type="file" [hidden]="true" accept=".key" name="hola5" id="inputKEYFile"
+                        (change)="uploadKeyFile($event)">
+                     <label *ngIf="keyDataFile.length > 0 ? false : true" for="inputKEYFile"
+                        class="btn btn-sm btn-primary">
+                        <span class="material-symbols-outlined align-middle basic-label me-1">upload</span>
+                        Subir archivo
+                     </label>
+                  </div>
+                  <div class="col-12 mt-3" *ngIf="keyDataFile.length > 0">
+                     <div class="card animate__animated animate__fadeIn">
+                        <div class="card-body py-2">
+                           <div class="row">
+                              <div class="col-2 d-flex align-items-center">
+                                 <span class="material-symbols-outlined align-middle text-secondary">description</span>
+                              </div>
+                              <label class="mb-0 col-8 ps-0 basic-label text-truncate">
+                                 {{ keyDataFile[0].name }}
+                              </label>
+                              <div class="col-2 text-end">
+                                 <a (click)="removeKeyFile()" title="Eliminar archivo" class="text-danger">
+                                    <span class="material-symbols-outlined align-middle">delete</span>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6">
+               <div class="row">
+                  <div class="col-12">
+                     <h5 class="text-secondary">Términos y condiciones</h5>
+                     <ul class="basic-label mb-0 mt-3" style="list-style: square; text-align: justify;">
+                        <li>
+                           El servicio de descarga masiva del SAT requiere la autentificación del contribuyente con
+                           su E-firma. A través de esta funcionalidad podrás recuperar hasta 200 mil registros por
+                           petición y hasta un millón en metadata. No existe limitante en cuanto al número de
+                           solicitudes siempre que no se descargue en más de dos ocasiones un XML.
+                        </li>
+                        <li>
+                           Los archivos .cer, .key y password que componen la E-firma son resguardados y
+                           encriptados en Google Cloud . De modo que solamente el usuario tiene control sobre ella,
+                           Next Technologies no tiene acceso a esta información.
+                        </li>
+                        <li>
+                           Los XMLs se encuentran resguardados en Google Cloud Storage, la información estará
+                           disponible para ti a través de FACTO Audit. En caso de requerirla por otro medio,
+                           contacta a soporte técnico al teléfono +52 55 12058000 opción 2.
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="row mt-3">
+                  <div class="col-12 text-end">
+                     <label class="fw-bold" nz-checkbox (nzCheckedChange)="contratoAceptado = !contratoAceptado">Acepto los términos
+                        y condiciones</label>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row mt-4 py-3 border-top align-items-center">
+            <div class="col-12 text-end">
+               <button (click)="handleCancelMiddle()" type="button"
+                  class="btn btn-danger shadow-sm btn-sm me-3">Cancelar</button>
+               <span nz-tooltip
+                  [nzTooltipTitle]="contratoAceptado === false ? 'Por favor, acepte los términos y condiciones para continuar.' : ''">
+                  <button [disabled]="!contratoAceptado" type="submit"
+                     class="btn btn-primary btn-sm shadow-sm">Agregar</button>
+               </span>
+
+            </div>
+         </div>
+      </form>
+   </ng-container>
+</nz-modal>

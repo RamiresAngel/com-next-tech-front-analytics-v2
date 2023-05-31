@@ -35,6 +35,7 @@ export class AutenticacionService {
   }
 
   public cerrarSesion() : void {
+    localStorage.clear();
     this.auth.logout({ logoutParams: { returnTo: this.documento.location.origin }});
   }
 

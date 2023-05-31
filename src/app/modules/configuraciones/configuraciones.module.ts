@@ -16,7 +16,14 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { ModalEditarRolComponent } from './components/modal-editar-rol/modal-editar-rol.component';
 import { ModalEditarUsuarioComponent } from './components/modal-editar-usuario/modal-editar-usuario.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-
+import { RolesComponent } from './pages/roles/roles.component';
+import { ModalCrearRolComponent } from './components/modal-crear-rol/modal-crear-rol.component';
+import { SociedadesComponent } from './pages/sociedades/sociedades.component';
+import { ModalCrearContribuyenteComponent } from './components/modal-crear-contribuyente/modal-crear-contribuyente.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { ModalEditarContribuyenteComponent } from './components/modal-editar-contribuyente/modal-editar-contribuyente.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,12 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     UsuariosComponent,
     ModalCrearUsuarioComponent,
     ModalEditarRolComponent,
-    ModalEditarUsuarioComponent
+    ModalEditarUsuarioComponent,
+    RolesComponent,
+    ModalCrearRolComponent,
+    SociedadesComponent,
+    ModalCrearContribuyenteComponent,
+    ModalEditarContribuyenteComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +50,10 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     NgxDatatableModule,
     NzModalModule,
     NzToolTipModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzCheckboxModule,
+    NzUploadModule,
+    NzMessageModule
   ]
 })
 export class ConfiguracionesModule { }

@@ -2,8 +2,8 @@
    <button class="btn btn-white d-flex align-items-center btn-top-user rounded-pill px-4" nzTrigger="hover" nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
       <nz-avatar [nzSize]="38" class="me-2" [nzSrc]="userDataAuth0?.picture"></nz-avatar>
       <div>
-         <p class="mb-0 name-avatar fw-bold basic-label">{{ userDataAuth0?.name }}</p>
-         <p class="mb-0 rol-avatar basic-paragraph">Administrador</p>
+         <p class="mb-0 name-avatar fw-bold basic-label text-start">{{ userDataAuth0?.name }}</p>
+         <p class="mb-0 rol-avatar basic-paragraph text-start">Administrador</p>
       </div>
    </button>
    <nz-dropdown-menu #menu="nzDropdownMenu">

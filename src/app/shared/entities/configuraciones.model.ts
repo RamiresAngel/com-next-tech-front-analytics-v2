@@ -26,3 +26,12 @@ export interface ListaRoles {
    mostrar: boolean
    funcionalidades: string[]
 }
+
+export interface ListaContribuyentes {
+   rfc: string
+   razon_social: string
+   estatus: string
+   identificador: string
+   fecha_creacion: string
+   fecha_ultimo_movimiento: string
+ }
