@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserData } from 'src/app/shared/entities/userData.model';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
@@ -9,18 +9,19 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./filtro-emision.component.scss']
 })
 export class FiltroEmisionComponent {
+  datesArray: Date[] = [];
   public visible = false;
-  public nivelAccesoSelected: any;
+  public nivelAccesoSelected: string = '';
   public dataUser!: UserData;
   public formFilters: FormGroup = new FormGroup({});
   public tipo_factura: string = 'Emision';
   public efecto_comprobante: string = '';
-  public rango_estatus: string = 'Vigentes/Canceladas';
   public date_factura = null;
   public date_rango = null;
   public dateFormat = 'dd/MM/yyyy';
   public vista_Fecha: boolean = true;
   public vista_Rango: boolean = true;
+
 
   constructor(
     private utils_service: UtilsService,
@@ -31,10 +32,10 @@ export class FiltroEmisionComponent {
 
   iniciaFormFiltro(): void {
     this.formFilters = new FormGroup({
-      nivel_acceso: new FormControl(this.nivelAccesoSelected),
+      nivel_acceso: new FormControl(this.nivelAccesoSelected, [Validators.required]),
       rfc_emisor: new FormControl(''),
       rfc_receptor: new FormControl(''),
-      tipo_factura: new FormControl('Emision'),
+      tipo_factura: new FormControl(),
       serie_hotel: new FormControl([]),
       serie: new FormControl(''),
       folio: new FormControl(''),
@@ -42,13 +43,14 @@ export class FiltroEmisionComponent {
       rfc_pac: new FormControl(''),
       efecto_comprobante: new FormControl(''),
       uuid: new FormControl(''),
-      rango_estatus: new FormControl('Vigentes/Canceladas'),
-      fecha_factura: new FormControl(),
+      rango_estatus_f: new FormControl('Vigentes/Canceladas'),
+      fecha_factura: new FormControl([Validators.required]),
       rango_cancelacion: new FormControl(''),
     });
   }
 
   filtrar(): void {
+    console.log(this.formFilters);
     console.log(this.formFilters.value);
   }
 
@@ -56,7 +58,10 @@ export class FiltroEmisionComponent {
     let vista = this.utils_service.setFechasVista(event);
     this.vista_Fecha = vista.fecha;
     this.vista_Rango = vista.rango;
-    this.rango_estatus = event;
+  }
+
+  selectedCatalogoNivel(event: any): void {
+    this.nivelAccesoSelected = event;
   }
 
   getTipoFactura(event: any): void {
@@ -70,6 +75,7 @@ export class FiltroEmisionComponent {
 
   onChange(result: Date[]): void {
     let fechas = this.utils_service.obtenerFormatoFechas(result);
+    if (fechas.inicio === '' || fechas.fin === '') return;
     this.formFilters.patchValue({ fecha_factura: fechas });
   }
 

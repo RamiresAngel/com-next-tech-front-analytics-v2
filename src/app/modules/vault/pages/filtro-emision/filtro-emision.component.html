@@ -6,8 +6,8 @@
         <div class="row align-items-center">
           <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
           <div class="col-12">
-            <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
-              formControlName="nivel_acceso">
+            <nz-select class="w-100" nzShowSearch [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+              formControlName="nivel_acceso" (ngModelChange)="selectedCatalogoNivel($event)">
               <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
                 [nzLabel]="hotel.hotel"></nz-option>
             </nz-select>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="col-lg-3 col-xxl-2">
-        <button class="btn btn-primary btn-sm" (click)="open()">
+        <button class="btn btn-primary btn-sm" (click)="open()" [disabled]="nivelAccesoSelected === ''">
           <span class="material-symbols-outlined align-middle">filter_alt</span>
           Filtro
         </button>
@@ -156,8 +156,7 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Rango de Estatus Factura </label>
             <div class="col-12">
-              <nz-select [(ngModel)]="rango_estatus" (ngModelChange)="selectedVigencia($event)"
-                formControlName="rango_estatus">
+              <nz-select (ngModelChange)="selectedVigencia($event)" formControlName="rango_estatus_f">
                 <nz-option nzLabel="Vigentes/Canceladas" nzValue="Vigentes/Canceladas" selected></nz-option>
                 <nz-option nzLabel="Vigentes" nzValue="Vigentes"></nz-option>
                 <nz-option nzLabel="Canceladas" nzValue="Canceladas"></nz-option>
@@ -170,7 +169,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Fecha Factura</label>
             <div class="col-12">
-              <nz-range-picker [nzFormat]="'yyyy/MM/dd'" [(ngModel)]="date_factura" (ngModelChange)="onChange($event)"
+              <nz-range-picker [nzDefaultPickerValue]="date_factura" [nzFormat]="'yyyy/MM/dd'"
+                [(ngModel)]="date_factura" (ngModelChange)="onChange($event)"
                 [ngModelOptions]="{standalone: true}"></nz-range-picker>
             </div>
           </div>
