@@ -191,8 +191,12 @@
 
   <ng-template #footerTpl>
     <div style="float: right">
+      <button nz-button class="btn btn-info btn-sm" style="margin-right: 8px;" (click)="showModal()"><span>
+          Reporte</span></button>
       <button nz-button class="btn btn-danger btn-sm" style="margin-right: 8px;" (click)="close()">Cancel</button>
       <button nz-button class="btn btn-primary btn-sm" (click)="filtrar()">Consultar</button>
     </div>
   </ng-template>
 </nz-drawer>
+
+<app-genera-reporte #modal (nombre)="generarReporte($event)"></app-genera-reporte>"

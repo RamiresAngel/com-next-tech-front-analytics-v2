@@ -18,6 +18,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     ReactiveFormsModule,
     NzDatePickerModule,
     NzModalModule,
+    NzNotificationModule,
     FormsModule
   ]
 })

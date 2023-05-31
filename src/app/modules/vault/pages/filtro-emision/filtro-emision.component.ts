@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserData } from 'src/app/shared/entities/userData.model';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-reporte.component';
 
 @Component({
   selector: 'app-filtro-emision',
@@ -9,7 +10,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./filtro-emision.component.scss']
 })
 export class FiltroEmisionComponent {
-  datesArray: Date[] = [];
+  @ViewChild('modal') modal?: GeneraReporteComponent;
   public visible = false;
   public nivelAccesoSelected: string = '';
   public dataUser!: UserData;
@@ -21,7 +22,6 @@ export class FiltroEmisionComponent {
   public dateFormat = 'dd/MM/yyyy';
   public vista_Fecha: boolean = true;
   public vista_Rango: boolean = true;
-
 
   constructor(
     private utils_service: UtilsService,
@@ -90,6 +90,14 @@ export class FiltroEmisionComponent {
 
   close(): void {
     this.visible = false;
+  }
+
+  generaReporte(event: any): void {
+    console.log(event);
+  }
+
+  showModal() {
+    this.modal?.showModal();
   }
 
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserData } from 'src/app/shared/entities/userData.model';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-reporte.component';
 
 @Component({
   selector: 'app-pagos-filtro',
@@ -9,6 +10,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./pagos-filtro.component.scss']
 })
 export class PagosFiltroComponent {
+  @ViewChild('modal') modal?: GeneraReporteComponent;
   public visible = false;
   public nivelAccesoSelected: any;
   public dataUser!: UserData;
@@ -84,6 +86,14 @@ export class PagosFiltroComponent {
 
   close(): void {
     this.visible = false;
+  }
+
+  generaReporte(event: any): void {
+    console.log(event);
+  }
+
+  showModal(): void {
+    this.modal?.showModal();
   }
 
 }

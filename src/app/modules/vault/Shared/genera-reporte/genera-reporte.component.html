@@ -1,1 +1,22 @@
-<p>genera-reporte works!</p>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <!-- Formulario para nombre reporte  -->
+    <form [formGroup]="form_reporte">
+      <div class="row mt-3 align-items-end">
+        <div class="col-lg-12 col-xxl-12 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Nombre Reporte Generado</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="Reporte_nombre">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" class="btn btn-danger btn-sm" style="margin-right: 8px;"
+      (click)="handleCancel()">Cancelar</button>
+    <button nz-button nzType="primary" class="btn btn-primary btn-sm" (click)="handleOk()">Genera Reporte</button>
+  </div>
+</nz-modal>
