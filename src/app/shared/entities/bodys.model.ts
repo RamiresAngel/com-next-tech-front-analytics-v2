@@ -105,4 +105,19 @@ export interface bodyCrearRFCCorporativo {
    corporativo: string
    password: string
    nivel_acceso: string
- }
+}
+
+export interface bodyEditarRFCCorporativo {
+   corporativo: string
+   identificador: string
+   file_cer: string
+   file_key: string
+   password: string
+}
+
+export interface bodyNivelesAcceso {
+   email: string
+   corporativo: string
+   niveles_acceso: string[]
+   rol: string
+}

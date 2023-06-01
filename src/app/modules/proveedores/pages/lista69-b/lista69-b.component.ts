@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { EMPTY } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { bodyRfcHotelUser } from 'src/app/shared/entities/bodys.model';
-import { UserData } from 'src/app/shared/entities/userData.model';
-import { ProveedoresLista69 } from 'src/app/shared/entities/vault.model';
+import { ProveedoresLista69, UserData, bodyRfcHotelUser } from 'src/app/shared/entities';
 import { ProveedoresService } from 'src/app/shared/services/proveedores.service';
 
 @Component({

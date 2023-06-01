@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserData } from 'src/app/shared/entities/userData.model';
+import { UserData } from 'src/app/shared/entities';
 
 @Component({
   selector: 'app-facturas-emitidas',

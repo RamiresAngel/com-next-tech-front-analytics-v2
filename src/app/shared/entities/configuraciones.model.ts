@@ -1,3 +1,8 @@
+export interface RfcHotelUser {
+   rfc_map: string[]
+   cp: string
+}
+
 export interface TablaUsuarios {
    apps: string[]
    corporativo: string

@@ -1,8 +1,3 @@
-export interface RfcHotelUser {
-   rfc_map: string[]
-   cp: string
-}
-
 export interface ProveedoresLista69 {
    rfc_receptor: string
    rfc_emisor: string

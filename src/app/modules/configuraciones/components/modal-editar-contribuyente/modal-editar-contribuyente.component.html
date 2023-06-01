@@ -1,4 +1,4 @@
-<!-- <button class="btn btn-sm btn-primary shadow-sm" (click)="showModalMiddle()">
+<button class="btn btn-sm btn-primary shadow-sm" (click)="showModalMiddle()">
    <span class="material-symbols-outlined me-1 align-middle">edit</span>
    Editar
 </button>
@@ -9,19 +9,14 @@
   nzCentered
   [nzClosable]="false"
   [nzFooter]="null"
+  [nzBodyStyle]="{ 'padding-bottom': '0px' }"
 >
   <ng-container *nzModalContent>
-   <form class="container" [formGroup]="formAddContribuyente" (ngSubmit)="handleOkMiddle()" autocomplete="off">
+   <form class="container" [formGroup]="formEditContribuyente" (ngSubmit)="handleOkMiddle()" autocomplete="off">
       <div class="row">
          <label class="col-12 mb-1 basic-label">RFC</label>
          <div class="col-12">
             <input nz-input type="text" formControlName="rfc" />
-         </div>
-      </div>
-      <div class="row mt-3">
-         <label class="col-12 mb-1 basic-label">Razón social</label>
-         <div class="col-12">
-            <input nz-input type="text" formControlName="razon_social" autocomplete="off" />
          </div>
       </div>
       <div class="row mt-3">
@@ -30,16 +25,15 @@
             <input nz-input type="password" formControlName="password" autocomplete="off" />
          </div>
       </div>
-
       <div class="row mt-4 align-items-center">
-         <label class="col-5 mb-0 basic-label d-flex align-items-center">Archivo .CER
-            <span *ngIf="cerDataFile.length > 0 ? true : false"
-               class="ms-2 material-symbols-outlined align-middle text-success animate__animated animate__fadeIn">
-               check_circle
-            </span>
-         </label>
-         <div class="col-7 ps-0">
-            <input #inputCERFile type="file" [hidden]="true" accept=".cer" name="hola4" id="inputCERFile"
+         <div class="col-12 d-flex align-items-center">
+            <label class="me-3 mb-0 basic-label d-flex align-items-center">Archivo .CER
+               <span *ngIf="cerDataFile.length > 0 ? true : false"
+                  class="ms-2 material-symbols-outlined align-middle text-success animate__animated animate__fadeIn">
+                  check_circle
+               </span>
+            </label>
+            <input #inputCERFile type="file" [hidden]="true" accept=".cer" name="cerFile" id="inputCERFile"
                (change)="uploadCerFile($event)">
             <label *ngIf="cerDataFile.length > 0 ? false : true" for="inputCERFile"
                class="btn btn-sm btn-primary">
@@ -69,14 +63,14 @@
       </div>
       <hr>
       <div class="row mt-3 align-items-center">
-         <label class="col-5 mb-0 basic-label d-flex align-items-center">Archivo .KEY
-            <span *ngIf="keyDataFile.length > 0 ? true : false"
-               class="ms-2 material-symbols-outlined align-middle text-success animate__animated animate__fadeIn">
-               check_circle
-            </span>
-         </label>
-         <div class="col-7 ps-0">
-            <input #inputKEYFile type="file" [hidden]="true" accept=".key" name="hola5" id="inputKEYFile"
+         <div class="col-12 d-flex align-items-center">
+            <label class="me-3 mb-0 basic-label d-flex align-items-center">Archivo .KEY
+               <span *ngIf="keyDataFile.length > 0 ? true : false"
+                  class="ms-2 material-symbols-outlined align-middle text-success animate__animated animate__fadeIn">
+                  check_circle
+               </span>
+            </label>
+            <input #inputKEYFile type="file" [hidden]="true" accept=".key" name="keyFile" id="inputKEYFile"
                (change)="uploadKeyFile($event)">
             <label *ngIf="keyDataFile.length > 0 ? false : true" for="inputKEYFile"
                class="btn btn-sm btn-primary">
@@ -109,10 +103,10 @@
             <button (click)="handleCancelMiddle()" type="button"
                class="btn btn-danger shadow-sm btn-sm me-3">Cancelar</button>
             <button type="submit"
-               class="btn btn-primary btn-sm shadow-sm">Agregar</button>
+               class="btn btn-primary btn-sm shadow-sm">Guardar cambios</button>
 
          </div>
       </div>
    </form>
   </ng-container>
-</nz-modal> -->
+</nz-modal>

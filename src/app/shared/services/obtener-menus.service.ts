@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, Injectable } from '@angular/core';
 import { globalApis } from 'src/environments/endpoints';
-import { BodyMenu } from '../entities/bodys.model';
-import { MenuEntity } from '../entities/menu.model';
+import { MenuEntity, BodyMenu } from '../entities';
 import { Observable } from 'rxjs';
 
 @Injectable({

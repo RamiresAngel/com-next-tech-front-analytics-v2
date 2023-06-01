@@ -55,9 +55,7 @@ export class ModalCrearContribuyenteComponent {
 
   public handleOkMiddle(): void {
     this.formAddContribuyente.markAllAsTouched();
-    if (this.formAddContribuyente.valid === true) {
-      console.log(this.formAddContribuyente.value);
-      
+    if (this.formAddContribuyente.valid === true) {      
       this.configuracionesService.crearRFCCorporativo(this.formAddContribuyente.value).subscribe(
         response => {
           this.removeCerFile();

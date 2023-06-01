@@ -1,9 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { globalApis } from '../../../environments/endpoints';
 import { Observable } from 'rxjs';
-import { UserData } from '../entities/userData.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BodyLogin } from '../entities/bodys.model';
+import { BodyLogin, UserData } from '../entities';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 

@@ -6,6 +6,7 @@ import {
   bodyCrearRFCCorporativo,
   bodyCrearRol,
   bodyCrearUsuario,
+  bodyEditarRFCCorporativo,
   bodyEditarUsuario,
   bodyGetListUsers,
   bodyListarRfcHotel,
@@ -28,7 +29,8 @@ export class ConfiguracionesService {
   private apiCreateUser: string = globalApis.url_usuarios + '/create_user';
   private apiCreateRol: string = globalApis.url_usuarios + '/create_rol';
   private apiRFCUser: string = globalApis.url_contribuyentes + '/rfc_user';
-  private apiCrearRFCCorporativo: string = globalApis.url_contribuyentes + 'crear_rfc_corporativo';
+  private apiCrearRFCCorporativo: string = globalApis.url_contribuyentes + '/crear_rfc_corporativo';
+  private apiEditarRFCCorporativo: string = globalApis.url_contribuyentes + '/editar_rfc_corporativo';
 
   constructor(
     private http: HttpClient
@@ -86,5 +88,9 @@ export class ConfiguracionesService {
 
   public crearRFCCorporativo(body:bodyCrearRFCCorporativo) : Observable<any> {
     return this.http.post<any>(this.apiCrearRFCCorporativo, JSON.stringify(body), { headers: this.headerAuth });
+  }
+
+  public editarRFCCorporativo(body:bodyEditarRFCCorporativo) : Observable<any> {
+    return this.http.post<any>(this.apiEditarRFCCorporativo, JSON.stringify(body), { headers: this.headerAuth });
   }
 }

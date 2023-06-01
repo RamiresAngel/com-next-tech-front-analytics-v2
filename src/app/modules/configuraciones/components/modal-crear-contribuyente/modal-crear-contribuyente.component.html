@@ -35,7 +35,7 @@
                      </span>
                   </label>
                   <div class="col-7 ps-0">
-                     <input #inputCERFile type="file" [hidden]="true" accept=".cer" name="hola4" id="inputCERFile"
+                     <input #inputCERFile type="file" [hidden]="true" accept=".cer" name="cerFile" id="inputCERFile"
                         (change)="uploadCerFile($event)">
                      <label *ngIf="cerDataFile.length > 0 ? false : true" for="inputCERFile"
                         class="btn btn-sm btn-primary">
@@ -72,7 +72,7 @@
                      </span>
                   </label>
                   <div class="col-7 ps-0">
-                     <input #inputKEYFile type="file" [hidden]="true" accept=".key" name="hola5" id="inputKEYFile"
+                     <input #inputKEYFile type="file" [hidden]="true" accept=".key" name="keyFile" id="inputKEYFile"
                         (change)="uploadKeyFile($event)">
                      <label *ngIf="keyDataFile.length > 0 ? false : true" for="inputKEYFile"
                         class="btn btn-sm btn-primary">

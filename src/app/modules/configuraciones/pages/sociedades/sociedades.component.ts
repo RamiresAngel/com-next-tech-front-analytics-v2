@@ -76,6 +76,22 @@ export class SociedadesComponent implements OnInit {
     );
   }
 
+  public updateFilter(event:any) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.rowsTable.filter(function (d) {
+      return (d.rfc.toLowerCase().indexOf(val) !== -1 || !val) ||
+      (d.razon_social.toLowerCase().indexOf(val) !== -1 || !val)
+    });
+
+    // update the rows
+    this.dataTable = temp;
+    
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
+  }
+
   columns = [
     { prop: 'rfc' },
     { prop: 'razon_social' },

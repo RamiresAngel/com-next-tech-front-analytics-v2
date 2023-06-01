@@ -2,9 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { globalApis } from 'src/environments/endpoints';
-import { bodyDescargaReportes, bodyDescargarReporte, bodyRfcHotelUser } from '../entities/bodys.model';
-import { ReportDescarga, ReporteLink } from '../entities/reports.model';
-import { RfcHotelUser } from '../entities/vault.model';
+import { RfcHotelUser, ReportDescarga, ReporteLink, bodyDescargaReportes, bodyDescargarReporte, bodyRfcHotelUser } from '../entities';
 
 @Injectable({
   providedIn: 'root'

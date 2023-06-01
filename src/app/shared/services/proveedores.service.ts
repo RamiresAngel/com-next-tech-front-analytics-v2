@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { globalApis } from 'src/environments/endpoints';
-import { bodyProveedoresLIsta69, bodyRfcHotelUser, bodyVerificaFuncionalidad } from '../entities/bodys.model';
-import { ProveedoresLista69, RfcHotelUser } from '../entities/proveedores.model';
+import { ProveedoresLista69, RfcHotelUser, bodyProveedoresLIsta69, bodyRfcHotelUser, bodyVerificaFuncionalidad } from '../entities';
 
 @Injectable({
   providedIn: 'root'

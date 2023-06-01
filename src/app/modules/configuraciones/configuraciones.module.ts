@@ -24,6 +24,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { ModalEditarContribuyenteComponent } from './components/modal-editar-contribuyente/modal-editar-contribuyente.component';
+import { NivelAccesoComponent } from './pages/nivel-acceso/nivel-acceso.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModalEditarContribuyenteComponent } from './components/modal-editar-con
     ModalCrearRolComponent,
     SociedadesComponent,
     ModalCrearContribuyenteComponent,
-    ModalEditarContribuyenteComponent
+    ModalEditarContribuyenteComponent,
+    NivelAccesoComponent
   ],
   imports: [
     CommonModule,
