@@ -17,8 +17,8 @@ export class Lista69Component implements OnInit {
   public nivelAcceso: any;
   public filtroHotel!: bodyRfcHotelUser;
   public filtroRfcHotelUser!: string[];
-  public listRFC!:string[];
-  public rowsTable:Array<ProveedoresLista69> = [];
+  public listRFC: string[] = [];
+  public rowsTable: Array<ProveedoresLista69> = [];
   public dataTable: Array<any> = [];
   public isLoading: boolean = false;
 
@@ -56,10 +56,10 @@ export class Lista69Component implements OnInit {
     }
 
     this.proveedoresService.getRfcHotelUser(this.filtroHotel).subscribe(
-      response => {
+      (response: any) => {
         this.listRFC = response.rfc_map;
         this.isLoading = false;
-      }, (error:any) => {
+      }, (error: any) => {
         this.isLoading = false;
         this.notificationService.error("¡Error!", "No se pudo cargar la información, por favor intente de nuevo más tarde.");
       }
@@ -68,7 +68,7 @@ export class Lista69Component implements OnInit {
 
   public getProveedores69(): void {
     this.isLoading = true;
-    this.proveedoresService.getProveedoresLista69({rfc: this.filtroRfcHotelUser}).subscribe(
+    this.proveedoresService.getProveedoresLista69({ rfc: this.filtroRfcHotelUser }).subscribe(
       response => {
         response.forEach(element => {
           this.rowsTable.push(
@@ -84,9 +84,9 @@ export class Lista69Component implements OnInit {
             }
           );
         });
-        this.dataTable = this.rowsTable;        
+        this.dataTable = this.rowsTable;
         this.isLoading = false;
-      }, (error:any) => {
+      }, (error: any) => {
         this.isLoading = false;
         while (this.dataTable.length) {
           this.dataTable.pop();

@@ -1,6 +1,7 @@
+import { RfcHotelUser, UserData, RFCMap } from './../../../../shared/entities';
+import { VaultService } from './../../../../shared/services/vault.service';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserData } from 'src/app/shared/entities/userData.model';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-reporte.component';
 
@@ -14,6 +15,7 @@ export class FiltroEmisionComponent {
   public visible = false;
   public nivelAccesoSelected: string = '';
   public dataUser!: UserData;
+  public rfc_map: RFCMap[] = [];
   public formFilters: FormGroup = new FormGroup({});
   public tipo_factura: string = 'Emision';
   public efecto_comprobante: string = '';
@@ -25,6 +27,7 @@ export class FiltroEmisionComponent {
 
   constructor(
     private utils_service: UtilsService,
+    private vault_service: VaultService
   ) {
     this.dataUser = JSON.parse(localStorage.getItem("dataUser")!);
     this.iniciaFormFiltro();
@@ -54,14 +57,35 @@ export class FiltroEmisionComponent {
     console.log(this.formFilters.value);
   }
 
+  selectedCatalogoNivel(event: any): void {
+    this.nivelAccesoSelected = event;
+    this.getRFCEmisor(this.nivelAccesoSelected);
+  }
+
+  /* Función que consume api y obtiene un objeto para select RFC emisor */
+  getRFCEmisor(acceso: string): void {
+    let body = {
+      email: this.dataUser.email,
+      corporativo: this.dataUser.corporativo,
+      nivel_acceso: acceso,
+      rol: this.dataUser.rol
+    };
+    this.vault_service.getRFCMap(body).subscribe(
+      (data: RfcHotelUser) => {
+        this.rfc_map = data.rfc_map;
+      }, (error: any) => {
+        console.log(error);
+      });
+  }
+
+  selectedRfc(event: any, tipo: string): void {
+    console.log(event, tipo);
+  }
+
   selectedVigencia(event: any): void {
     let vista = this.utils_service.setFechasVista(event);
     this.vista_Fecha = vista.fecha;
     this.vista_Rango = vista.rango;
-  }
-
-  selectedCatalogoNivel(event: any): void {
-    this.nivelAccesoSelected = event;
   }
 
   getTipoFactura(event: any): void {

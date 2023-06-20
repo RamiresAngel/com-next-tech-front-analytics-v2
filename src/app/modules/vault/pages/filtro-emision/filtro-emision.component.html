@@ -36,10 +36,9 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Emisor*</label>
             <div class="col-12">
-              <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
-                formControlName="rfc_emisor">
-                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
-                  [nzLabel]="hotel.hotel"></nz-option>
+              <nz-select class="w-100" nzShowSearch formControlName="rfc_emisor"
+                (ngModelChange)="selectedRfc($event, 'emisor')">
+                <nz-option *ngFor="let rfc of rfc_map" [nzValue]="rfc.rfc" [nzLabel]="rfc.rfc"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -56,10 +55,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Receptor*</label>
             <div class="col-12">
-              <nz-select formControlName="rfc_receptor" class="w-100"
-                [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true">
-                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
-                  [nzLabel]="hotel.hotel"></nz-option>
+              <nz-select formControlName="rfc_receptor" class="w-100" (ngModelChange)="selectedRfc($event, 'receptor')">
+                <nz-option *ngFor="let rfc of rfc_map" [nzValue]="rfc.rfc" [nzLabel]="rfc.rfc"></nz-option>
               </nz-select>
             </div>
           </div>

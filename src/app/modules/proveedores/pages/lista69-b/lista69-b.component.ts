@@ -51,7 +51,7 @@ export class Lista69BComponent implements OnInit {
       rol: this.dataUser.rol
     }
     this.proveedoresService.getRfcHotelUser(this.filtroHotel).subscribe(
-      response => {
+      (response: any) => {
         this.listRFC = response.rfc_map;
         this.filtroRfcHotelUser = this.listRFC;
         this.isLoading = false;
