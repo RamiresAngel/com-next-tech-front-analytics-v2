@@ -86,10 +86,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Serie Hotel</label>
             <div class="col-12">
-              <nz-select formControlName="serie_hotel" class="w-100"
-                [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true">
-                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
-                  [nzLabel]="hotel.hotel"></nz-option>
+              <nz-select formControlName="serie_hotel" class="w-100" nzMode="multiple" [(ngModel)]="serie_hotel">
+                <nz-option *ngFor="let item of option_serie_hotel" [nzLabel]="item" [nzValue]="item"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -154,7 +152,7 @@
             <label class="mb-1 col-12 basic-paragraph text-secondary">Rango de Estatus Factura </label>
             <div class="col-12">
               <nz-select (ngModelChange)="selectedVigencia($event)" formControlName="rango_estatus_f">
-                <nz-option nzLabel="Vigentes/Canceladas" nzValue="Vigentes/Canceladas" selected></nz-option>
+                <nz-option nzLabel="Vigentes/Canceladas" nzValue="" selected></nz-option>
                 <nz-option nzLabel="Vigentes" nzValue="Vigentes"></nz-option>
                 <nz-option nzLabel="Canceladas" nzValue="Canceladas"></nz-option>
               </nz-select>

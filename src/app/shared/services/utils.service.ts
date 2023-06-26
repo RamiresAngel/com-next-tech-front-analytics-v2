@@ -10,14 +10,23 @@ export class UtilsService {
 
   constructor() { }
 
-  /* Función que de formato a fecha  "Mon May 01 2023 17:06:57
- GMT-0600 (hora estándar central)" a formato 'dd/MM/yyyy'
- que*/
-  obtenerFormatoFechas(fechas: Date[]): { inicio: string, fin: string } {
-    if (!fechas || fechas.length === 0) return { inicio: '', fin: '' };
-    const inicio = fechas[0].toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    const fin = fechas[1].toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  /* Función para obtener el formato de fecha */
+  obtenerFormatoFechas(fecha: any[]): any {
+    const inicio = this.FormatoFechas(fecha[0]);
+    const fin = this.FormatoFechas(fecha[1]);
     return { inicio, fin };
+  }
+
+  /* Función que de formato a fecha  "Mon May 01 2023 17:06:57
+  GMT-0600 (hora estándar central)" a formato 'dd/MM/yyyy'
+  que*/
+  FormatoFechas(date: Date): any {
+    if (date) {
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
   }
 
   /* Función para mandar valores a la vista */

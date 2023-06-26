@@ -71,13 +71,13 @@ export class PPDFiltroComponent {
   }
 
   onChange(result: Date[]): void {
-    let fechas = this.utils_service.obtenerFormatoFechas(result);
-    this.formFilters.patchValue({ fecha_factura: fechas });
+    /* let fechas = this.utils_service.obtenerFormatoFechas(result);
+    this.formFilters.patchValue({ fecha_factura: fechas }); */
   }
 
   rangoCancelacion(result: Date[]): void {
-    let fechas = this.utils_service.obtenerFormatoFechas(result);
-    this.formFilters.patchValue({ rango_cancelacion: fechas });
+    /* let fechas = this.utils_service.obtenerFormatoFechas(result);
+    this.formFilters.patchValue({ rango_cancelacion: fechas }); */
   }
 
   open(): void {
