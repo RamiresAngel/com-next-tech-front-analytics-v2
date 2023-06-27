@@ -74,7 +74,7 @@
             <label class="mb-1 col-12 basic-paragraph text-secondary">Tipo</label>
             <div class="col-12">
               <nz-select formControlName="tipo_factura" nzShowSearch nzAllowClear [(ngModel)]="tipo_factura"
-                (ngModelChange)="getTipoFactura($event)" Seleccioné="Seleccine un tipo">
+                Seleccioné="Seleccine un tipo">
                 <nz-option nzLabel="Emisión" nzValue="Emision" selected></nz-option>
                 <nz-option nzLabel="Recepción" nzValue="Recepcion"></nz-option>
               </nz-select>
@@ -129,8 +129,7 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Efecto de Comprobante</label>
             <div class="col-12">
-              <nz-select nzShowSearch nzAllowClear [(ngModel)]="efecto_comprobante"
-                (ngModelChange)="getEfectoComprobante(efecto_comprobante)" Seleccioné="Seleccine un tipo"
+              <nz-select nzShowSearch nzAllowClear [(ngModel)]="efecto_comprobante" Seleccioné="Seleccine un tipo"
                 nzPlaceHolder="Selecciona" formControlName="efecto_comprobante">
                 <nz-option nzLabel="I" nzValue="I"></nz-option>
                 <nz-option nzLabel="E" nzValue="E"></nz-option>

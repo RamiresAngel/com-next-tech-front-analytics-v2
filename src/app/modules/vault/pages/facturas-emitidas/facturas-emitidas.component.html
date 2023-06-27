@@ -4,7 +4,7 @@
       <h3 class="mb-0">Facturas</h3>
     </div>
   </div>
-  <app-filtro-emision></app-filtro-emision>
+  <app-filtro-emision (filtro)="inicializaTabla($event)"></app-filtro-emision>
   <!-- <div class="row mt-3">
       <div class="col-md-12">
          <app-loader *ngIf="isLoading" class="mt-5"></app-loader>

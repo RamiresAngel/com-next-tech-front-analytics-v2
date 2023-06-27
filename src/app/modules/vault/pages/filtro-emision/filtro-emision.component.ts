@@ -1,6 +1,6 @@
 import { RfcHotelUser, UserData, RFCMap, BodyFiltro } from './../../../../shared/entities';
 import { VaultService } from './../../../../shared/services/vault.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-reporte.component';
@@ -12,6 +12,7 @@ import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-repor
 })
 export class FiltroEmisionComponent {
   @ViewChild('modal') modal?: GeneraReporteComponent;
+  @Output() filtro = new EventEmitter<BodyFiltro>();
   public visible = false;
   public nivelAccesoSelected: string = '';
   public dataUser!: UserData;
@@ -75,7 +76,7 @@ export class FiltroEmisionComponent {
     this.bodyFiltro.ppd_view = false;
     this.bodyFiltro.fidecomiso = false;
     this.bodyFiltro.corporativo = this.dataUser.corporativo;
-    console.log(this.bodyFiltro);
+    this.filtro.emit(this.bodyFiltro);
   }
 
   selectedCatalogoNivel(event: any): void {
@@ -109,15 +110,6 @@ export class FiltroEmisionComponent {
     this.vista_Rango = vista.rango;
   }
 
-  getTipoFactura(event: any): void {
-    this.tipo_factura = event;
-  }
-
-  getEfectoComprobante(event: any): void {
-    console.log(event);
-    this.efecto_comprobante = event;
-  }
-
   onChange(event: any) {
     if (!event || event.length === 0) return;
     const fecha = this.utils_service.obtenerFormatoFechas(event);
@@ -136,6 +128,7 @@ export class FiltroEmisionComponent {
 
   close(): void {
     this.visible = false;
+    this.iniciaFormFiltro();
   }
 
   generaReporte(event: any): void {
