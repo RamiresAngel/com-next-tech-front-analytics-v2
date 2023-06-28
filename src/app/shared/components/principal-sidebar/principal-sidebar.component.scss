@@ -4,9 +4,13 @@
    left: 0;
    top: 0;
    background-color: #001529;
-   width: 240px;
+   width: 255px;
    transition: all 0.3s ease-in-out;
    z-index: 20;
+
+   @media (max-width: 990px) {
+      width: 240px; /* Adjust the width for 990px and below */
+    }
 
    .logo {
       height: 28px;
@@ -15,6 +19,8 @@
 
    .menu-sidebar {
       border: 0;
+      overflow-y: auto;
+      height: calc(100% - 44px); /* Subtract the height of the logo */
 
       .label-sidebar-menu {
          font-size: 12px;
