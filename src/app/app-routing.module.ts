@@ -7,6 +7,7 @@ import { AnalyticsPageComponent } from './modules/analytics/analytics-page/analy
 import { ProveedoresPageComponent } from './modules/proveedores/proveedores-page/proveedores-page.component';
 import { VaultPageComponent } from './modules/vault/vault-page/vault-page.component';
 import { ConfiguracionesPageComponent } from './modules/configuraciones/configuraciones-page/configuraciones-page.component';
+import { MergePageComponent } from './modules/merge/merge-page/merge-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'proveedores', canActivate: [AuthGuard], component: ProveedoresPageComponent, loadChildren: () => import('./modules/proveedores/proveedores.module').then(m => m.ProveedoresModule) },
   { path: 'vault', canActivate: [AuthGuard], component: VaultPageComponent, loadChildren: () => import('./modules/vault/vault.module').then(m => m.VaultModule) },
   { path: 'configuraciones', canActivate: [AuthGuard], component: ConfiguracionesPageComponent, loadChildren: () => import('./modules/configuraciones/configuraciones.module').then(m => m.ConfiguracionesModule) },
-  // { path: 'merge', canActivate: [AuthGuard], component: }
+  { path: 'merge', canActivate: [AuthGuard], component: MergePageComponent, loadChildren: () => import('./modules/merge/merge.module').then(m => m.MergeModule) }
 ];
 
 @NgModule({
