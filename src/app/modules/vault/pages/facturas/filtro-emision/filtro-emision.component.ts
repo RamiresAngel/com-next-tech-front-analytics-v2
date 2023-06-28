@@ -1,9 +1,9 @@
-import { RfcHotelUser, UserData, RFCMap, BodyFiltro } from './../../../../shared/entities';
-import { VaultService } from './../../../../shared/services/vault.service';
+import { RfcHotelUser, UserData, RFCMap, BodyFiltro } from '../../../../../shared/entities';
+import { VaultService } from '../../../../../shared/services/vault.service';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-reporte.component';
+import { GeneraReporteComponent } from '../../../Shared/genera-reporte/genera-reporte.component';
 
 @Component({
   selector: 'app-filtro-emision',
