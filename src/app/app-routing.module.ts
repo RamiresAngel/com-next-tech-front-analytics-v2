@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'analytics', canActivate: [AuthGuard], component: AnalyticsPageComponent, loadChildren: () => import('./modules/analytics/analytics.module').then(m => m.AnalyticsModule) },
   { path: 'proveedores', canActivate: [AuthGuard], component: ProveedoresPageComponent, loadChildren: () => import('./modules/proveedores/proveedores.module').then(m => m.ProveedoresModule) },
   { path: 'vault', canActivate: [AuthGuard], component: VaultPageComponent, loadChildren: () => import('./modules/vault/vault.module').then(m => m.VaultModule) },
-  { path: 'configuraciones', canActivate: [AuthGuard], component: ConfiguracionesPageComponent, loadChildren: () => import('./modules/configuraciones/configuraciones.module').then(m => m.ConfiguracionesModule) }
+  { path: 'configuraciones', canActivate: [AuthGuard], component: ConfiguracionesPageComponent, loadChildren: () => import('./modules/configuraciones/configuraciones.module').then(m => m.ConfiguracionesModule) },
+  // { path: 'merge', canActivate: [AuthGuard], component: }
 ];
 
 @NgModule({
