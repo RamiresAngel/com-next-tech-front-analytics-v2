@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserData } from 'src/app/shared/entities/userData.model';
 import { UtilsService } from 'src/app/shared/services/utils.service';
-import { GeneraReporteComponent } from '../../Shared/genera-reporte/genera-reporte.component';
+import { GeneraReporteComponent } from '../../../Shared/genera-reporte/genera-reporte.component';
 
 @Component({
   selector: 'app-pagos-filtro',

@@ -7,10 +7,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FacturasEmitidasComponent } from './pages/facturas/facturas-emitidas/facturas-emitidas.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FiltroEmisionComponent } from './pages/facturas/filtro-emision/filtro-emision.component';
-import { PagosEmitidosComponent } from './pages/pagos-emitidos/pagos-emitidos.component';
-import { PagosFiltroComponent } from './pages/pagos-filtro/pagos-filtro.component';
+import { PagosEmitidosComponent } from './pages/pagos/pagos-emitidos/pagos-emitidos.component';
+import { PagosFiltroComponent } from './pages/pagos/pagos-filtro/pagos-filtro.component';
 import { FacturasPPDComponent } from './pages/factura-ppd/facturas-ppd/facturas-ppd.component';
-import { PPDFiltroComponent } from './pages/facturas -ppd/ppd-filtro/ppd-filtro.component';
+import { PPDFiltroComponent } from './pages/factura-ppd/ppd-filtro/ppd-filtro.component';
 import { GeneraReporteComponent } from './Shared/genera-reporte/genera-reporte.component';
 /* NG-Zorro */
 import { NzInputModule } from 'ng-zorro-antd/input';
