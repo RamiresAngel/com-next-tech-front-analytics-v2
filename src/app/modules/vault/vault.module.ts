@@ -19,6 +19,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
     NzDatePickerModule,
     NzModalModule,
     NzNotificationModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ]
 })
 export class VaultModule { }
