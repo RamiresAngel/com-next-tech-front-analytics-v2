@@ -10,6 +10,7 @@ import { TableDescuadreComponent } from './pages/facturas-emision/facturas-fecha
 import { FormDescuadreComponent } from './pages/facturas-emision/facturas-fecha-descuadre/form-descuadre/form-descuadre.component';
 import { TableFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/table-faltantes/table-faltantes.component';
 import { FormFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/form-faltantes/form-faltantes.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormFaltantesComponent } from './pages/facturas-emision/facturas-faltan
   imports: [
     CommonModule,
     MergeRoutingModule,
-    SharedModule
+    SharedModule,
+    NzDrawerModule
   ]
 })
 export class MergeModule { }

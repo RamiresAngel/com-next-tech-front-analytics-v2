@@ -1,1 +1,49 @@
-<p>form-conciliadas works!</p>
+<div>
+  <div class="row align-items-center">
+    <h4 class="col-4">Facturas Conciliadas</h4>
+    <div class="col-8 text-end">
+      <button class="btn btn-primary btn-sm" nz-button nzType="primary" (click)="open()">
+        <span class="material-symbols-outlined align-middle">filter_alt</span>
+        Filtros
+      </button>
+    </div>
+  </div>
+  <div>
+    <nz-drawer
+      [nzClosable]="true"
+      [nzVisible]="visible"
+      [nzPlacement]="'right'"
+      nzTitle="Panel de filtrado"
+      (nzOnClose)="close()"
+      [nzFooter]="footerTpl"
+    >
+
+    <ng-template #footerTpl>
+      <div class="row">
+        <div class="col-6">
+          <!-- <app-genera-roporte #reporte (nombre)="generarReporteFn($event)"></app-genera-roporte> -->
+        </div>
+        <div class="col-6 text-end">
+          <button
+            class="btn btn-info btn-sm"
+            nz-button
+            style="margin-right: 8px;"
+            (click)="limpiarFiltros()"
+          >
+            Limpiar
+          </button>
+          <button
+            class="btn btn-primary btn-sm"
+            nz-button
+            nzType="primary"
+            (click)="enviarDatosFiltro()"
+          >
+            Filtrar
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    </nz-drawer>
+  </div>
+</div>
