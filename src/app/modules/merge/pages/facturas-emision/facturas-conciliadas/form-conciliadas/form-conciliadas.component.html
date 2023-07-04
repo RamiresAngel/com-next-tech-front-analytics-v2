@@ -21,13 +21,18 @@
     <ng-container *nzDrawerContent>
       <div>
         <form
+          [formGroup]="formularioConciliadas"
           class="container"
           nz-form
         >
         <div class="mt-0">
           <label>Hotel</label>
-          <nz-select>
-            <nz-option></nz-option>
+          <nz-select (ngModelChange)="obtenerRfcEmisores($event)" formControlName="hotelControl">
+            <nz-option
+              *ngFor="let hotel of hoteles"
+              [nzLabel]="hotel.hotel" [nzValue]="hotel"
+            >
+            </nz-option>
           </nz-select>
         </div>
         <div class="mt-3">
