@@ -6,8 +6,8 @@
         <div class="row align-items-center">
           <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
           <div class="col-12">
-            <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
-              formControlName="nivel_acceso">
+            <nz-select class="w-100" nzShowSearch [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
+              formControlName="nivel_acceso" (ngModelChange)="selectedCatalogoNivel($event)">
               <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
                 [nzLabel]="hotel.hotel"></nz-option>
             </nz-select>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="col-lg-3 col-xxl-2">
-        <button class="btn btn-primary btn-sm" (click)="open()">
+        <button class="btn btn-primary btn-sm" (click)="open()" [disabled]="nivelAccesoSelected === ''">
           <span class="material-symbols-outlined align-middle">filter_alt</span>
           Filtro
         </button>
@@ -36,10 +36,9 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Emisor*</label>
             <div class="col-12">
-              <nz-select class="w-100" [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
-                formControlName="rfc_emisor">
-                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
-                  [nzLabel]="hotel.hotel"></nz-option>
+              <nz-select class="w-100" nzShowSearch formControlName="rfc_emisor"
+                (ngModelChange)="selectedRfc($event, 'emisor')">
+                <nz-option *ngFor="let rfc of rfc_map" [nzValue]="rfc.rfc" [nzLabel]="rfc.rfc"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -56,10 +55,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Receptor*</label>
             <div class="col-12">
-              <nz-select formControlName="rfc_receptor" class="w-100"
-                [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true">
-                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
-                  [nzLabel]="hotel.hotel"></nz-option>
+              <nz-select formControlName="rfc_receptor" class="w-100" (ngModelChange)="selectedRfc($event, 'receptor')">
+                <nz-option *ngFor="let rfc of rfc_map" [nzValue]="rfc.rfc" [nzLabel]="rfc.rfc"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -77,7 +74,7 @@
             <label class="mb-1 col-12 basic-paragraph text-secondary">Tipo</label>
             <div class="col-12">
               <nz-select formControlName="tipo_factura" nzShowSearch nzAllowClear [(ngModel)]="tipo_factura"
-                (ngModelChange)="getTipoFactura($event)" Seleccioné="Seleccine un tipo">
+                Seleccioné="Seleccine un tipo">
                 <nz-option nzLabel="Emisión" nzValue="Emision" selected></nz-option>
                 <nz-option nzLabel="Recepción" nzValue="Recepcion"></nz-option>
               </nz-select>
@@ -89,10 +86,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Serie Hotel</label>
             <div class="col-12">
-              <nz-select formControlName="serie_hotel" class="w-100"
-                [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true">
-                <nz-option *ngFor="let hotel of dataUser.catalogo_niveles" [nzValue]="hotel.nombre"
-                  [nzLabel]="hotel.hotel"></nz-option>
+              <nz-select formControlName="serie_hotel" class="w-100" nzMode="multiple" [(ngModel)]="serie_hotel">
+                <nz-option *ngFor="let item of option_serie_hotel" [nzLabel]="item" [nzValue]="item"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -134,8 +129,7 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Efecto de Comprobante</label>
             <div class="col-12">
-              <nz-select nzShowSearch nzAllowClear [(ngModel)]="efecto_comprobante"
-                (ngModelChange)="getEfectoComprobante(efecto_comprobante)" Seleccioné="Seleccine un tipo"
+              <nz-select nzShowSearch nzAllowClear [(ngModel)]="efecto_comprobante" Seleccioné="Seleccine un tipo"
                 nzPlaceHolder="Selecciona" formControlName="efecto_comprobante">
                 <nz-option nzLabel="I" nzValue="I"></nz-option>
                 <nz-option nzLabel="E" nzValue="E"></nz-option>
@@ -156,9 +150,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Rango de Estatus Factura </label>
             <div class="col-12">
-              <nz-select [(ngModel)]="rango_estatus" (ngModelChange)="selectedVigencia($event)"
-                formControlName="rango_estatus">
-                <nz-option nzLabel="Vigentes/Canceladas" nzValue="Vigentes/Canceladas" selected></nz-option>
+              <nz-select (ngModelChange)="selectedVigencia($event)" formControlName="rango_estatus_f">
+                <nz-option nzLabel="Vigentes/Canceladas" nzValue="" selected></nz-option>
                 <nz-option nzLabel="Vigentes" nzValue="Vigentes"></nz-option>
                 <nz-option nzLabel="Canceladas" nzValue="Canceladas"></nz-option>
               </nz-select>
@@ -170,7 +163,8 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">Fecha Factura</label>
             <div class="col-12">
-              <nz-range-picker [nzFormat]="'yyyy/MM/dd'" [(ngModel)]="date_factura" (ngModelChange)="onChange($event)"
+              <nz-range-picker [nzDefaultPickerValue]="date_factura" [nzFormat]="'yyyy/MM/dd'"
+                [(ngModel)]="date_factura" (ngModelChange)="onChange($event)"
                 [ngModelOptions]="{standalone: true}"></nz-range-picker>
             </div>
           </div>
@@ -199,4 +193,4 @@
   </ng-template>
 </nz-drawer>
 
-<app-genera-reporte #modal (nombre)="generarReporte($event)"></app-genera-reporte>"
+<app-genera-reporte #modal (nombre)="generaReporte($event)"></app-genera-reporte>
