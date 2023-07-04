@@ -20,6 +20,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { DataTablesModule } from 'angular-datatables';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { DataTablesModule } from 'angular-datatables';
     PagosFiltroComponent,
     FacturasPPDComponent,
     PPDFiltroComponent,
-    GeneraReporteComponent
+    GeneraReporteComponent,
+    ReportesComponent
   ],
   imports: [
     CommonModule,
