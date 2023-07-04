@@ -12,6 +12,7 @@ import { PagosFiltroComponent } from './pages/pagos/pagos-filtro/pagos-filtro.co
 import { FacturasPPDComponent } from './pages/factura-ppd/facturas-ppd/facturas-ppd.component';
 import { PPDFiltroComponent } from './pages/factura-ppd/ppd-filtro/ppd-filtro.component';
 import { GeneraReporteComponent } from './Shared/genera-reporte/genera-reporte.component';
+import { DataTablesModule } from 'angular-datatables';
 /* NG-Zorro */
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -19,7 +20,6 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { DataTablesModule } from 'angular-datatables';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
