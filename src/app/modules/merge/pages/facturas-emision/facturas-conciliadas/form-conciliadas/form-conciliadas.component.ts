@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-conciliadas',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class FormConciliadasComponent {
   public visible: boolean = false;
+  public formularioConciliadas!: FormGroup;
+
+  constructor() {};
 
   public limpiarFiltros(): void {
     console.log('limpiar filtros');

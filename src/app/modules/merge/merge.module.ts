@@ -11,6 +11,10 @@ import { FormDescuadreComponent } from './pages/facturas-emision/facturas-fecha-
 import { TableFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/table-faltantes/table-faltantes.component';
 import { FormFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/form-faltantes/form-faltantes.component';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     CommonModule,
     MergeRoutingModule,
     SharedModule,
-    NzDrawerModule
+    NzDrawerModule,
+    NzSelectModule,
+    NzInputModule,
+    NzDatePickerModule,
+    ReactiveFormsModule
   ]
 })
 export class MergeModule { }
