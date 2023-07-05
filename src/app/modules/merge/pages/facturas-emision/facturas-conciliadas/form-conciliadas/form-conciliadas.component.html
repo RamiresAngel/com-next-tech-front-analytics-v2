@@ -37,14 +37,30 @@
         </div>
         <div class="mt-3">
           <label>RFC emisor</label>
-          <nz-select>
-            <nz-option></nz-option>
+          <nz-select
+            formControlName="rfcEmisorControl"
+            (ngModelChange)="selectedRfc($event, 'emisor')"
+          >
+            <nz-option
+              *ngFor="let rfcEmisor of rfcEmisores"
+              [nzLabel]="rfcEmisor.rfc"
+              [nzValue]="rfcEmisor.rfc"
+            >
+            </nz-option>
           </nz-select>
         </div>
         <div class="mt-3">
           <label>Series hoteles</label>
-          <nz-select>
-            <nz-option></nz-option>
+          <nz-select
+            formControlName="serieHotelControl"
+            nzMode="multiple"
+          >
+            <nz-option
+              *ngFor="let item of option_serie_hotel"
+              [nzLabel]="item"
+              [nzValue]="item"
+            >
+            </nz-option>
           </nz-select>
         </div>
         <hr />

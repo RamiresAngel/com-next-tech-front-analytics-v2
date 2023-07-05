@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzSelectModule,
     NzInputModule,
     NzDatePickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ]
 })
 export class MergeModule { }
