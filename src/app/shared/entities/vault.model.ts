@@ -32,11 +32,15 @@ export interface Order {
 
 export class BodyFiltro {
   filtro: Filtro;
-  tipo: string;;
+  tipo: string;
   tipo_comprobante: string;
   ppd_view: boolean;
   fidecomiso: boolean;
   corporativo: string;
+  //  * @param para Reporte Generado
+  nombre_reporte?: string;
+  email?: string;
+  nivel_acceso?: string;
 
   constructor() {
     this.filtro = new Filtro();
@@ -136,9 +140,7 @@ export class ColumnsHeader {
       { title: 'CARGOS NO FACTURABLES PROPINAS FACTO', data: '40' },
       { title: 'CARGOS NO FACTURABLES OTROS FACTO', data: '41' },
       { title: 'CARGOS NO FACTURABLES TOTAL FACTO', data: '42' },
-      { title: 'GRAN TOTAL DE FACTURA FACTO', data: '43' },
-      /* { title: 'XML', data: '44' },
-      { title: 'PDF', data: '45' } */
+      { title: 'GRAN TOTAL DE FACTURA FACTO', data: '43' }
     ];
   }
 

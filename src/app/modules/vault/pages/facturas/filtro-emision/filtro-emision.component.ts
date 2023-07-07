@@ -4,6 +4,7 @@ import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { GeneraReporteComponent } from '../../../Shared/genera-reporte/genera-reporte.component';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-filtro-emision',
@@ -18,8 +19,8 @@ export class FiltroEmisionComponent {
   public dataUser!: UserData;
   public rfc_map: RFCMap[] = [];
   public serie_hotel: Array<string> = [];
-  public option_serie_hotel: string[] = [];
-  public tipo_factura: string = 'Emision';
+  public option_serie_hotel: Array<string> = [];
+  public tipo_factura: string = 'emision';
   public efecto_comprobante: string = '';
   public date_factura = null;
   public date_rango = null;
@@ -30,7 +31,8 @@ export class FiltroEmisionComponent {
 
   constructor(
     private utils_service: UtilsService,
-    private vault_service: VaultService
+    private vault_service: VaultService,
+    private _notification: NzNotificationService
   ) {
     this.dataUser = JSON.parse(localStorage.getItem("dataUser")!);
     this.iniciaFormFiltro();
@@ -128,11 +130,20 @@ export class FiltroEmisionComponent {
 
   close(): void {
     this.visible = false;
-    this.iniciaFormFiltro();
+    // this.iniciaFormFiltro();
   }
 
   generaReporte(event: any): void {
-    console.log(event);
+    this.bodyFiltro.nombre_reporte = event;
+    this.bodyFiltro.email = this.dataUser.email;
+    this.bodyFiltro.nivel_acceso = this.nivelAccesoSelected;
+    this.vault_service.reporteProgramado(this.bodyFiltro).subscribe(
+      (data: any) => {
+        this._notification.success('Éxito', 'Se ha generado el reporte correctamente');
+      }, (error: any) => {
+        console.log(error);
+        this._notification.error('Error', 'No se pudo generar el reporte, intente más tarde');
+      });
   }
 
   showModal() {

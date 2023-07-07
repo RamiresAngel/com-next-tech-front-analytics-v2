@@ -34,7 +34,6 @@ export class GeneraReporteComponent {
   }
 
   handleCancel(): void {
-    console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
