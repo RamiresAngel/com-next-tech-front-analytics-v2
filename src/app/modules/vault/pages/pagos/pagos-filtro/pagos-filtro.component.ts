@@ -5,6 +5,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 import { GeneraReporteComponent } from '../../../Shared/genera-reporte/genera-reporte.component';
 import { BodyFiltro, RFCMap, RfcHotelUser } from 'src/app/shared/entities';
 import { VaultService } from 'src/app/shared/services/vault.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-pagos-filtro',
@@ -20,7 +21,7 @@ export class PagosFiltroComponent {
   public rfc_map: RFCMap[] = [];
   public serie_hotel: Array<string> = [];
   public option_serie_hotel: string[] = [];
-  public tipo_factura: string = 'Emision';
+  public tipo_factura: string = 'emision';
   public efecto_comprobante: string = '';
   public date_factura = null;
   public date_rango = null;
@@ -31,7 +32,8 @@ export class PagosFiltroComponent {
 
   constructor(
     private utils_service: UtilsService,
-    private vault_service: VaultService
+    private vault_service: VaultService,
+    private _notification: NzNotificationService
   ) {
     this.dataUser = JSON.parse(localStorage.getItem("dataUser")!);
     this.iniciaFormFiltro();
@@ -50,13 +52,14 @@ export class PagosFiltroComponent {
       rfc_pac: new FormControl(''),
       efecto_comprobante: new FormControl(''),
       uuid: new FormControl(''),
-      rango_estatus: new FormControl(),
+      rango_estatus_f: new FormControl(''),
       fecha_factura: new FormControl([Validators.required]),
       rango_cancelacion: new FormControl(''),
     });
   }
 
   filtrar(): void {
+
     this.bodyFiltro.filtro.rfc_emisor = this.formFilters.value.rfc_emisor;
     this.bodyFiltro.filtro.rfc_receptor = this.formFilters.value.rfc_receptor;
     this.bodyFiltro.filtro.fecha_factura_i = this.formFilters.value.fecha_factura.inicio;
@@ -73,9 +76,9 @@ export class PagosFiltroComponent {
     this.bodyFiltro.filtro.fecha_cancelacion_f = this.formFilters.value.rango_cancelacion.fin ? this.formFilters.value.rango_cancelacion.fin : '';
 
     this.bodyFiltro.tipo = this.formFilters.value.tipo_factura;
-    this.bodyFiltro.tipo_comprobante = 'factura';
+    this.bodyFiltro.tipo_comprobante = 'pagos';
     this.bodyFiltro.ppd_view = false;
-    this.bodyFiltro.fidecomiso = false;
+    this.bodyFiltro.fidecomiso = '';
     this.bodyFiltro.corporativo = this.dataUser.corporativo;
     this.filtro.emit(this.bodyFiltro);
   }
@@ -133,7 +136,16 @@ export class PagosFiltroComponent {
   }
 
   generaReporte(event: any): void {
-    console.log(event);
+    this.bodyFiltro.nombre_reporte = event;
+    this.bodyFiltro.email = this.dataUser.email;
+    this.bodyFiltro.nivel_acceso = this.nivelAccesoSelected;
+    this.vault_service.reporteProgramado(this.bodyFiltro).subscribe(
+      (data: any) => {
+        this._notification.success('Éxito', 'Se ha generado el reporte correctamente');
+      }, (error: any) => {
+        console.log(error);
+        this._notification.error('Error', 'No se pudo generar el reporte, intente más tarde');
+      });
   }
 
   showModal() {

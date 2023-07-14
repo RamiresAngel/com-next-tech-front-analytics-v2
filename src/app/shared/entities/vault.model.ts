@@ -35,7 +35,7 @@ export class BodyFiltro {
   tipo: string;
   tipo_comprobante: string;
   ppd_view: boolean;
-  fidecomiso: boolean;
+  fidecomiso: any;
   corporativo: string;
   //  * @param para Reporte Generado
   nombre_reporte?: string;
@@ -92,7 +92,7 @@ export class Filtro {
   }
 }
 
-export class ColumnsHeader {
+export class ColumnsFactEmitidas {
   columns_header: Array<{ title: string, data: string }>;
 
   constructor() {
@@ -144,4 +144,112 @@ export class ColumnsHeader {
     ];
   }
 
+}
+
+export class ColumnsFacturasPPD {
+  columns_header: Array<{ title: string, data: string }>;
+
+  constructor() {
+    this.columns_header = [
+      { title: 'ESTATUS', data: '0' },
+      { title: 'FECHA CANCELACIÓN', data: '1' },
+      { title: 'FOLIO FISCAL', data: '2' },
+      { title: 'RFC EMISOR', data: '3' },
+      { title: 'RAZÓN SOCIAL EMISOR', data: '4' },
+      { title: 'RFC RECEPTOR', data: '5' },
+      { title: 'RAZÓN SOCIAL RECEPTOR', data: '6' },
+      { title: 'RFC PAC', data: '7' },
+      { title: 'FECHA EMISIÓN (YYYY-MM-DD)', data: '8' },
+      { title: 'FECHA EMISIÓN', data: '9' },
+      { title: 'FECHA TIMBRADO', data: '10' },
+      { title: 'MONTO', data: '11' },
+      { title: 'EFECTO COMPROBANTE', data: '12' },
+      { title: 'TIPO CAMBIO', data: '13' },
+      { title: 'TOTAL DE IMPUESTOS TRASLADADOS', data: '14' },
+      { title: 'TOTAL DE IMPUESTOS RETENIDOS', data: '15' },
+      { title: 'SERIE', data: '16' },
+      { title: 'FOLIO', data: '17' },
+      { title: 'USO DE CFDI', data: '18' },
+      { title: 'FORMA DE PAGO', data: '19' },
+      { title: 'MÉTODO DE PAGO', data: '20' },
+      { title: 'MONEDA', data: '21' },
+      { title: 'IVA TRASLADADO', data: '22' },
+      { title: 'ISR TRASLADADO', data: '23' },
+      { title: 'IEPS TRASLADADO', data: '24' },
+      { title: 'IVA RETENIDO', data: '25' },
+      { title: 'ISR RETENIDO', data: '26' },
+      { title: 'IEPS RETENIDO', data: '27' },
+      { title: 'PRIMER CONCEPTO', data: '28' },
+      { title: 'CÓDIGO POSTAL ', data: '29' },
+      { title: 'VERSIÓN', data: '30' },
+      { title: 'TOTAL IMPUESTOS LOCALES TRASLADADOS', data: '31' },
+      { title: 'TOTAL IMPUESTOS LOCALES RETENIDOS', data: '32' },
+      { title: 'DESCUENTO', data: '33' },
+      { title: 'FOLIO FISCAL PAGO', data: '34' },
+      { title: 'ESTATUS PAGO', data: '35' },
+      { title: 'FECHA CANCELACIÓN PAGO', data: '36' },
+      { title: 'FECHA EMISIÓN PAGO', data: '37' },
+      { title: 'FECHA DE TIMBRADO PAGO', data: '38' },
+      { title: 'FECHA DE PAGO', data: '39' },
+      { title: 'MONTO DE PAGO', data: '41' },
+      { title: 'MONEDA DE PAGO', data: '42' },
+      { title: 'IMPORTE PAGADO', data: '43' },
+      { title: 'IMPORTE SALDO', data: '44' },
+      { title: 'IMPORTE INSOLUTO', data: '45' },
+      { title: 'TIPO DE CAMBIO PAGO', data: '46' },
+      { title: 'TIPO DE CAMBIO DR PAGO', data: '47' },
+      { title: 'NÚMERO DE PARCIALIDAD', data: '48' },
+      { title: 'SERIE DR PAGO', data: '49' },
+      { title: 'MONEDA DR PAGO', data: '50' },
+      { title: 'HORA PAGO', data: '51' },
+      { title: 'VERSIÓN PAGO', data: '52' }
+    ];
+  }
+}
+
+export class ColumnsPagos {
+  columns_header: Array<{ title: string, data: string }>;
+
+  constructor() {
+    this.columns_header = [
+      { title: 'ESTATUS', data: '0' },
+      { title: 'FECHA CANCELACIÓN', data: '1' },
+      { title: 'FOLIO FISCAL', data: '2' },
+      { title: 'RFC EMISOR', data: '3' },
+      { title: 'RAZÓN SOCIAL EMISOR', data: '4' },
+      { title: 'RFC RECEPTOR', data: '5' },
+      { title: 'RAZÓN SOCIAL RECEPTOR', data: '6' },
+      { title: 'RFC PAC', data: '7' },
+      { title: 'FECHA EMISIÓN (YYYY-MM-DD)', data: '8' },
+      { title: 'FECHA EMISIÓN', data: '9' },
+      { title: 'FECHA CERTIFICACIÓN', data: '10' },
+      { title: 'MONTO', data: '11' },
+      { title: 'EFECTO COMPROBANTE', data: '12' },
+      { title: 'USO DE CFDI', data: '13' },
+      { title: 'CÓDIGO POSTAL', data: '14' },
+      { title: 'FOLIO', data: '15' },
+      { title: 'SERIE', data: '16' },
+      { title: 'FECHA PAGO', data: '17' },
+      { title: 'FORMA DE PAGO', data: '18' },
+      { title: 'MONEDA', data: '19' },
+      { title: 'RFC EMISOR CUENTA ORDENANTE', data: '21' },
+      { title: 'NOM. BANCO ORD. EXT.', data: '22' },
+      { title: 'CUENTA ORDENANTE', data: '23' },
+      { title: 'RFC EMISOR CUENTA BENEFICIARIO', data: '24' },
+      { title: 'CUENTA BENEFICIARIO', data: '25' },
+      { title: 'DOCUMENTOS RELACIONADOS', data: '26' },
+      { title: 'IMPORTE PAGADO', data: '27' },
+      { title: 'IMPORTE SALDO', data: '28' },
+      { title: 'IMPORTE INSOLUTO', data: '29' },
+      { title: 'MÉTODO DE PAGO', data: '30' },
+      { title: 'TIPO CAMBIO', data: '31' },
+      { title: 'TIPO CAMBIO DR', data: '32' },
+      { title: 'NÚMERO DE PARCIALIDAD', data: '33' },
+      { title: 'SERIE DR', data: '34' },
+      { title: 'FOLIO DR', data: '35' },
+      { title: 'MONEDA DR', data: '36' },
+      { title: 'HORA', data: '37' },
+      { title: 'VERSIÓN', data: '38' },
+    ]
+  }
 }

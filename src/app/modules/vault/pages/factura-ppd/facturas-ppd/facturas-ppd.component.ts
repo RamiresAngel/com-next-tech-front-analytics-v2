@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
-import { BodyFiltro, ColumnsHeader, UserData } from 'src/app/shared/entities';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BodyFiltro, ColumnsFacturasPPD, UserData } from 'src/app/shared/entities';
 import { globalApis } from 'src/environments/endpoints';
 
 @Component({
@@ -8,12 +8,12 @@ import { globalApis } from 'src/environments/endpoints';
   templateUrl: './facturas-ppd.component.html',
   styleUrls: ['./facturas-ppd.component.scss']
 })
-export class FacturasPPDComponent {
-  @ViewChild('facturas') facturas!: HTMLElement;
+export class FacturasPPDComponent implements OnInit {
+  @ViewChild('facturas_ppd') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltro();
-  public columns_header = new ColumnsHeader();
+  public columns_header = new ColumnsFacturasPPD();
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser!: UserData;
   public is_loading: boolean = false;
@@ -46,10 +46,14 @@ export class FacturasPPDComponent {
       ajax: (dataTablesParameters: any, callback) => {
         const aux_filtro = this.meterFiltro(dataTablesParameters);
         if (aux_filtro.filtro.rfc_emisor != '') {
-          dataTablesParameters = aux_filtro;
-          console.log(dataTablesParameters);
+          dataTablesParameters.filtro = aux_filtro.filtro;
+          dataTablesParameters.corporativo = 'marriott';
+          dataTablesParameters.fidecomiso = false;
+          dataTablesParameters.ppd_view = true;
+          dataTablesParameters.tipo = 'emision';
+          dataTablesParameters.tipo_comprobante = 'factura';
           this._http.post<any>(
-            `${globalApis.url_vault}/factura`,
+            `${globalApis.url_vault}/factura_ppd`,
             dataTablesParameters, {
             headers: new HttpHeaders({
               'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -58,9 +62,9 @@ export class FacturasPPDComponent {
           },
           ).subscribe((resp: any) => {
             callback({
-              recordsTotal: resp.data.total,
-              recordsFiltered: resp.data.total,
-              data: resp.data.data
+              recordsTotal: resp.recordsTotal,
+              recordsFiltered: resp.recordsFiltered,
+              data: resp.data
             });
           }, (error) => {
             console.log(error);
@@ -78,7 +82,11 @@ export class FacturasPPDComponent {
           });
         }
       },
-      columns: []
+      columns: [
+        ...this.columns_header.columns_header,
+        this.createDownloadColumn(),
+        this.createDownloadColumn2()
+      ]
     }
   }
 
@@ -86,15 +94,15 @@ export class FacturasPPDComponent {
     const body_filtro = this.filtro;
     if (body_filtro) {
       obj = {};
-      obj = body_filtro;
-      this.filtro = body_filtro;
+      obj.filtro = body_filtro.filtro;
+      this.bodyGlobalFiltro.filtro = body_filtro.filtro;
     }
     if (obj) {
       this.dataTablesParameters = obj;
     } else {
       obj = this.dataTablesParameters;
     }
-    obj = this.filtro;
+    obj.filtro = this.filtro.filtro;
     obj.columns = [{
       dir: 'asc'
     }];
@@ -106,8 +114,9 @@ export class FacturasPPDComponent {
       || filtro.filtro.fecha_factura_i == '' || filtro.filtro.fecha_factura_i == null || filtro.filtro.fecha_factura_i == undefined) {
       alert('El campo RFC Emisor es requerido');
     } else {
-      if (filtro) {
-        this.filtro = filtro;
+      this.filtro = filtro;
+      if (this.filtro) {
+        this.bodyGlobalFiltro.filtro = this.filtro.filtro;
       }
       try {
         $('#analytics-table').DataTable().ajax.reload();
@@ -116,5 +125,63 @@ export class FacturasPPDComponent {
       }
     }
   }
+
+  private createDownloadColumn() {
+    return {
+      title: 'Descargar PDF/XML',
+      orderable: false,
+      render: (data: any, type: any, row: any) => {
+        const pdfLink = row[54];
+        const xmlLink = row[53];
+        const pdfBtnClass = 'btn-danger';
+        const xmlBtnClass = 'btn-success';
+        const pdfBtn = pdfLink ? `
+          <a href="${pdfLink}" target="_blank" class="m-1 btn ${pdfBtnClass}">
+            <i class="fa-regular fa-file-pdf"></i>
+          </a>
+        ` : '';
+        const xmlBtn = xmlLink ? `
+          <a href="${xmlLink}" target="_blank" class="m-1 btn ${xmlBtnClass}">
+            <i class="fa-regular fa-file-code"></i>
+          </a>
+        ` : '';
+        return `
+        <div class="d-inline-flex align-items-center">
+          ${pdfBtn}
+          ${xmlBtn}
+        </div>
+      `;
+      }
+    };
+  };
+
+  private createDownloadColumn2() {
+    return {
+      title: 'Descargar PDF/XML',
+      orderable: false,
+      render: (data: any, type: any, row: any) => {
+        const pdfLink = row[56];
+        const xmlLink = row[55];
+        const pdfBtnClass = 'btn-danger';
+        const xmlBtnClass = 'btn-success';
+        const pdfBtn = pdfLink ? `
+          <a href="${pdfLink}" target="_blank" class="m-1 btn ${pdfBtnClass}">
+            <i class="fa-regular fa-file-pdf"></i>
+          </a>
+        ` : '';
+        const xmlBtn = xmlLink ? `
+          <a href="${xmlLink}" target="_blank" class="m-1 btn ${xmlBtnClass}">
+            <i class="fa-regular fa-file-code"></i>
+          </a>
+        ` : '';
+        return `
+        <div class="d-inline-flex align-items-center">
+          ${pdfBtn}
+          ${xmlBtn}
+        </div>
+      `;
+      }
+    };
+  };
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BodyFiltro, ColumnsHeader, UserData } from 'src/app/shared/entities';
+import { BodyFiltro, ColumnsFactEmitidas, UserData } from 'src/app/shared/entities';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { globalApis } from 'src/environments/endpoints';
 declare var $: any;
@@ -15,7 +15,7 @@ export class TableConciliadasComponent {
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltro();
-  public columns_header = new ColumnsHeader();
+  public columns_header = new ColumnsFactEmitidas();
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser!: UserData;
   public is_loading: boolean = false;

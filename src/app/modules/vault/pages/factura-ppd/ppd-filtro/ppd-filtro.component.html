@@ -32,7 +32,7 @@
     <form [formGroup]="formFilters">
       <div class="row mt-3 align-items-end">
 
-        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Emision'">
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'emision'">
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Emisor*</label>
             <div class="col-12">
@@ -43,7 +43,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Emision'">
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'emision'">
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Receptor</label>
             <div class="col-12">
@@ -51,7 +51,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Recepcion' ">
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'recepcion' ">
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Receptor*</label>
             <div class="col-12">
@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'Recepcion' ">
+        <div class="col-lg-4 col-xxl-4" *ngIf="tipo_factura === 'recepcion' ">
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary">RFC Emisor</label>
             <div class="col-12">
@@ -75,8 +75,8 @@
             <div class="col-12">
               <nz-select formControlName="tipo_factura" nzShowSearch nzAllowClear [(ngModel)]="tipo_factura"
                 Seleccioné="Seleccine un tipo">
-                <nz-option nzLabel="Emisión" nzValue="Emision" selected></nz-option>
-                <nz-option nzLabel="Recepción" nzValue="Recepcion"></nz-option>
+                <nz-option nzLabel="Emisión" nzValue="emision" selected></nz-option>
+                <nz-option nzLabel="Recepción" nzValue="recepcion"></nz-option>
               </nz-select>
             </div>
           </div>

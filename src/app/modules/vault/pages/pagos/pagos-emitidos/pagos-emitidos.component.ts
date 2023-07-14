@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
-import { BodyFiltro, ColumnsHeader, UserData } from 'src/app/shared/entities';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BodyFiltro, ColumnsPagos, UserData } from 'src/app/shared/entities';
 import { globalApis } from 'src/environments/endpoints';
 
 @Component({
@@ -8,12 +8,12 @@ import { globalApis } from 'src/environments/endpoints';
   templateUrl: './pagos-emitidos.component.html',
   styleUrls: ['./pagos-emitidos.component.scss']
 })
-export class PagosEmitidosComponent {
-  @ViewChild('facturas') facturas!: HTMLElement;
+export class PagosEmitidosComponent implements OnInit {
+  @ViewChild('pagos_emitidos') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltro();
-  public columns_header = new ColumnsHeader();
+  public columns_header = new ColumnsPagos();
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser!: UserData;
   public is_loading: boolean = false;
@@ -46,10 +46,14 @@ export class PagosEmitidosComponent {
       ajax: (dataTablesParameters: any, callback) => {
         const aux_filtro = this.meterFiltro(dataTablesParameters);
         if (aux_filtro.filtro.rfc_emisor != '') {
-          dataTablesParameters = aux_filtro;
-          console.log(dataTablesParameters);
+          dataTablesParameters.filtro = aux_filtro.filtro;
+          dataTablesParameters.corporativo = 'marriott';
+          dataTablesParameters.fidecomiso = true;
+          dataTablesParameters.ppd_view = false;
+          dataTablesParameters.tipo = 'emision';
+          dataTablesParameters.tipo_comprobante = 'pagos';
           this._http.post<any>(
-            `${globalApis.url_vault}/factura`,
+            `${globalApis.url_vault}/pagos`,
             dataTablesParameters, {
             headers: new HttpHeaders({
               'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -78,7 +82,10 @@ export class PagosEmitidosComponent {
           });
         }
       },
-      columns: [...this.columns_header.columns_header]
+      columns: [...this.columns_header.columns_header,
+      this.createDownloadColumn()
+      ]
+
     }
   }
 
@@ -86,15 +93,15 @@ export class PagosEmitidosComponent {
     const body_filtro = this.filtro;
     if (body_filtro) {
       obj = {};
-      obj = body_filtro;
-      this.filtro = body_filtro;
+      obj.filtro = body_filtro.filtro;
+      this.bodyGlobalFiltro.filtro = body_filtro.filtro;
     }
     if (obj) {
       this.dataTablesParameters = obj;
     } else {
       obj = this.dataTablesParameters;
     }
-    obj = this.filtro;
+    obj.filtro = this.filtro.filtro;
     obj.columns = [{
       dir: 'asc'
     }];
@@ -106,8 +113,9 @@ export class PagosEmitidosComponent {
       || filtro.filtro.fecha_factura_i == '' || filtro.filtro.fecha_factura_i == null || filtro.filtro.fecha_factura_i == undefined) {
       alert('El campo RFC Emisor es requerido');
     } else {
-      if (filtro) {
-        this.filtro = filtro;
+      this.filtro = filtro;
+      if (this.filtro) {
+        this.bodyGlobalFiltro.filtro = this.filtro.filtro;
       }
       try {
         $('#analytics-table').DataTable().ajax.reload();
@@ -116,5 +124,34 @@ export class PagosEmitidosComponent {
       }
     }
   }
+
+  private createDownloadColumn() {
+    return {
+      title: 'Descargar PDF/XML',
+      orderable: false,
+      render: (data: any, type: any, row: any) => {
+        const pdfLink = row[45];
+        const xmlLink = row[44];
+        const pdfBtnClass = 'btn-danger';
+        const xmlBtnClass = 'btn-success';
+        const pdfBtn = pdfLink ? `
+          <a href="${pdfLink}" target="_blank" class="m-1 btn ${pdfBtnClass}">
+            <i class="fa-regular fa-file-pdf"></i>
+          </a>
+        ` : '';
+        const xmlBtn = xmlLink ? `
+          <a href="${xmlLink}" target="_blank" class="m-1 btn ${xmlBtnClass}">
+            <i class="fa-regular fa-file-code"></i>
+          </a>
+        ` : '';
+        return `
+        <div class="d-inline-flex align-items-center">
+          ${pdfBtn}
+          ${xmlBtn}
+        </div>
+      `;
+      }
+    };
+  };
 
 }
