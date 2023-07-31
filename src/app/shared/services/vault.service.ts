@@ -37,4 +37,16 @@ export class VaultService {
     return this.http.post(`${globalApis.url_vault}/reportes`, body, { headers: this.headerAuth });
   }
 
+  public eliminarReporte(q: any): Observable<any> {
+    return this.http.delete(`${globalApis.url_vault}/borrar_reporte?q=${q.identificador}&t=${q.fecha_creacion_date}`, { headers: this.headerAuth });
+  }
+
+  public listarDescargas(body: bodyDescargaReportes): Observable<Array<ReportDescarga>> {
+    return this.http.get<Array<ReportDescarga>>(`${globalApis.url_vault}/descarga?email=${body.email}&corporativo=${body.corporativo}`, { headers: this.headerAuth });
+  }
+
+  public listarDescargasLink(body: bodyDescargarReporte): Observable<Array<ReporteLink>> {
+    return this.http.get<Array<ReporteLink>>(`${globalApis.url_vault}/descarga/link?q=${body.q}&t=${body.t}`, { headers: this.headerAuth });
+  }
+
 }

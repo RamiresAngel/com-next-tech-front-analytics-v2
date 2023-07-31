@@ -5,3 +5,4 @@ export * from './proveedores.model';
 export * from './reports.model';
 export * from './userData.model';
 export * from './vault.model';
+export * from './reportes.model';

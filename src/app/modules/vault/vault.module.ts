@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { VaultRoutingModule } from './vault-routing.module';
 import { VaultPageComponent } from './vault-page/vault-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -13,6 +12,7 @@ import { FacturasPPDComponent } from './pages/factura-ppd/facturas-ppd/facturas-
 import { PPDFiltroComponent } from './pages/factura-ppd/ppd-filtro/ppd-filtro.component';
 import { GeneraReporteComponent } from './Shared/genera-reporte/genera-reporte.component';
 import { DataTablesModule } from 'angular-datatables';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 /* NG-Zorro */
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -21,6 +21,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { ReportesComponent } from './pages/reportes/reportes.component';
+import { DescargaReporteVaultComponent } from './Shared/descarga-reporte-vault/descarga-reporte-vault.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ReportesComponent } from './pages/reportes/reportes.component';
     FacturasPPDComponent,
     PPDFiltroComponent,
     GeneraReporteComponent,
-    ReportesComponent
+    ReportesComponent,
+    DescargaReporteVaultComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { ReportesComponent } from './pages/reportes/reportes.component';
     NzModalModule,
     NzNotificationModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbAlertModule
   ]
 })
 export class VaultModule { }
