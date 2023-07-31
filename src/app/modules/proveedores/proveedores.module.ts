@@ -12,13 +12,15 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { Lista69BComponent } from './pages/lista69-b/lista69-b.component';
+import { DofComponent } from './pages/dof/dof.component';
 
 @NgModule({
   declarations: [
     ProveedoresPageComponent,
     Lista69Component,
     HomeComponent,
-    Lista69BComponent
+    Lista69BComponent,
+    DofComponent
   ],
   imports: [
     CommonModule,
