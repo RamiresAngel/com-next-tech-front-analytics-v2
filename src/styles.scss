@@ -52,15 +52,15 @@ html {
   background-color: #244478;
   border-color    : #244478;
 
-   &:hover {
-      background-color: darken($color: #244478, $amount: 10);
-      border-color: darken($color: #244478, $amount: 10);
-   }
+  &:hover {
+    background-color: darken($color: #244478, $amount: 10);
+    border-color    : darken($color: #244478, $amount: 10);
+  }
 
-   &:disabled {
-      background-color: lighten($color: #244478, $amount: 10);
-      border-color: lighten($color: #244478, $amount: 10);
-   }
+  &:disabled {
+    background-color: lighten($color: #244478, $amount: 10);
+    border-color    : lighten($color: #244478, $amount: 10);
+  }
 }
 
 #overlay-sidebar {
@@ -136,31 +136,36 @@ nz-select {
 }
 
 .ant-select {
-   &.ng-invalid {
-      &.ng-touched {
-         .ant-select-selector {
-            border: 1px solid red;
-         }
+  &.ng-invalid {
+    &.ng-touched {
+      .ant-select-selector {
+        border: 1px solid red;
       }
-   }
+    }
+  }
 }
 
 .ant-select {
-   &.ng-invalid {
-      &.ng-touched {
-         .ant-select-selector {
-            border: 1px solid red;
-         }
+  &.ng-invalid {
+    &.ng-touched {
+      .ant-select-selector {
+        border: 1px solid red;
       }
-   }
+    }
+  }
 }
 
 
 
-.main-wrapper{
-  border: 5px solid gray;
-  height: calc(100vh - 50px);
+.main-wrapper {
+  border    : 5px solid gray;
+  height    : calc(100vh - 50px);
   overflow-y: auto;
   overflow-x: hidden;
 }
 
+.alert-disclaimer {
+  button {
+    padding: 12px 15px !important;
+  }
+}

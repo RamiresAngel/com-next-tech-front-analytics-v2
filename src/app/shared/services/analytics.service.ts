@@ -20,8 +20,8 @@ export class AnalyticsService {
     });
   }
 
-  public getTableauToken(email: string): Observable<any> {
-    return this.http.post(this.url_tableau, email, { headers: this.headerAuth });
+  public getTableauToken(email: string, corporativo: string): Observable<any> {
+    return this.http.post(this.url_tableau, { token_email: email, corporativo: corporativo }, { headers: this.headerAuth });
   }
 
 }
