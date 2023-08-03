@@ -110,19 +110,14 @@ export class FacturasEmitidasComponent implements OnInit {
   }
 
   public refrescaTabla(filtro: BodyFiltro) {
-    if (filtro.filtro.rfc_emisor == '' || filtro.filtro.rfc_emisor == null || filtro.filtro.rfc_emisor == undefined
-      || filtro.filtro.fecha_factura_i == '' || filtro.filtro.fecha_factura_i == null || filtro.filtro.fecha_factura_i == undefined) {
-      alert('El campo RFC Emisor es requerido');
-    } else {
-      this.filtro = filtro;
-      if (this.filtro) {
-        this.bodyGlobalFiltro.filtro = this.filtro.filtro;
-      }
-      try {
-        $('#analytics-table').DataTable().ajax.reload();
-      } catch (error) {
-        console.log(error);
-      }
+    this.filtro = filtro;
+    if (this.filtro) {
+      this.bodyGlobalFiltro.filtro = this.filtro.filtro;
+    }
+    try {
+      $('#analytics-table').DataTable().ajax.reload();
+    } catch (error) {
+      console.log(error);
     }
   }
 

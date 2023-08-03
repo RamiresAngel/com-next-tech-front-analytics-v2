@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from '@auth0/auth0-angular';
 import { LoaderInterceptorService } from './shared/services/loader-interceptor.service';
 import { DataTablesModule } from 'angular-datatables';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 registerLocaleData(es);
 
@@ -37,7 +38,8 @@ registerLocaleData(es);
   ],
   providers: [
     { provide: NZ_I18N, useValue: es_ES },
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
+    NzNotificationService
   ],
   bootstrap: [AppComponent],
 })

@@ -1,4 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { BodyFiltro } from '../entities';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class UtilsService {
   public collapsedSidebarPrincipal: EventEmitter<boolean> = new EventEmitter<boolean>();
   public collapsedSidebarPrincipalMobile: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private _notification: NzNotificationService) { }
 
   /* Función para obtener el formato de fecha */
   obtenerFormatoFechas(fecha: any[]): any {
@@ -44,6 +46,37 @@ export class UtilsService {
       default:
     }
     return { fecha: true, rango: true }
+  }
+
+  // función que reciba this.bodyFiltro.filtro para validar que el formulario no esté vacío
+  public validarFormulario(obj_form: BodyFiltro): boolean {
+    if (obj_form.filtro.rfc_emisor === '') {
+      this._notification.warning('Advertencia', 'Debe ingresar RFC emisor');
+      return false;
+    }
+    switch (obj_form.filtro.estatus_factura) {
+      case 'Canceladas':
+        if (!obj_form.filtro.fecha_cancelacion_i || obj_form.filtro.fecha_cancelacion_i === '') {
+          this._notification.warning('Advertencia', 'Debe ingresar fecha de cancelación');
+          return false;
+        }
+        break;
+      case 'Vigentes':
+        if (!obj_form.filtro.fecha_factura_i || obj_form.filtro.fecha_factura_i === '') {
+          this._notification.warning('Advertencia', 'Debe ingresar fecha de factura');
+          return false;
+        }
+        break;
+      case '':
+        if (!obj_form.filtro.fecha_factura_i || obj_form.filtro.fecha_factura_i === '') {
+          this._notification.warning('Advertencia', 'Debe ingresar fecha de factura');
+          return false;
+        }
+        break;
+      default:
+        break;
+    }
+    return true;
   }
 
 }
