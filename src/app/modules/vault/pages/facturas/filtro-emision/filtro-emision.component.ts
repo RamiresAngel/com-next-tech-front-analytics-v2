@@ -69,10 +69,9 @@ export class FiltroEmisionComponent {
     this.bodyFiltro.fidecomiso = false;
     this.bodyFiltro.corporativo = this.dataUser.corporativo;
     const valid = this.utils_service.validarFormulario(this.bodyFiltro);
-    if (valid) {
-      this.filtro.emit(this.bodyFiltro);
-      this.close();
-    }
+    if (!valid) return;
+    this.filtro.emit(this.bodyFiltro);
+    this.close();
   }
 
   selectedCatalogoNivel(event: any): void {

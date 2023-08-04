@@ -92,6 +92,18 @@ export class Filtro {
   }
 }
 
+export class PPDSelected {
+  ppd_list: Array<{ label: string, data: any }>;
+
+  constructor() {
+    this.ppd_list = [
+      { label: 'Si / NO', data: '' },
+      { label: 'Si', data: true },
+      { label: 'No', data: false }
+    ];
+  }
+}
+
 export class ColumnsFactEmitidas {
   columns_header: Array<{ title: string, data: string }>;
 

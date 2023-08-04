@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { GeneraReporteComponent } from '../../../Shared/genera-reporte/genera-reporte.component';
-import { BodyFiltro, RFCMap, RfcHotelUser, UserData } from 'src/app/shared/entities';
+import { BodyFiltro, PPDSelected, RFCMap, RfcHotelUser, UserData } from 'src/app/shared/entities';
 import { VaultService } from 'src/app/shared/services/vault.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -28,6 +28,7 @@ export class PPDFiltroComponent {
   public vista_Rango: boolean = true;
   public bodyFiltro: BodyFiltro = new BodyFiltro();
   public formFilters: FormGroup = new FormGroup({});
+  public list_ppd = new PPDSelected();
 
   constructor(
     private utils_service: UtilsService,
@@ -36,6 +37,7 @@ export class PPDFiltroComponent {
   ) {
     this.dataUser = JSON.parse(localStorage.getItem("dataUser")!);
     this.iniciaFormFiltro();
+    console.log(this.list_ppd);
   }
 
   iniciaFormFiltro(): void {
@@ -54,6 +56,7 @@ export class PPDFiltroComponent {
       rango_estatus_f: new FormControl(''),
       fecha_factura: new FormControl([Validators.required]),
       rango_cancelacion: new FormControl(''),
+      ppd: new FormControl(''),
     });
   }
 
@@ -110,6 +113,10 @@ export class PPDFiltroComponent {
     let vista = this.utils_service.setFechasVista(event);
     this.vista_Fecha = vista.fecha;
     this.vista_Rango = vista.rango;
+  }
+
+  selectedPPD(event: any): void {
+    console.log(event);
   }
 
   onChange(event: any) {

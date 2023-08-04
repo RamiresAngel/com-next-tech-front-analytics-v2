@@ -15,6 +15,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class PagosFiltroComponent {
   @ViewChild('modal') modal?: GeneraReporteComponent;
   @Output() filtro = new EventEmitter<BodyFiltro>();
+  public isLoading: boolean = false;
   public visible = false;
   public nivelAccesoSelected: string = '';
   public dataUser!: UserData;
@@ -29,6 +30,7 @@ export class PagosFiltroComponent {
   public vista_Rango: boolean = true;
   public bodyFiltro: BodyFiltro = new BodyFiltro();
   public formFilters: FormGroup = new FormGroup({});
+  public nivel_acceso: string;
 
   constructor(
     private utils_service: UtilsService,
@@ -36,6 +38,7 @@ export class PagosFiltroComponent {
     private _notification: NzNotificationService
   ) {
     this.dataUser = JSON.parse(localStorage.getItem("dataUser")!);
+    this.nivel_acceso = this.dataUser.nombre_nivel_acceso ? this.dataUser.nombre_nivel_acceso : 'Sucursal';
     this.iniciaFormFiltro();
   }
 
@@ -59,8 +62,8 @@ export class PagosFiltroComponent {
   }
 
   filtrar(): void {
-
-    this.bodyFiltro.filtro.rfc_emisor = this.formFilters.value.rfc_emisor;
+    this.bodyFiltro.filtro = this.utils_service.getBodyFiltro(this.formFilters.value);
+    /* this.bodyFiltro.filtro.rfc_emisor = this.formFilters.value.rfc_emisor;
     this.bodyFiltro.filtro.rfc_receptor = this.formFilters.value.rfc_receptor;
     this.bodyFiltro.filtro.fecha_factura_i = this.formFilters.value.fecha_factura.inicio;
     this.bodyFiltro.filtro.fecha_factura_f = this.formFilters.value.fecha_factura.fin;
@@ -73,14 +76,17 @@ export class PagosFiltroComponent {
     this.bodyFiltro.filtro.folio_fiscal = this.formFilters.value.uuid;
     this.bodyFiltro.filtro.estatus_factura = this.formFilters.value.rango_estatus_f;
     this.bodyFiltro.filtro.fecha_cancelacion_i = this.formFilters.value.rango_cancelacion.inicio ? this.formFilters.value.rango_cancelacion.inicio : '';
-    this.bodyFiltro.filtro.fecha_cancelacion_f = this.formFilters.value.rango_cancelacion.fin ? this.formFilters.value.rango_cancelacion.fin : '';
+    this.bodyFiltro.filtro.fecha_cancelacion_f = this.formFilters.value.rango_cancelacion.fin ? this.formFilters.value.rango_cancelacion.fin : ''; */
 
     this.bodyFiltro.tipo = this.formFilters.value.tipo_factura;
     this.bodyFiltro.tipo_comprobante = 'pagos';
     this.bodyFiltro.ppd_view = false;
     this.bodyFiltro.fidecomiso = '';
     this.bodyFiltro.corporativo = this.dataUser.corporativo;
+    const valid = this.utils_service.validarFormulario(this.bodyFiltro);
+    if (!valid) return;
     this.filtro.emit(this.bodyFiltro);
+    this.close();
   }
 
   selectedCatalogoNivel(event: any): void {
@@ -90,6 +96,7 @@ export class PagosFiltroComponent {
 
   /* Función que consume api y obtiene un objeto para select RFC emisor */
   getRFCEmisor(acceso: string): void {
+    this.isLoading = true;
     let body = {
       email: this.dataUser.email,
       corporativo: this.dataUser.corporativo,
@@ -98,8 +105,10 @@ export class PagosFiltroComponent {
     };
     this.vault_service.getRFCMap(body).subscribe(
       (data: RfcHotelUser) => {
+        this.isLoading = false;
         this.rfc_map = data.rfc_map;
       }, (error: any) => {
+        this.isLoading = false;
         console.log(error);
       });
   }
@@ -136,13 +145,17 @@ export class PagosFiltroComponent {
   }
 
   generaReporte(event: any): void {
+    this.isLoading = true;
     this.bodyFiltro.nombre_reporte = event;
     this.bodyFiltro.email = this.dataUser.email;
     this.bodyFiltro.nivel_acceso = this.nivelAccesoSelected;
     this.vault_service.reporteProgramado(this.bodyFiltro).subscribe(
       (data: any) => {
+        this.isLoading = false;
         this._notification.success('Éxito', 'Se ha generado el reporte correctamente');
+        this.close();
       }, (error: any) => {
+        this.isLoading = false;
         console.log(error);
         this._notification.error('Error', 'No se pudo generar el reporte, intente más tarde');
       });

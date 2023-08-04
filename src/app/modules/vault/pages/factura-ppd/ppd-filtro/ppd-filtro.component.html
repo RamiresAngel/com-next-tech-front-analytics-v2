@@ -158,6 +158,18 @@
             </div>
           </div>
         </div>
+        <div class="col-lg-4 col-xxl-4 mt-3">
+          <div class="row align-items-center">
+            <label class="mb-1 col-12 basic-paragraph text-secondary"> Facturas con PPD </label>
+            <div class="col-12">
+              <nz-select (ngModelChange)="selectedPPD($event)" formControlName="ppd">
+                <nz-option nzLabel="Si / No" nzValue="" selected></nz-option>
+                <nz-option nzLabel="SI" nzValue="si"></nz-option>
+                <nz-option nzLabel="NO" nzValue="no"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
 
         <div class="col-lg-6 col-xxl-6 mt-3" *ngIf="vista_Fecha">
           <div class="row align-items-center">
