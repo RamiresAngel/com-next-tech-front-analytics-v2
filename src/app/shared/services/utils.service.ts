@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { BodyFiltro, Filtro } from '../entities';
+import { BodyFiltro, Filtro, FiltroPPD } from '../entities';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +95,26 @@ export class UtilsService {
     filtro.rfc_pac = value.rfc_pac;
     filtro.efecto_comprobante = value.efecto_comprobante;
     filtro.estatus_factura = value.rango_estatus_f;
+    return filtro;
+  }
+
+  public getBodyFiltroPPD(value: any): FiltroPPD {
+    let filtro = new FiltroPPD();
+    filtro.rfc_emisor = value.rfc_emisor;
+    filtro.rfc_receptor = value.rfc_receptor;
+    filtro.fecha_factura_i = value.fecha_factura?.inicio ?? '';
+    filtro.fecha_factura_f = value.fecha_factura?.fin ?? '';
+    filtro.folio_fiscal = value.uuid;
+    filtro.fecha_cancelacion_i = value.rango_cancelacion?.inicio ?? '';
+    filtro.fecha_cancelacion_f = value.rango_cancelacion?.fin ?? '';
+    filtro.serie_hotel = value.serie_hotel;
+    filtro.serie = value.serie;
+    filtro.folio = value.folio;
+    filtro.cp = value.codigo_postal;
+    filtro.rfc_pac = value.rfc_pac;
+    filtro.efecto_comprobante = value.efecto_comprobante;
+    filtro.estatus_factura = value.rango_estatus_f;
+    filtro.con_ppd = value.ppd;
     return filtro;
   }
 

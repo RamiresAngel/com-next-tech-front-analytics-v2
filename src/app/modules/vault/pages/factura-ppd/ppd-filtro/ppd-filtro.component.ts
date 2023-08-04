@@ -14,6 +14,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class PPDFiltroComponent {
   @ViewChild('modal') modal?: GeneraReporteComponent;
   @Output() filtro = new EventEmitter<BodyFiltro>();
+  public isLoading: boolean = false;
   public visible = false;
   public nivelAccesoSelected: string = '';
   public dataUser!: UserData;
@@ -29,6 +30,7 @@ export class PPDFiltroComponent {
   public bodyFiltro: BodyFiltro = new BodyFiltro();
   public formFilters: FormGroup = new FormGroup({});
   public list_ppd = new PPDSelected();
+  public nivel_acceso: string;
 
   constructor(
     private utils_service: UtilsService,
@@ -36,8 +38,8 @@ export class PPDFiltroComponent {
     private _notification: NzNotificationService
   ) {
     this.dataUser = JSON.parse(localStorage.getItem("dataUser")!);
+    this.nivel_acceso = this.dataUser.nombre_nivel_acceso ? this.dataUser.nombre_nivel_acceso : 'Sucursal';
     this.iniciaFormFiltro();
-    console.log(this.list_ppd);
   }
 
   iniciaFormFiltro(): void {
@@ -61,27 +63,17 @@ export class PPDFiltroComponent {
   }
 
   filtrar(): void {
-    this.bodyFiltro.filtro.rfc_emisor = this.formFilters.value.rfc_emisor;
-    this.bodyFiltro.filtro.rfc_receptor = this.formFilters.value.rfc_receptor;
-    this.bodyFiltro.filtro.fecha_factura_i = this.formFilters.value.fecha_factura.inicio;
-    this.bodyFiltro.filtro.fecha_factura_f = this.formFilters.value.fecha_factura.fin;
-    this.bodyFiltro.filtro.serie_hotel = this.formFilters.value.serie_hotel;
-    this.bodyFiltro.filtro.serie = this.formFilters.value.serie;
-    this.bodyFiltro.filtro.folio = this.formFilters.value.folio;
-    this.bodyFiltro.filtro.cp = this.formFilters.value.codigo_postal;
-    this.bodyFiltro.filtro.rfc_pac = this.formFilters.value.rfc_pac;
-    this.bodyFiltro.filtro.efecto_comprobante = this.formFilters.value.efecto_comprobante;
-    this.bodyFiltro.filtro.folio_fiscal = this.formFilters.value.uuid;
-    this.bodyFiltro.filtro.estatus_factura = this.formFilters.value.rango_estatus_f;
-    this.bodyFiltro.filtro.fecha_cancelacion_i = this.formFilters.value.rango_cancelacion.inicio ? this.formFilters.value.rango_cancelacion.inicio : '';
-    this.bodyFiltro.filtro.fecha_cancelacion_f = this.formFilters.value.rango_cancelacion.fin ? this.formFilters.value.rango_cancelacion.fin : '';
+    this.bodyFiltro.filtro = this.utils_service.getBodyFiltroPPD(this.formFilters.value);
 
     this.bodyFiltro.tipo = this.formFilters.value.tipo_factura;
     this.bodyFiltro.tipo_comprobante = 'factura';
     this.bodyFiltro.ppd_view = false;
     this.bodyFiltro.fidecomiso = false;
     this.bodyFiltro.corporativo = this.dataUser.corporativo;
+    const valid = this.utils_service.validarFormulario(this.bodyFiltro);
+    if (!valid) return;
     this.filtro.emit(this.bodyFiltro);
+    this.close();
   }
 
   selectedCatalogoNivel(event: any): void {
@@ -91,6 +83,7 @@ export class PPDFiltroComponent {
 
   /* Función que consume api y obtiene un objeto para select RFC emisor */
   getRFCEmisor(acceso: string): void {
+    this.isLoading = true;
     let body = {
       email: this.dataUser.email,
       corporativo: this.dataUser.corporativo,
@@ -99,8 +92,10 @@ export class PPDFiltroComponent {
     };
     this.vault_service.getRFCMap(body).subscribe(
       (data: RfcHotelUser) => {
+        this.isLoading = false;
         this.rfc_map = data.rfc_map;
       }, (error: any) => {
+        this.isLoading = false;
         console.log(error);
       });
   }
@@ -115,9 +110,6 @@ export class PPDFiltroComponent {
     this.vista_Rango = vista.rango;
   }
 
-  selectedPPD(event: any): void {
-    console.log(event);
-  }
 
   onChange(event: any) {
     if (!event || event.length === 0) return;
@@ -141,13 +133,16 @@ export class PPDFiltroComponent {
   }
 
   generaReporte(event: any): void {
+    this.isLoading = true;
     this.bodyFiltro.nombre_reporte = event;
     this.bodyFiltro.email = this.dataUser.email;
     this.bodyFiltro.nivel_acceso = this.nivelAccesoSelected;
     this.vault_service.reporteProgramado(this.bodyFiltro).subscribe(
       (data: any) => {
+        this.isLoading = false;
         this._notification.success('Éxito', 'Se ha generado el reporte correctamente');
       }, (error: any) => {
+        this.isLoading = false;
         console.log(error);
         this._notification.error('Error', 'No se pudo generar el reporte, intente más tarde');
       });

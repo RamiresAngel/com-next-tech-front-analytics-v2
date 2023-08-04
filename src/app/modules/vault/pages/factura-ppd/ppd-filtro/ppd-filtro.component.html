@@ -4,7 +4,7 @@
     <div class="row mt-3 align-items-end">
       <div class="col-lg-3 col-xxl-2">
         <div class="row align-items-center">
-          <label class="mb-1 col-12 basic-paragraph text-secondary">{{ dataUser.nombre_nivel_acceso }}*</label>
+          <label class="mb-1 col-12 basic-paragraph text-secondary">{{ nivel_acceso }}*</label>
           <div class="col-12">
             <nz-select class="w-100" nzShowSearch [nzDisabled]="dataUser.catalogo_niveles.length >= 2 ? false : true"
               formControlName="nivel_acceso" (ngModelChange)="selectedCatalogoNivel($event)">
@@ -162,10 +162,9 @@
           <div class="row align-items-center">
             <label class="mb-1 col-12 basic-paragraph text-secondary"> Facturas con PPD </label>
             <div class="col-12">
-              <nz-select (ngModelChange)="selectedPPD($event)" formControlName="ppd">
-                <nz-option nzLabel="Si / No" nzValue="" selected></nz-option>
-                <nz-option nzLabel="SI" nzValue="si"></nz-option>
-                <nz-option nzLabel="NO" nzValue="no"></nz-option>
+              <nz-select formControlName="ppd">
+                <nz-option *ngFor="let ppd of list_ppd.ppd_list; let i=index" [nzValue]="ppd.data"
+                  [nzLabel]="ppd.label"></nz-option>
               </nz-select>
             </div>
           </div>
@@ -193,6 +192,12 @@
 
       </div>
     </form>
+
+    <div class="row mt-2" *ngIf="isLoading">
+      <div class="col-12">
+        <app-loader></app-loader>
+      </div>
+    </div>
   </ng-container>
 
   <ng-template #footerTpl>

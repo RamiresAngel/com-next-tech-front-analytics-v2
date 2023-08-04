@@ -91,6 +91,47 @@ export class Filtro {
     this.serie_hotel = [];
   }
 }
+export class FiltroPPD {
+  rfc_emisor: string;
+  rfc_receptor: string;
+  fecha_factura_i: string;
+  fecha_factura_f: string;
+  folio_fiscal: string;
+  fecha_cancelacion_i: string;
+  fecha_cancelacion_f: string;
+  razon_social_emisor: string;
+  razon_social_receptor: string;
+  estatus_factura: string;
+  efecto_comprobante: string;
+  nivel_acceso: string;
+  rfc_pac: string;
+  folio: string;
+  serie: string;
+  cp: string;
+  con_ppd: any
+  serie_hotel: Array<string> = [];
+
+  constructor() {
+    this.rfc_emisor = "";
+    this.rfc_receptor = "";
+    this.fecha_factura_i = "";
+    this.fecha_factura_f = "";
+    this.folio_fiscal = "";
+    this.fecha_cancelacion_i = "";
+    this.fecha_cancelacion_f = "";
+    this.razon_social_emisor = "";
+    this.razon_social_receptor = "";
+    this.estatus_factura = "";
+    this.efecto_comprobante = "";
+    this.nivel_acceso = "";
+    this.rfc_pac = "";
+    this.folio = "";
+    this.serie = "";
+    this.cp = "";
+    this.con_ppd = "";
+    this.serie_hotel = [];
+  }
+}
 
 export class PPDSelected {
   ppd_list: Array<{ label: string, data: any }>;
