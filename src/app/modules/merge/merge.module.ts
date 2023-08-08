@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MergeRoutingModule } from './merge-routing.module';
 import { MergePageComponent } from './merge-page/merge-page.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -10,12 +9,14 @@ import { TableDescuadreComponent } from './pages/facturas-emision/facturas-fecha
 import { FormDescuadreComponent } from './pages/facturas-emision/facturas-fecha-descuadre/form-descuadre/form-descuadre.component';
 import { TableFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/table-faltantes/table-faltantes.component';
 import { FormFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/form-faltantes/form-faltantes.component';
+import { DataTablesModule } from 'angular-datatables';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+/* ng-zorro */
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { DataTablesModule } from 'angular-datatables';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,10 @@ import { DataTablesModule } from 'angular-datatables';
     NzInputModule,
     NzDatePickerModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NzSwitchModule
   ]
 })
 export class MergeModule { }
