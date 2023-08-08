@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { globalApis } from 'src/environments/endpoints';
 import { RfcHotelUser, bodyRfcHotelUser } from '../../entities';
+import { BodyFiltroMerge } from '../../entities/merge.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,12 @@ export class MergeService {
     });
   };
 
-  public getRFCMap(body:bodyRfcHotelUser) : Observable<RfcHotelUser> {
+  public getRFCMap(body: bodyRfcHotelUser): Observable<RfcHotelUser> {
     return this._httpClient.post<RfcHotelUser>(this.apiRFCMapHotelUser, JSON.stringify(body), { headers: this._headerAuth });
   }
+
+  public programaReporte(body: BodyFiltroMerge): Observable<any> {
+    return this._httpClient.post(`${globalApis.url_merge}/reportes`, body, { headers: this._headerAuth });
+  }
+
 };

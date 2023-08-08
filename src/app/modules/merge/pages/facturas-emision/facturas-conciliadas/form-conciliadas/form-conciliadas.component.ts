@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CatalogoNiveles, RFCMap, UserData } from 'src/app/shared/entities';
 import { BodyFiltroMerge } from 'src/app/shared/entities/merge.model';
@@ -12,6 +12,7 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
   styleUrls: ['./form-conciliadas.component.scss']
 })
 export class FormConciliadasComponent {
+  @Output() filtro = new EventEmitter<BodyFiltroMerge>();
   public visible: boolean = false;
   public formularioConciliadas!: FormGroup;
   public hoteles!: CatalogoNiveles[];
@@ -78,6 +79,9 @@ export class FormConciliadasComponent {
     this.body_merge.nivel_acceso = this.formularioConciliadas.value.hotelControl;
     this.body_merge.corporativo = this.dataUser.corporativo;
     this.body_merge.descuadre = false;
+    const valid = this._mergeUtils.validarBodyFiltroMerge(this.body_merge);
+    if (!valid) return;
+    this.filtro.emit(this.body_merge);
     console.log('body merge', this.body_merge);
   };
 
@@ -93,6 +97,17 @@ export class FormConciliadasComponent {
     console.log('fideicomiso', fideicomiso);
     this.fidecomiso = fideicomiso;
   };
+
+  generaReporte(event: any): void {
+    this.body_merge.nombre_reporte = event;
+    this.body_merge.email = this.dataUser.email;
+    this.body_merge.nivel_acceso = this.formularioConciliadas.value.hotelControl;
+    this._mergeService.programaReporte(this.body_merge).subscribe((data: any) => {
+      console.log('data', data);
+    }, (error: any) => {
+      console.log('error', error);
+    });
+  }
 
   public open(): void {
     this.visible = true;

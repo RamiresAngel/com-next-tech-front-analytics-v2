@@ -7,6 +7,10 @@ export class BodyFiltroMerge {
   nivel_acceso: string;
   corporativo: string;
   descuadre: boolean;
+  //  * @param Generar Reporte
+  nombre_reporte?: string;
+  email?: string;
+  sufijo_tabla?: string;
 
   constructor() {
     this.filtro = new FiltroMerge();

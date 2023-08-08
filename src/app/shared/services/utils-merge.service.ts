@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { FiltroMerge } from '../entities/merge.model';
+import { BodyFiltroMerge, FiltroMerge } from '../entities/merge.model';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsMergeService {
 
-  constructor() { }
+  constructor(private _notification: NzNotificationService) { }
 
   /* Función que genere el body filtro, recibe el value form */
   public getBodyFiltroMerge(value: any): FiltroMerge {
@@ -25,4 +26,22 @@ export class UtilsMergeService {
     filtro.serie_hotel = value.serieHotelControl;
     return filtro;
   }
+
+  /* Función para validar this.body_merge.filtro (rfc_emisor,fecha_inicio,fecha_fin) */
+  public validarBodyFiltroMerge(obj_form: BodyFiltroMerge): boolean {
+    if (obj_form.filtro.rfc_emisor === '') {
+      this._notification.warning('Advertencia', 'Debe ingresar RFC emisor');
+      return false;
+    }
+    if (!obj_form.filtro.fecha_inicio || obj_form.filtro.fecha_inicio === '') {
+      this._notification.warning('Advertencia', 'Debe ingresar fecha de factura');
+      return false;
+    }
+    if (!obj_form.filtro.fecha_fin || obj_form.filtro.fecha_fin === '') {
+      this._notification.warning('Advertencia', 'Debe ingresar fecha de factura');
+      return false;
+    }
+    return true;
+  }
+
 }
