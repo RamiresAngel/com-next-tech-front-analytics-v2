@@ -7,8 +7,9 @@
   <div class="row">
     <div class="col-12">
       <div class="ms-3">
-        <app-form-conciliadas></app-form-conciliadas>
-        <table #facturas_conciliadas_merge datatable [dtOptions]="dtOptions" class="row-border hover" id="analytics-table"></table>
+        <app-form-conciliadas (filtro)="refrescaTabla($event)"></app-form-conciliadas>
+        <table #facturas_conciliadas_merge datatable [dtOptions]="dtOptions" class="row-border hover"
+          id="analytics-table"></table>
       </div>
     </div>
   </div>

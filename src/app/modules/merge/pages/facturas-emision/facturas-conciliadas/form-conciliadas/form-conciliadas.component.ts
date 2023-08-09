@@ -23,6 +23,7 @@ export class FormConciliadasComponent {
   public date_factura = null;
   public body_merge: BodyFiltroMerge = new BodyFiltroMerge();
   public fidecomiso: boolean = false;
+  public nivel_acceso: string = '';
 
   constructor(
     private _mergeService: MergeService,
@@ -54,6 +55,7 @@ export class FormConciliadasComponent {
   };
 
   public obtenerRfcEmisores(event: any): any {
+    this.nivel_acceso = event?.nombre;
     this._mergeService.getRFCMap({
       "email": this.dataUser.email,
       "corporativo": this.dataUser.corporativo,
@@ -76,13 +78,12 @@ export class FormConciliadasComponent {
     this.body_merge.tipo = 'emision';
     this.body_merge.tipo_comprobante = 'factura';
     this.body_merge.fidecomiso = this.fidecomiso;
-    this.body_merge.nivel_acceso = this.formularioConciliadas.value.hotelControl;
+    this.body_merge.nivel_acceso = this.nivel_acceso;
     this.body_merge.corporativo = this.dataUser.corporativo;
     this.body_merge.descuadre = false;
     const valid = this._mergeUtils.validarBodyFiltroMerge(this.body_merge);
     if (!valid) return;
     this.filtro.emit(this.body_merge);
-    console.log('body merge', this.body_merge);
   };
 
   onChange(event: any) {
@@ -101,7 +102,7 @@ export class FormConciliadasComponent {
   generaReporte(event: any): void {
     this.body_merge.nombre_reporte = event;
     this.body_merge.email = this.dataUser.email;
-    this.body_merge.nivel_acceso = this.formularioConciliadas.value.hotelControl;
+    this.body_merge.nivel_acceso = this.nivel_acceso;
     this._mergeService.programaReporte(this.body_merge).subscribe((data: any) => {
       console.log('data', data);
     }, (error: any) => {

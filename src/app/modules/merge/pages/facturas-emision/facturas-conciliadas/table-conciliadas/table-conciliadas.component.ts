@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BodyFiltro, ColumnsFactEmitidas, UserData } from 'src/app/shared/entities';
+import { BodyFiltroMerge, ColumnsEmiConciliadas, ColumnsFactEmitidas, UserData } from 'src/app/shared/entities';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { globalApis } from 'src/environments/endpoints';
 declare var $: any;
@@ -14,11 +14,11 @@ export class TableConciliadasComponent {
   @ViewChild('facturas_conciliadas_merge') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
-  public filtro = new BodyFiltro();
-  public columns_header = new ColumnsFactEmitidas();
+  public filtro = new BodyFiltroMerge();
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser!: UserData;
   public is_loading: boolean = false;
+  public columns = new ColumnsEmiConciliadas();
   public bodyGlobalFiltro: any = {
     filtro: {}
   };
@@ -48,10 +48,16 @@ export class TableConciliadasComponent {
       ajax: (dataTablesParameters: any, callback) => {
         const aux_filtro = this.meterFiltro(dataTablesParameters);
         if (aux_filtro.filtro.rfc_emisor != '') {
-          dataTablesParameters = aux_filtro;
-          console.log(dataTablesParameters);
+          dataTablesParameters.filtro = aux_filtro.filtro;
+          dataTablesParameters.corporativo = aux_filtro.corporativo;
+          dataTablesParameters.fidecomiso = aux_filtro.fidecomiso;
+          dataTablesParameters.tipo = aux_filtro.tipo;
+          dataTablesParameters.tipo_comprobante = aux_filtro.tipo_comprobante;
+          dataTablesParameters.faltantes_erp = aux_filtro.faltantes_erp;
+          dataTablesParameters.descuadre = aux_filtro.descuadre;
+          dataTablesParameters.nivel_acceso = aux_filtro.nivel_acceso;
           this._http.post<any>(
-            `${globalApis.url_vault}/factura`,
+            `${globalApis.url_merge}/conciliadas`,
             dataTablesParameters, {
             headers: new HttpHeaders({
               'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -80,7 +86,7 @@ export class TableConciliadasComponent {
           });
         }
       },
-      columns: [...this.columns_header.columns_header]
+      columns: [...this.columns.columns_header]
     }
   }
 
@@ -89,7 +95,7 @@ export class TableConciliadasComponent {
     if (body_filtro) {
       obj = {};
       obj = body_filtro;
-      this.filtro = body_filtro;
+      this.bodyGlobalFiltro = body_filtro;
     }
     if (obj) {
       this.dataTablesParameters = obj;
@@ -103,19 +109,15 @@ export class TableConciliadasComponent {
     return obj;
   }
 
-  public refrescaTabla(filtro: BodyFiltro) {
-    if (filtro.filtro.rfc_emisor == '' || filtro.filtro.rfc_emisor == null || filtro.filtro.rfc_emisor == undefined
-      || filtro.filtro.fecha_factura_i == '' || filtro.filtro.fecha_factura_i == null || filtro.filtro.fecha_factura_i == undefined) {
-      alert('El campo RFC Emisor es requerido');
-    } else {
-      if (filtro) {
-        this.filtro = filtro;
-      }
-      try {
-        $('#analytics-table').DataTable().ajax.reload();
-      } catch (error) {
-        console.log(error);
-      }
+  public refrescaTabla(filtro: BodyFiltroMerge) {
+    this.filtro = filtro;
+    if (this.filtro) {
+      this.bodyGlobalFiltro = this.filtro;
+    }
+    try {
+      $('#analytics-table').DataTable().ajax.reload();
+    } catch (error) {
+      console.log(error);
     }
   }
 
