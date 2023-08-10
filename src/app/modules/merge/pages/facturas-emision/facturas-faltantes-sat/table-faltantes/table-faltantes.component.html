@@ -1,12 +1,16 @@
-<div class="container">
+<div class="container p-i mt-2">
   <div class="row">
     <div class="col-12">
-      <p>table works! FALTANTES</p>
+      <p class="ps-2"></p>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <app-form-faltantes></app-form-faltantes>
+      <div class="ms-3">
+        <app-form-faltantes (filtro)="refrescaTabla($event)"></app-form-faltantes>
+        <table #facturas_faltantes_merge datatable [dtOptions]="dtOptions" class="row-border hover"
+          id="analytics-table"></table>
+      </div>
     </div>
   </div>
 </div>

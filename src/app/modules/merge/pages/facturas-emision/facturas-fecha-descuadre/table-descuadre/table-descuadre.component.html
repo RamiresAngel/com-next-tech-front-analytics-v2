@@ -1,12 +1,16 @@
-<div class="container">
+<div class="container p-1 mt-2">
   <div class="row">
     <div class="col-12">
-      <p>table works! DESCUADRE</p>
+      <p class="ps-2"></p>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <app-form-descuadre></app-form-descuadre>
+      <div class="ms-3">
+        <app-form-descuadre (filtro)="refrescaTabla($event)"></app-form-descuadre>
+        <table #facturas_descuadre_merge datatable [dtOptions]="dtOptions" class="row-border hover"
+          id="analytics-table"></table>
+      </div>
     </div>
   </div>
 </div>

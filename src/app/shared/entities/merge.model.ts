@@ -1,6 +1,6 @@
 export class BodyFiltroMerge {
   filtro: FiltroMerge;
-  faltantes_erp: boolean;
+  faltantes_erp?: boolean;
   tipo: string;
   tipo_comprobante: string;
   fidecomiso: boolean;

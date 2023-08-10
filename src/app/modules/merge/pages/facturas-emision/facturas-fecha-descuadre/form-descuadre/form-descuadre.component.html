@@ -1,1 +1,119 @@
-<p>form-descuadre works!</p>
+<div>
+  <div class="row align-items-center">
+    <h4 class="col-4">Facturas con Descuadre Total</h4>
+    <div class="col-8 text-end">
+      <button class="btn btn-primary btn-sm" nz-button nzType="primary" (click)="open()">
+        <span class="material-symbols-outlined align-middle">filter_alt</span>
+        Filtros
+      </button>
+    </div>
+  </div>
+  <div>
+    <nz-drawer [nzClosable]="true" [nzVisible]="visible" [nzPlacement]="'right'" nzTitle="Panel de filtrado"
+      (nzOnClose)="close()" [nzFooter]="footerTpl">
+
+      <ng-container *nzDrawerContent>
+        <div>
+          <form [formGroup]="formularioConciliadas" class="container" nz-form>
+            <div class="mt-0">
+              <label>Hotel</label>
+              <nz-select class="w-100" nzShowSearch (ngModelChange)="obtenerRfcEmisores($event)"
+                formControlName="hotelControl">
+                <nz-option *ngFor="let hotel of hoteles" [nzLabel]="hotel.hotel" [nzValue]="hotel">
+                </nz-option>
+              </nz-select>
+            </div>
+            <div class="mt-3">
+              <label>RFC emisor</label>
+              <nz-select formControlName="rfcEmisorControl" (ngModelChange)="selectedRfc($event, 'emisor')">
+                <nz-option *ngFor="let rfcEmisor of rfcEmisores" [nzLabel]="rfcEmisor.rfc" [nzValue]="rfcEmisor.rfc">
+                </nz-option>
+              </nz-select>
+            </div>
+            <div class="mt-3">
+              <label>Series hoteles</label>
+              <nz-select formControlName="serieHotelControl" class="w-100" nzMode="multiple">
+                <nz-option *ngFor="let item of option_serie_hotel" [nzLabel]="item" [nzValue]="item">
+                </nz-option>
+              </nz-select>
+            </div>
+            <hr />
+            <div class="mt-3">
+              <label>RFC receptor</label>
+              <input nz-input type="text" formControlName="rfcReceptorControl" />
+            </div>
+            <div class="mt-3">
+              <label>RFC PAC</label>
+              <input nz-input type="text" formControlName="rfcPacControl" />
+            </div>
+            <div class="mt-3">
+              <label>Código postal emisor</label>
+              <input nz-input type="text" formControlName="cpControl" />
+            </div>
+            <div class="mt-3">
+              <label>Código postal emisor (FACTO)</label>
+              <input nz-input type="text" formControlName="cpFactoraControl" />
+            </div>
+            <div class="mt-3">
+              <label>Serie</label>
+              <input nz-input type="text" formControlName="serieControl" />
+            </div>
+            <div class="mt-3">
+              <label>Folio</label>
+              <input nz-input type="text" formControlName="folioControl" />
+            </div>
+            <div class="mt-3">
+              <label>Folio Fiscal</label>
+              <input nz-input type="text" formControlName="uuidControl" />
+            </div>
+            <div class="mt-3">
+              <label>Rango de fechas</label>
+              <nz-range-picker [nzDefaultPickerValue]="date_factura" [nzFormat]="'yyyy/MM/dd'"
+                [(ngModel)]="date_factura" (ngModelChange)="onChange($event)"
+                [ngModelOptions]="{standalone: true}"></nz-range-picker>
+            </div>
+            <div class="mt-3">
+              <label>Estatus de factura</label>
+              <nz-select formControlName="estatusControl">
+                <nz-option nzLabel="Vigentes/Canceladas" nzValue="" selected></nz-option>
+                <nz-option nzLabel="Vigentes" nzValue="Vigentes"></nz-option>
+                <nz-option nzLabel="Canceladas" nzValue="Canceladas"></nz-option>
+              </nz-select>
+            </div>
+            <div class="mt-3">
+              <label>Efecto de comprobante</label>
+              <nz-select Seleccioné="Seleccine un tipo" formControlName="efectoComprobanteControl">
+                <nz-option nzLabel="I" nzValue="I"></nz-option>
+                <nz-option nzLabel="E" nzValue="E"></nz-option>
+              </nz-select>
+            </div>
+            <div class="mt-3">
+              <label>Faltantes</label>
+              <br>
+              <nz-switch formControlName="faltantesControl" nzCheckedChildren="NO" nzUnCheckedChildren="SI"></nz-switch>
+            </div>
+
+          </form>
+        </div>
+      </ng-container>
+
+      <ng-template #footerTpl>
+        <div class="row">
+          <div class="col-6">
+            <button>Reporte btn</button>
+            <!-- <app-genera-roporte #reporte (nombre)="generarReporteFn($event)"></app-genera-roporte> -->
+          </div>
+          <div class="col-6 text-end">
+            <button class="btn btn-info btn-sm" nz-button style="margin-right: 8px;" (click)="limpiarFiltros()">
+              Limpiar
+            </button>
+            <button class="btn btn-primary btn-sm" nz-button nzType="primary" (click)="enviarDatosFiltro()">
+              Filtrar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+    </nz-drawer>
+  </div>
+</div>
