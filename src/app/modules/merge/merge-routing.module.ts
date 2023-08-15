@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableConciliadasComponent } from './pages/facturas-emision/facturas-conciliadas/table-conciliadas/table-conciliadas.component';
 import { TableFaltantesComponent } from './pages/facturas-emision/facturas-faltantes-sat/table-faltantes/table-faltantes.component';
 import { TableDescuadreComponent } from './pages/facturas-emision/facturas-fecha-descuadre/table-descuadre/table-descuadre.component';
-import { TableConRecComponent } from './pages/facturas-recepsion/conciliadas-recepsion/table-con-rec/table-con-rec.component';
-import { TableFalRecComponent } from './pages/facturas-recepsion/faltantes-sat-recepsion/table-fal-rec/table-fal-rec.component';
-import { TableDesRecComponent } from './pages/facturas-recepsion/descuadre-recepsion/table-des-rec/table-des-rec.component';
+import { TableFalRecComponent } from './pages/facturas-recepcion/faltantes-recepcion/table-fal-rec/table-fal-rec.component';
+import { TableDesRecComponent } from './pages/facturas-recepcion/descuadre-recepcion/table-des-rec/table-des-rec.component';
+import { TableConRecComponent } from './pages/facturas-recepcion/conciliadas-recepcion/table-con-rec/table-con-rec.component';
 
 const routes: Routes = [
   { path: 'fac_emi_conciliadas', component: TableConciliadasComponent },
