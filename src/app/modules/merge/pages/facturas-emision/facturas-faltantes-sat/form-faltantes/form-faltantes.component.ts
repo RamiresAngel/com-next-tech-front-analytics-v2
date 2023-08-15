@@ -49,7 +49,6 @@ export class FormFaltantesComponent {
       fechaFacturaControl: new FormControl(Validators.required),
       estatusControl: new FormControl(''),
       efectoComprobanteControl: new FormControl(''),
-      faltantesControl: new FormControl(false)
     });
   };
 
