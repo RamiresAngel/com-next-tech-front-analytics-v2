@@ -7,8 +7,9 @@
   <div class="row">
     <div class="col-12">
       <div class="ms-3">
-        <app-form-fal-rec></app-form-fal-rec>
-        <table class="row-border hover" id="analytics-table"></table>
+        <app-form-fal-rec (filtro)="refrescaTabla($event)"></app-form-fal-rec>
+        <table #recepcion_faltantes_merge datatable [dtOptions]="dtOptions" class="row-border hover"
+          id="analytics-table"></table>
       </div>
     </div>
   </div>

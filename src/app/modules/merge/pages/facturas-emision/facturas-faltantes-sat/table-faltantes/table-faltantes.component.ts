@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { BodyFiltroMerge, ColumnsRecFaltantes, UserData } from 'src/app/shared/entities';
+import { BodyFiltroMerge, ColumnsEmiFaltantes, UserData } from 'src/app/shared/entities';
 import { globalApis } from 'src/environments/endpoints';
 
 @Component({
@@ -16,7 +16,7 @@ export class TableFaltantesComponent {
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser!: UserData;
   public is_loading: boolean = false;
-  public columns = new ColumnsRecFaltantes();
+  public columns = new ColumnsEmiFaltantes();
   public bodyGlobalFiltro: any = {
     filtro: {}
   };
