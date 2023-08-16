@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { BodyFiltroMerge, UserData, ColumnsEmiConciliadas } from 'src/app/shared/entities';
+import { BodyFiltroMerge, UserData, ColumnsEmiDescuadre } from 'src/app/shared/entities';
 import { globalApis } from 'src/environments/endpoints';
 
 @Component({
@@ -16,7 +16,7 @@ export class TableDescuadreComponent {
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser!: UserData;
   public is_loading: boolean = false;
-  public columns = new ColumnsEmiConciliadas();
+  public columns = new ColumnsEmiDescuadre();
   public bodyGlobalFiltro: any = {
     filtro: {}
   };

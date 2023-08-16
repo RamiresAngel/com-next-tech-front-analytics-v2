@@ -6,8 +6,9 @@
     <div class="row">
       <div class="col-12">
         <div class="ms-3">
-          <app-form-con-rec></app-form-con-rec>
-          <table class="row-border hover" id="analytics-table"></table>
+          <app-form-con-rec (filtro)="refrescaTabla($event)"></app-form-con-rec>
+          <table #recepcion_conciliadas_merge datatable [dtOptions]="dtOptions" class="row-border hover"
+            id="analytics-table"></table>
         </div>
       </div>
     </div>
