@@ -23,6 +23,12 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { FormConciliadasValidComponent } from './pages/facturas-recepcion-valid/facturas-conciliadas-valid/form-conciliadas-valid/form-conciliadas-valid.component';
+import { TableConciliadasValidComponent } from './pages/facturas-recepcion-valid/facturas-conciliadas-valid/table-conciliadas-valid/table-conciliadas-valid.component';
+import { FormDescuadreValidComponent } from './pages/facturas-recepcion-valid/facturas-descuadre-valid/form-descuadre-valid/form-descuadre-valid.component';
+import { TableDescuadreValidComponent } from './pages/facturas-recepcion-valid/facturas-descuadre-valid/table-descuadre-valid/table-descuadre-valid.component';
+import { FormFaltantesValidComponent } from './pages/facturas-recepcion-valid/facturas-faltantes-valid/form-faltantes-valid/form-faltantes-valid.component';
+import { TableFaltantesValidComponent } from './pages/facturas-recepcion-valid/facturas-faltantes-valid/table-faltantes-valid/table-faltantes-valid.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,13 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     FormDesRecComponent,
     TableDesRecComponent,
     FormFalRecComponent,
-    TableFalRecComponent
+    TableFalRecComponent,
+    FormConciliadasValidComponent,
+    TableConciliadasValidComponent,
+    FormDescuadreValidComponent,
+    TableDescuadreValidComponent,
+    FormFaltantesValidComponent,
+    TableFaltantesValidComponent
   ],
   imports: [
     CommonModule,
