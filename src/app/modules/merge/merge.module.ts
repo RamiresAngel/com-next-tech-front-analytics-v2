@@ -23,6 +23,12 @@ import { FormDescuadreValidComponent } from './pages/facturas-recepcion-valid/fa
 import { TableDescuadreValidComponent } from './pages/facturas-recepcion-valid/facturas-descuadre-valid/table-descuadre-valid/table-descuadre-valid.component';
 import { FormFaltantesValidComponent } from './pages/facturas-recepcion-valid/facturas-faltantes-valid/form-faltantes-valid/form-faltantes-valid.component';
 import { TableFaltantesValidComponent } from './pages/facturas-recepcion-valid/facturas-faltantes-valid/table-faltantes-valid/table-faltantes-valid.component';
+import { FormPagosConciliadosComponent } from './pages/pagos-emision/pagos-conciliados/form-pagos-conciliados/form-pagos-conciliados.component';
+import { TablePagosConciliadosComponent } from './pages/pagos-emision/pagos-conciliados/table-pagos-conciliados/table-pagos-conciliados.component';
+import { FormPagosDescuadreComponent } from './pages/pagos-emision/pagos-descuadre/form-pagos-descuadre/form-pagos-descuadre.component';
+import { TablePagosDescuadreComponent } from './pages/pagos-emision/pagos-descuadre/table-pagos-descuadre/table-pagos-descuadre.component';
+import { FormPagosFaltantesSatComponent } from './pages/pagos-emision/pagos-faltantes-sat/form-pagos-faltantes-sat/form-pagos-faltantes-sat.component';
+import { TablePagosFaltantesSatComponent } from './pages/pagos-emision/pagos-faltantes-sat/table-pagos-faltantes-sat/table-pagos-faltantes-sat.component';
 /* ng-zorro */
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -50,7 +56,13 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     FormDescuadreValidComponent,
     TableDescuadreValidComponent,
     FormFaltantesValidComponent,
-    TableFaltantesValidComponent
+    TableFaltantesValidComponent,
+    FormPagosConciliadosComponent,
+    TablePagosConciliadosComponent,
+    FormPagosDescuadreComponent,
+    TablePagosDescuadreComponent,
+    FormPagosFaltantesSatComponent,
+    TablePagosFaltantesSatComponent
   ],
   imports: [
     CommonModule,
