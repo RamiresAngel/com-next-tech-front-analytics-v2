@@ -7,7 +7,8 @@
   <div class="row">
     <div class="col-12">
       <div class="ms-3">
-        <app-form-faltantes-valid></app-form-faltantes-valid>
-        <table #facturas_faltantes_merge datatable class="row-border hover" id="analytics-table"></table>
+        <app-form-faltantes-valid (filtro)="refrescaTabla($event)"></app-form-faltantes-valid>
+        <table #facturas_faltantes_valid datatable [dtOptions]="dtOptions" class="row-border hover"
+          id="analytics-table"></table>
       </div>
     </div>
