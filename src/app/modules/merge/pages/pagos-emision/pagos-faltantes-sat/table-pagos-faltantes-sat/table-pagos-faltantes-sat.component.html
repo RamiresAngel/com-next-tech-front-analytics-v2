@@ -1,1 +1,17 @@
-<p>table-pagos-faltantes-sat works!</p>
+<div class="container p-1 mt-2">
+  <div class="row">
+    <div class="col-12">
+      <p class="ps-2"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="ms-3">
+        <!-- (filtro)="refrescaTabla($event)" -->
+        <app-form-pagos-faltantes-sat></app-form-pagos-faltantes-sat>
+        <!-- datatable [dtOptions]="dtOptions" -->
+        <table #pagos_faltantes_sat class="row-border hover" id="analytics-table"></table>
+      </div>
+    </div>
+  </div>
+</div>
