@@ -1,1 +1,17 @@
-<p>table-pagos-conciliados-valid works!</p>
+<div class="container p-1 mt-2">
+  <div class="row">
+    <div class="col-12">
+      <p class="ps-2"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="ms-3">
+        <!-- (filtro)="refrescaTabla($event)" -->
+        <app-form-pagos-conciliados-valid></app-form-pagos-conciliados-valid>
+        <!-- datatable [dtOptions]="dtOptions" -->
+        <table #pagos_conciliados_valid class="row-border hover" id="analytics-table">
+        </table>
+      </div>
+    </div>
+  </div>
