@@ -7,9 +7,7 @@
   <div class="row">
     <div class="col-12">
       <div class="ms-3">
-
         <app-form-pagos-conciliados (filtro)="refrescaTabla($event)"></app-form-pagos-conciliados>
-
         <table #pagos_conciliados datatable [dtOptions]="dtOptions" class="row-border hover" id="analytics-table">
         </table>
       </div>

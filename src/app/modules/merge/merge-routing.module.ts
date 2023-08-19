@@ -12,6 +12,8 @@ import { TableFaltantesValidComponent } from './pages/facturas-recepcion-valid/f
 import { TablePagosConciliadosComponent } from './pages/pagos-emision/pagos-conciliados/table-pagos-conciliados/table-pagos-conciliados.component';
 import { TablePagosFaltantesSatComponent } from './pages/pagos-emision/pagos-faltantes-sat/table-pagos-faltantes-sat/table-pagos-faltantes-sat.component';
 import { TablePagosDescuadreComponent } from './pages/pagos-emision/pagos-descuadre/table-pagos-descuadre/table-pagos-descuadre.component';
+import { TablesPagosRecConciliadosComponent } from './pages/pagos-recepcion/pagos-rec-conciliados/tables-pagos-rec-conciliados/tables-pagos-rec-conciliados.component';
+import { TablePagosRecFaltantesComponent } from './pages/pagos-recepcion/pagos-rec-faltantes/table-pagos-rec-faltantes/table-pagos-rec-faltantes.component';
 
 const routes: Routes = [
   { path: 'fac_emi_conciliadas', component: TableConciliadasComponent },
@@ -25,7 +27,9 @@ const routes: Routes = [
   { path: 'fac_rec_valid_descuadre', component: TableDescuadreValidComponent },
   { path: 'pag_emi_conciliadas', component: TablePagosConciliadosComponent },
   { path: 'pag_emi_fal_sat', component: TablePagosFaltantesSatComponent },
-  { path: 'pag_emi_descuadre', component: TablePagosDescuadreComponent }
+  { path: 'pag_emi_descuadre', component: TablePagosDescuadreComponent },
+  { path: 'pag_rec_conciliadas', component: TablesPagosRecConciliadosComponent },
+  { path: 'pag_rec_fal_sat', component: TablePagosRecFaltantesComponent }
 ];
 
 @NgModule({
