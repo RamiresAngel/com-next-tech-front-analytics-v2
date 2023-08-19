@@ -29,6 +29,12 @@ import { FormPagosDescuadreComponent } from './pages/pagos-emision/pagos-descuad
 import { TablePagosDescuadreComponent } from './pages/pagos-emision/pagos-descuadre/table-pagos-descuadre/table-pagos-descuadre.component';
 import { FormPagosFaltantesSatComponent } from './pages/pagos-emision/pagos-faltantes-sat/form-pagos-faltantes-sat/form-pagos-faltantes-sat.component';
 import { TablePagosFaltantesSatComponent } from './pages/pagos-emision/pagos-faltantes-sat/table-pagos-faltantes-sat/table-pagos-faltantes-sat.component';
+import { FormPagosRecConciliadosComponent } from './pages/pagos-recepcion/pagos-rec-conciliados/form-pagos-rec-conciliados/form-pagos-rec-conciliados.component';
+import { TablesPagosRecConciliadosComponent } from './pages/pagos-recepcion/pagos-rec-conciliados/tables-pagos-rec-conciliados/tables-pagos-rec-conciliados.component';
+import { FormPagosRecDescuadreComponent } from './pages/pagos-recepcion/pagos-rec-descuadre/form-pagos-rec-descuadre/form-pagos-rec-descuadre.component';
+import { TablePagosRecDescuadreComponent } from './pages/pagos-recepcion/pagos-rec-descuadre/table-pagos-rec-descuadre/table-pagos-rec-descuadre.component';
+import { FormPagosRecFaltantesComponent } from './pages/pagos-recepcion/pagos-rec-faltantes/form-pagos-rec-faltantes/form-pagos-rec-faltantes.component';
+import { TablePagosRecFaltantesComponent } from './pages/pagos-recepcion/pagos-rec-faltantes/table-pagos-rec-faltantes/table-pagos-rec-faltantes.component';
 /* ng-zorro */
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -62,7 +68,13 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     FormPagosDescuadreComponent,
     TablePagosDescuadreComponent,
     FormPagosFaltantesSatComponent,
-    TablePagosFaltantesSatComponent
+    TablePagosFaltantesSatComponent,
+    FormPagosRecConciliadosComponent,
+    TablesPagosRecConciliadosComponent,
+    FormPagosRecDescuadreComponent,
+    TablePagosRecDescuadreComponent,
+    FormPagosRecFaltantesComponent,
+    TablePagosRecFaltantesComponent
   ],
   imports: [
     CommonModule,
