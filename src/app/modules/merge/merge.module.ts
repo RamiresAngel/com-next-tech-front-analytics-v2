@@ -35,6 +35,10 @@ import { FormPagosRecDescuadreComponent } from './pages/pagos-recepcion/pagos-re
 import { TablePagosRecDescuadreComponent } from './pages/pagos-recepcion/pagos-rec-descuadre/table-pagos-rec-descuadre/table-pagos-rec-descuadre.component';
 import { FormPagosRecFaltantesComponent } from './pages/pagos-recepcion/pagos-rec-faltantes/form-pagos-rec-faltantes/form-pagos-rec-faltantes.component';
 import { TablePagosRecFaltantesComponent } from './pages/pagos-recepcion/pagos-rec-faltantes/table-pagos-rec-faltantes/table-pagos-rec-faltantes.component';
+import { FormPagosConciliadosValidComponent } from './pages/pagos-recepcion-valid/pagos-conciliados-valid/form-pagos-conciliados-valid/form-pagos-conciliados-valid.component';
+import { TablePagosConciliadosValidComponent } from './pages/pagos-recepcion-valid/pagos-conciliados-valid/table-pagos-conciliados-valid/table-pagos-conciliados-valid.component';
+import { FormPagosFaltantesValidComponent } from './pages/pagos-recepcion-valid/pagos-faltantes-valid/form-pagos-faltantes-valid/form-pagos-faltantes-valid.component';
+import { TablePagosFaltantesValidComponent } from './pages/pagos-recepcion-valid/pagos-faltantes-valid/table-pagos-faltantes-valid/table-pagos-faltantes-valid.component';
 /* ng-zorro */
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -74,7 +78,11 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     FormPagosRecDescuadreComponent,
     TablePagosRecDescuadreComponent,
     FormPagosRecFaltantesComponent,
-    TablePagosRecFaltantesComponent
+    TablePagosRecFaltantesComponent,
+    FormPagosConciliadosValidComponent,
+    TablePagosConciliadosValidComponent,
+    FormPagosFaltantesValidComponent,
+    TablePagosFaltantesValidComponent
   ],
   imports: [
     CommonModule,
