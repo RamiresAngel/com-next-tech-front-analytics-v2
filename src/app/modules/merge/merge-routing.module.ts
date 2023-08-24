@@ -16,6 +16,7 @@ import { TablesPagosRecConciliadosComponent } from './pages/pagos-recepcion/pago
 import { TablePagosRecFaltantesComponent } from './pages/pagos-recepcion/pagos-rec-faltantes/table-pagos-rec-faltantes/table-pagos-rec-faltantes.component';
 import { TablePagosConciliadosValidComponent } from './pages/pagos-recepcion-valid/pagos-conciliados-valid/table-pagos-conciliados-valid/table-pagos-conciliados-valid.component';
 import { TablePagosFaltantesValidComponent } from './pages/pagos-recepcion-valid/pagos-faltantes-valid/table-pagos-faltantes-valid/table-pagos-faltantes-valid.component';
+import { ReportesMergeComponent } from './pages/reportes-merge/reportes-merge.component';
 
 const routes: Routes = [
   { path: 'fac_emi_conciliadas', component: TableConciliadasComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'pag_rec_conciliadas', component: TablesPagosRecConciliadosComponent },
   { path: 'pag_rec_fal_sat', component: TablePagosRecFaltantesComponent },
   { path: 'pag_rec_conciliadas_valid', component: TablePagosConciliadosValidComponent },
-  { path: 'pag_rec_fal_sat_valid', component: TablePagosFaltantesValidComponent }
+  { path: 'pag_rec_fal_sat_valid', component: TablePagosFaltantesValidComponent },
+  { path: 'reporte_generado', component: ReportesMergeComponent }
 ];
 
 @NgModule({
