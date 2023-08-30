@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BodyFiltroMerge, ColumnsEmiConciliadas, ColumnsFactEmitidas, UserData } from 'src/app/shared/entities';
+import { Component, ViewChild } from '@angular/core';
+import { BodyFiltroMerge, ColumnsEmiConciliadas, UserData } from 'src/app/shared/entities';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { globalApis } from 'src/environments/endpoints';
 declare var $: any;
