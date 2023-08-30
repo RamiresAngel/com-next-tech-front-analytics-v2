@@ -9,7 +9,7 @@ import { globalApis } from 'src/environments/endpoints';
   styleUrls: ['./table-faltantes-valid.component.scss']
 })
 export class TableFaltantesValidComponent {
-  @ViewChild('facturas_conciliadas_merge') facturas!: HTMLElement;
+  @ViewChild('facturas_faltantes_valid') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltroMerge();

@@ -9,7 +9,7 @@ import { globalApis } from 'src/environments/endpoints';
   styleUrls: ['./table-con-rec.component.scss']
 })
 export class TableConRecComponent {
-  @ViewChild('facturas_conciliadas_merge') facturas!: HTMLElement;
+  @ViewChild('recepcion_conciliadas_merge') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltroMerge();

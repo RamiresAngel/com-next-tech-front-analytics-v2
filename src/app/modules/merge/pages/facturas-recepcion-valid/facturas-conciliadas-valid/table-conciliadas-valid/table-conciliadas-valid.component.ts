@@ -9,7 +9,7 @@ import { globalApis } from 'src/environments/endpoints';
   styleUrls: ['./table-conciliadas-valid.component.scss']
 })
 export class TableConciliadasValidComponent {
-  @ViewChild('facturas_conciliadas_merge') facturas!: HTMLElement;
+  @ViewChild('facturas_conciliadas_valid') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltroMerge();

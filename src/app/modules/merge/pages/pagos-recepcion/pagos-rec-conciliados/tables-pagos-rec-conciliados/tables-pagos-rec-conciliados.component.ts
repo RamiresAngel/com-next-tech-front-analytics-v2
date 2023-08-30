@@ -9,7 +9,7 @@ import { globalApis } from 'src/environments/endpoints';
   styleUrls: ['./tables-pagos-rec-conciliados.component.scss']
 })
 export class TablesPagosRecConciliadosComponent {
-  @ViewChild('pagos_conciliados') facturas!: HTMLElement;
+  @ViewChild('pagos_rec_conciliados') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltroMerge();

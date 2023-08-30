@@ -9,7 +9,7 @@ import { globalApis } from 'src/environments/endpoints';
   styleUrls: ['./table-descuadre.component.scss']
 })
 export class TableDescuadreComponent {
-  @ViewChild('facturas_conciliadas_merge') facturas!: HTMLElement;
+  @ViewChild('facturas_descuadre_merge') facturas!: HTMLElement;
   public dtOptions: DataTables.Settings = {};
   public dataTablesParameters: any;
   public filtro = new BodyFiltroMerge();

@@ -7,9 +7,7 @@
   <div class="row">
     <div class="col-12">
       <div class="ms-3">
-
         <app-form-pagos-faltantes-valid (filtro)="refrescaTabla($event)"></app-form-pagos-faltantes-valid>
-
         <table #pagos_faltantes_valid datatable [dtOptions]="dtOptions" class="row-border hover" id="analytics-table">
         </table>
       </div>
