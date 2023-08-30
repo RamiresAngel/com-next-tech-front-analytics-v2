@@ -4,26 +4,26 @@
       <h4>Descargas programadas</h4>
     </div>
     <div class="col-lg-6 text-end">
-      <!--  <button type="button" (click)="refreshTabla()" class="btn btn-primary btn-sm">
+      <button type="button" (click)="refreshTabla()" class="btn btn-primary btn-sm">
         <i class="fas fa-refresh me-1"></i>
         Actualizar
-      </button> -->
+      </button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-12">
-      <!-- <ngb-alert type="info" class="basic-label py-2 my-3 alert-disclaimer" (closed)="disclaimerShow = !disclaimerShow"
+      <ngb-alert type="info" class="basic-label py-2 my-3 alert-disclaimer" (closed)="disclaimerShow = !disclaimerShow"
         *ngIf="disclaimerShow">
         <strong>Atención:</strong>
         Te recordamos que los reportes generados se eliminan 30 días hábiles después de haber sido creados.
-      </ngb-alert> -->
+      </ngb-alert>
     </div>
   </div>
 
   <div class="row mt-4">
     <div class="col-12">
-      <!--  <app-loader *ngIf="isLoading"></app-loader>
+      <app-loader *ngIf="isLoading"></app-loader>
       <table *ngIf="!isLoading" datatable [dtOptions]="dtOptions" class="row-border hover w-100" id="analytics-table">
         <thead>
           <tr>
@@ -46,15 +46,15 @@
             </td>
             <td class="text-end">
               <p class="mb-0 text-end" style="width: 120px;">
-                <app-descarga-reporte-vault [rowSelected]="reporte"
-                  *ngIf="reporte.status === 'descargado'"></app-descarga-reporte-vault>
+                <!-- <app-descarga-reporte-vault [rowSelected]="reporte"
+                  *ngIf="reporte.status === 'descargado'"></app-descarga-reporte-vault> -->
                 <button *ngIf="reporte.status === 'descargado'" type="button" (click)="showModalMiddle(reporte)"
                   class="btn btn-danger btn-sm shadow-sm"><i class="fas fa-trash"></i></button>
               </p>
             </td>
           </tr>
         </tbody>
-      </table> -->
+      </table>
     </div>
   </div>
 

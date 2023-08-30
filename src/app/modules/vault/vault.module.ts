@@ -12,16 +12,17 @@ import { FacturasPPDComponent } from './pages/factura-ppd/facturas-ppd/facturas-
 import { PPDFiltroComponent } from './pages/factura-ppd/ppd-filtro/ppd-filtro.component';
 import { GeneraReporteComponent } from './Shared/genera-reporte/genera-reporte.component';
 import { DataTablesModule } from 'angular-datatables';
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReportesComponent } from './pages/reportes/reportes.component';
+import { DescargaReporteVaultComponent } from './Shared/descarga-reporte-vault/descarga-reporte-vault.component';
 /* NG-Zorro */
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
-import { ReportesComponent } from './pages/reportes/reportes.component';
-import { DescargaReporteVaultComponent } from './Shared/descarga-reporte-vault/descarga-reporte-vault.component';
+/* Bootstrap */
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({

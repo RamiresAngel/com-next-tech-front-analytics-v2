@@ -46,6 +46,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+/* Bootstrap */
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -98,7 +102,10 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzModalModule,
+    NzNotificationModule,
+    NgbAlertModule
   ]
 })
 export class MergeModule { }
