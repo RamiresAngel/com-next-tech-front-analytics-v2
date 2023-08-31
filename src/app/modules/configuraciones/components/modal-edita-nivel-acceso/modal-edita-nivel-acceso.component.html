@@ -1,10 +1,112 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Edita Nivel de Acceso" (nzOnCancel)="handleCancel()">
+<nz-modal [(nzVisible)]="isVisible" [nzWidth]="700" nzTitle="Editar sucursal" [nzClosable]="false" [nzFooter]="null">
   <ng-container *nzModalContent>
-    <h1>Formulario Edición</h1>
+    <app-loader *ngIf="isLoading"></app-loader>
+    <form class="container px-0" *ngIf="!isLoading" [formGroup]="formEditarSucursal">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <label class="col-12 mb-1 text-secondary basic-paragraph">Nombre</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="hotel">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="col-12 mb-1 text-secondary basic-paragraph">Dirección</label>
+            <div class="col-12">
+              <textarea nz-input rows="3" formControlName="direccion"></textarea>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="col-12 mb-1 text-secondary basic-paragraph">RFC's asociados</label>
+            <div class="col-12">
+              <nz-select (ngModelChange)="rfcSelected()" [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder"
+                formControlName="rfc" nzMode="multiple">
+                <nz-option *ngFor="let rfc of listaRFCCorporativo" [nzLabel]="rfc" [nzValue]="rfc"></nz-option>
+              </nz-select>
+              <ng-template #tagPlaceHolder let-selectedList>y {{ selectedList.length }} más</ng-template>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Teléfono</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="telefono" maxlength="10"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="mb-1 col-12 basic-paragraph text-secondary">Código Postal</label>
+            <div class="col-12">
+              <input nz-input type="text" formControlName="cp" maxlength="5"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="mb-2 basic-paragraph text-secondary col-12">Centralizado</label>
+            <div class="col-12 d-flex align-items-center">
+              <small class="text-secondary">No</small>
+              <nz-switch class="mx-3" formControlName="centralizado"></nz-switch>
+              <small class="text-secondary">Si</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row mt-3">
+      <div class="col-12">
+        <nz-collapse nzAccordion *ngIf="rfcMap.length >= 1">
+          <nz-collapse-panel *ngFor="let panel of rfcMap; let i = index" [nzHeader]="panel.rfc" [nzActive]="false">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="row">
+                  <label class="col-12 mb-2 basic-paragraph text-secondary">Fideicomiso</label>
+                  <div class="col-12 d-flex align-items-center">
+                    <small class="text-secondary">No</small>
+                    <nz-switch class="mx-3" [ngModel]="panel.fidecomiso"
+                      (ngModelChange)="setFideicomiso($event, i)"></nz-switch>
+                    <small class="text-secondary">Si</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="row">
+                  <label class="col-12 mb-1 text-secondary basic-paragraph">Serie</label>
+                  <div class="col-12 d-flex">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                      <input type="text" nz-input [id]="'serie-input-' + i" />
+                    </nz-input-group>
+                    <ng-template #suffixIconButton>
+                      <button type="button" (click)="Addserie(i)" nz-button nzType="primary" nzSearch>
+                        <i class="fas fa-plus me-1"></i>
+                        Agregar serie
+                      </button>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <nz-tag nzMode="closeable" (nzOnClose)="deleteSerie(i, idSerie)"
+                  *ngFor="let serie of panel.serie; let idSerie = index">{{serie}}</nz-tag>
+              </div>
+            </div>
+          </nz-collapse-panel>
+        </nz-collapse>
+      </div>
+    </div>
+    <div class="row mt-4 border-top pt-3">
+      <div class="col-12 text-end">
+        <button type="button" (click)="handleCancel()" class="btn btn-sm btn-danger me-3">Cancelar</button>
+        <button type="submit" (click)="handleOk()" class="btn btn-sm btn-primary" [disabled]="isSubmiting">
+          <div *ngIf="isSubmiting" class="spinner-border text-light spinner-btn" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          Actualizar
+        </button>
+      </div>
+    </div>
+
   </ng-container>
-  <div *nzModalFooter>
-    <button nz-button nzType="default" class="btn btn-danger btn-sm" style="margin-right: 8px;"
-      (click)="handleCancel()">Cancelar</button>
-    <button nz-button nzType="primary" class="btn btn-primary btn-sm" (click)="handleOk()">Crear</button>
-  </div>
 </nz-modal>

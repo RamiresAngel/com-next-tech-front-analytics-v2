@@ -147,3 +147,30 @@ export interface RfcMap {
   serie: string[]
   rfc: string
 }
+
+
+export interface bodyEditSucursal {
+  corporativo: any
+  nombre: string
+  hotel: string
+  direccion: string
+  cp: string
+  telefono: string
+  centralizado: boolean
+  rfc: string[]
+  rfc_map: RfcMap[]
+}
+
+export type ListaSucursales = Sucursal[]
+
+export interface Sucursal {
+  corporativo: any
+  nombre: string
+  hotel: string
+  direccion: string
+  telefono: string
+  centralizado: boolean
+  rfc: string[]
+  cp: string
+  rfc_map: RfcMap[]
+}

@@ -7,6 +7,7 @@ import {
   bodyCrearRFCCorporativo,
   bodyCrearRol,
   bodyCrearUsuario,
+  bodyEditSucursal,
   bodyEditarRFCCorporativo,
   bodyEditarUsuario,
   bodyGetListUsers,
@@ -35,6 +36,7 @@ export class ConfiguracionesService {
   private apiEditarRFCCorporativo: string = globalApis.url_contribuyentes + '/editar_rfc_corporativo';
   private apiListNivelAcceso: string = globalApis.url_usuarios + '/listar_hoteles';
   private apiCrearSucursal: string = globalApis.url_usuarios + '/crear_hotel';
+  private apiEditarSucursal: string = globalApis.url_usuarios + '/editar_hotel';
 
   constructor(
     private http: HttpClient
@@ -108,5 +110,9 @@ export class ConfiguracionesService {
 
   public agregarSucursal(body: bodyAddSucursal): Observable<any> {
     return this.http.post<any>(this.apiCrearSucursal, JSON.stringify(body), { headers: this.headerAuth });
+  }
+
+  public editarSucursal(body: bodyEditSucursal): Observable<any> {
+    return this.http.post<any>(this.apiEditarSucursal, JSON.stringify(body), { headers: this.headerAuth });
   }
 }

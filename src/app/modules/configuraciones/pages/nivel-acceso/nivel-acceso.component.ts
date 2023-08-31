@@ -3,6 +3,7 @@ import { UserData } from 'src/app/shared/entities/userData.model';
 import { ConfiguracionesService } from 'src/app/shared/services/configuraciones.service';
 import { ModalCreaNivelAccesoComponent } from '../../components/modal-crea-nivel-acceso/modal-crea-nivel-acceso.component';
 import { ModalEditaNivelAccesoComponent } from '../../components/modal-edita-nivel-acceso/modal-edita-nivel-acceso.component';
+import { ListaSucursales } from 'src/app/shared/entities';
 
 @Component({
   selector: 'app-nivel-acceso',
@@ -22,7 +23,8 @@ export class NivelAccesoComponent {
     },
     scrollX: true
   };
-  public rowsTable: Array<any> = [];
+  public rowsTable!: ListaSucursales;
+  public sucursal: any;
 
   constructor(
     private _configuraciones: ConfiguracionesService,
@@ -45,16 +47,6 @@ export class NivelAccesoComponent {
       rol: this.dataUser.rol
     }).subscribe(
       response => {
-        console.log(response);
-        let aux_list = []
-        aux_list = response.map((item, i) => {
-          if (item['centralizado']) {
-            item['centralizado_value'] = 'Sí';
-          } else {
-            item['centralizado_value'] = 'No';
-          }
-          return item;
-        });
         this.rowsTable = response;
         this.isLoading = false;
       }, (error: any) => {
@@ -64,8 +56,10 @@ export class NivelAccesoComponent {
   }
 
   modalEditar(item: any): void {
-    console.log(item);
-    this.modal_editar?.showModal();
+    this.sucursal = item;
+    setTimeout(() => {
+      this.modal_editar?.showModal();
+    }, 300);
   }
 
   showModal(): void {

@@ -42,7 +42,7 @@
               <td>{{item.hotel}}</td>
               <td>{{item.direccion}}</td>
               <td>{{item.telefono}}</td>
-              <td>{{item.centralizado_value}}</td>
+              <td>{{item.centralizado ? 'Si' : 'No' }}</td>
               <td>
                 <button type="button" (click)="modalEditar(item)" class="btn btn-primary btn-sm shadow-sm">
                   <i class="fa-regular fa-pen-to-square"></i>
@@ -56,4 +56,4 @@
     </div>
 
     <app-modal-crea-nivel-acceso #modal_crear></app-modal-crea-nivel-acceso>
-    <app-modal-edita-nivel-acceso #modal_editar></app-modal-edita-nivel-acceso>
+    <app-modal-edita-nivel-acceso #modal_editar [sucursalSeleccionada]="sucursal"></app-modal-edita-nivel-acceso>
