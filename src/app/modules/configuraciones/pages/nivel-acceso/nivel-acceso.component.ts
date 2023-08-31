@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserData } from 'src/app/shared/entities/userData.model';
 import { ConfiguracionesService } from 'src/app/shared/services/configuraciones.service';
+import { ModalCreaNivelAccesoComponent } from '../../components/modal-crea-nivel-acceso/modal-crea-nivel-acceso.component';
+import { ModalEditaNivelAccesoComponent } from '../../components/modal-edita-nivel-acceso/modal-edita-nivel-acceso.component';
 
 @Component({
   selector: 'app-nivel-acceso',
@@ -8,6 +10,8 @@ import { ConfiguracionesService } from 'src/app/shared/services/configuraciones.
   styleUrls: ['./nivel-acceso.component.scss']
 })
 export class NivelAccesoComponent {
+  @ViewChild('modal_crear') modal_crear?: ModalCreaNivelAccesoComponent;
+  @ViewChild('modal_editar') modal_editar?: ModalEditaNivelAccesoComponent;
   public dataUserStorage: any = localStorage.getItem("dataUser");
   public dataUser: UserData;
   public nivelAcceso: any;
@@ -61,5 +65,10 @@ export class NivelAccesoComponent {
 
   modalEditar(item: any): void {
     console.log(item);
+    this.modal_editar?.showModal();
+  }
+
+  showModal(): void {
+    this.modal_crear?.showModal();
   }
 }

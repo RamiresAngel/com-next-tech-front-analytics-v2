@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { globalApis } from 'src/environments/endpoints';
 import {
+  bodyAddSucursal,
   bodyCambiarRol,
   bodyCrearRFCCorporativo,
   bodyCrearRol,
@@ -33,6 +34,7 @@ export class ConfiguracionesService {
   private apiCrearRFCCorporativo: string = globalApis.url_contribuyentes + '/crear_rfc_corporativo';
   private apiEditarRFCCorporativo: string = globalApis.url_contribuyentes + '/editar_rfc_corporativo';
   private apiListNivelAcceso: string = globalApis.url_usuarios + '/listar_hoteles';
+  private apiCrearSucursal: string = globalApis.url_usuarios + '/crear_hotel';
 
   constructor(
     private http: HttpClient
@@ -98,5 +100,13 @@ export class ConfiguracionesService {
 
   public listarNivelAcceso(body: bodyGetNivelAcceso): Observable<Array<any>> {
     return this.http.post<Array<any>>(this.apiListNivelAcceso, JSON.stringify(body), { headers: this.headerAuth });
+  }
+
+  public listarRFCCorporativo(corporativo: any): Observable<string[]> {
+    return this.http.get<string[]>(`${globalApis.url_usuarios}/listar_rfc_corporativo?corporativo=${corporativo}`, { headers: this.headerAuth });
+  }
+
+  public agregarSucursal(body: bodyAddSucursal): Observable<any> {
+    return this.http.post<any>(this.apiCrearSucursal, JSON.stringify(body), { headers: this.headerAuth });
   }
 }

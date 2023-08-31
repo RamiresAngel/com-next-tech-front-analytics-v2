@@ -14,38 +14,46 @@
     </div>
     <div class="col-lg-4 col-xxl-4">
       <div class="row align-items-center">
-        Botón de agregar hotel
+        <!-- Botón de agregar hotel -->
+        <div class="col-12">
+          <button class="btn btn-primary btn-sm" (click)="showModal()">
+            <span class="material-symbols-outlined align-middle">add</span>
+            Agregar
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row mt-4">
-    <div class="col-12">
-      <app-loader *ngIf="isLoading"></app-loader>
-      <table *ngIf="!isLoading" datatable [dtOptions]="dtOptions" class="row-border hover w-100" id="analytics-table">
-        <thead>
-          <tr>
-            <th>Hotel</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Centralizado</th>
-            <th>Editar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of rowsTable">
-            <td>{{item.hotel}}</td>
-            <td>{{item.direccion}}</td>
-            <td>{{item.telefono}}</td>
-            <td>{{item.centralizado_value}}</td>
-            <td>
-              <button type="button" (click)="modalEditar(item)" class="btn btn-primary btn-sm shadow-sm">
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row mt-4">
+      <div class="col-12">
+        <app-loader *ngIf="isLoading"></app-loader>
+        <table *ngIf="!isLoading" datatable [dtOptions]="dtOptions" class="row-border hover w-100" id="analytics-table">
+          <thead>
+            <tr>
+              <th>Hotel</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Centralizado</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rowsTable">
+              <td>{{item.hotel}}</td>
+              <td>{{item.direccion}}</td>
+              <td>{{item.telefono}}</td>
+              <td>{{item.centralizado_value}}</td>
+              <td>
+                <button type="button" (click)="modalEditar(item)" class="btn btn-primary btn-sm shadow-sm">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
-  </div>
+    <app-modal-crea-nivel-acceso #modal_crear></app-modal-crea-nivel-acceso>
+    <app-modal-edita-nivel-acceso #modal_editar></app-modal-edita-nivel-acceso>

@@ -23,6 +23,8 @@ import { ModalCrearContribuyenteComponent } from './components/modal-crear-contr
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { ModalEditarContribuyenteComponent } from './components/modal-editar-contribuyente/modal-editar-contribuyente.component';
 import { NivelAccesoComponent } from './pages/nivel-acceso/nivel-acceso.component';
 import { DataTablesModule } from 'angular-datatables';
@@ -60,7 +62,9 @@ import { ModalEditaNivelAccesoComponent } from './components/modal-edita-nivel-a
     NzCheckboxModule,
     NzUploadModule,
     NzMessageModule,
-    DataTablesModule
+    DataTablesModule,
+    NzCollapseModule,
+    NzTagModule
   ]
 })
 export class ConfiguracionesModule { }

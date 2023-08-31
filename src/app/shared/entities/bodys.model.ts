@@ -128,3 +128,22 @@ export interface bodyGetNivelAcceso {
   niveles_acceso: string[]
   rol: string
 }
+
+export interface bodyAddSucursal {
+  corporativo: any
+  hotel: string
+  direccion: string
+  telefono: string
+  centralizado: boolean
+  rfc: string[]
+  cp: string
+  rfc_map: RfcMap[]
+  usuario: string[]
+}
+
+export interface RfcMap {
+  cp: string
+  fidecomiso: boolean
+  serie: string[]
+  rfc: string
+}
