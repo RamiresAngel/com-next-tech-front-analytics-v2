@@ -25,7 +25,9 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { ModalEditarContribuyenteComponent } from './components/modal-editar-contribuyente/modal-editar-contribuyente.component';
 import { NivelAccesoComponent } from './pages/nivel-acceso/nivel-acceso.component';
-
+import { DataTablesModule } from 'angular-datatables';
+import { ModalCreaNivelAccesoComponent } from './components/modal-crea-nivel-acceso/modal-crea-nivel-acceso.component';
+import { ModalEditaNivelAccesoComponent } from './components/modal-edita-nivel-acceso/modal-edita-nivel-acceso.component';
 @NgModule({
   declarations: [
     ConfiguracionesPageComponent,
@@ -38,7 +40,9 @@ import { NivelAccesoComponent } from './pages/nivel-acceso/nivel-acceso.componen
     SociedadesComponent,
     ModalCrearContribuyenteComponent,
     ModalEditarContribuyenteComponent,
-    NivelAccesoComponent
+    NivelAccesoComponent,
+    ModalCreaNivelAccesoComponent,
+    ModalEditaNivelAccesoComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,8 @@ import { NivelAccesoComponent } from './pages/nivel-acceso/nivel-acceso.componen
     NzSwitchModule,
     NzCheckboxModule,
     NzUploadModule,
-    NzMessageModule
+    NzMessageModule,
+    DataTablesModule
   ]
 })
 export class ConfiguracionesModule { }

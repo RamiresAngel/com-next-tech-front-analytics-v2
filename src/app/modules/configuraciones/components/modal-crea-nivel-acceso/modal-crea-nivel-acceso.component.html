@@ -1,0 +1,10 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Crea Nivel de Acceso" (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <h1>Formulario Crea</h1>
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" class="btn btn-danger btn-sm" style="margin-right: 8px;"
+      (click)="handleCancel()">Cancelar</button>
+    <button nz-button nzType="primary" class="btn btn-primary btn-sm" (click)="handleOk()">Crear</button>
+  </div>
+</nz-modal>

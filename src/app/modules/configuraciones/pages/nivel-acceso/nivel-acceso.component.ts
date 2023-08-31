@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserData } from 'src/app/shared/entities/userData.model';
+import { ConfiguracionesService } from 'src/app/shared/services/configuraciones.service';
 
 @Component({
   selector: 'app-nivel-acceso',
@@ -8,14 +9,57 @@ import { UserData } from 'src/app/shared/entities/userData.model';
 })
 export class NivelAccesoComponent {
   public dataUserStorage: any = localStorage.getItem("dataUser");
-  public dataUser:UserData;
-  public nivelAcceso:any;
+  public dataUser: UserData;
+  public nivelAcceso: any;
+  public isLoading: boolean = false;
+  dtOptions: DataTables.Settings = {
+    language: {
+      url: '../../../../../assets/data/table-language.json',
+    },
+    scrollX: true
+  };
+  public rowsTable: Array<any> = [];
 
-  constructor() {
+  constructor(
+    private _configuraciones: ConfiguracionesService,
+  ) {
     this.dataUser = JSON.parse(this.dataUserStorage);
+    this.getNivelesAcceso();
   }
 
-  public getNivelesAcceso() : void {
-    
+  public getNivelesAcceso(): void {
+    this.isLoading = true;
+    if (this.nivelAcceso === undefined || this.nivelAcceso === null || this.nivelAcceso === '') {
+      this.nivelAcceso = this.dataUser.nivel_acceso;
+    } else {
+      this.nivelAcceso = [this.nivelAcceso];
+    }
+    this._configuraciones.listarNivelAcceso({
+      email: this.dataUser.email,
+      corporativo: this.dataUser.corporativo,
+      niveles_acceso: this.nivelAcceso,
+      rol: this.dataUser.rol
+    }).subscribe(
+      response => {
+        console.log(response);
+        let aux_list = []
+        aux_list = response.map((item, i) => {
+          if (item['centralizado']) {
+            item['centralizado_value'] = 'Sí';
+          } else {
+            item['centralizado_value'] = 'No';
+          }
+          return item;
+        });
+        this.rowsTable = response;
+        this.isLoading = false;
+      }, (error: any) => {
+        this.isLoading = false;
+      }
+    );
+  }
+
+  modalEditar(item: any): void {
+    console.log(item);
   }
 }

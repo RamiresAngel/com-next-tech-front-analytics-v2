@@ -9,6 +9,7 @@ import {
   bodyEditarRFCCorporativo,
   bodyEditarUsuario,
   bodyGetListUsers,
+  bodyGetNivelAcceso,
   bodyListarRfcHotel,
   bodyRFCUser,
   bodyVerificaFuncionalidad
@@ -31,6 +32,7 @@ export class ConfiguracionesService {
   private apiRFCUser: string = globalApis.url_contribuyentes + '/rfc_user';
   private apiCrearRFCCorporativo: string = globalApis.url_contribuyentes + '/crear_rfc_corporativo';
   private apiEditarRFCCorporativo: string = globalApis.url_contribuyentes + '/editar_rfc_corporativo';
+  private apiListNivelAcceso: string = globalApis.url_usuarios + '/listar_hoteles';
 
   constructor(
     private http: HttpClient
@@ -66,7 +68,7 @@ export class ConfiguracionesService {
     return this.http.get<Array<ListaRoles>>(`${globalApis.url_usuarios}/listar_roles?corporativo=${corporativo}`, { headers: this.headerAuth });
   }
 
-  public listarFuncionalidades(corporativo:string) : Observable<Array<string>> {
+  public listarFuncionalidades(corporativo: string): Observable<Array<string>> {
     return this.http.get<Array<string>>(`${globalApis.url_usuarios}/listar_funcionalidades?corporativo=${corporativo}`, { headers: this.headerAuth });
   }
 
@@ -78,19 +80,23 @@ export class ConfiguracionesService {
     return this.http.post<any>(this.apiCreateUser, JSON.stringify(body), { headers: this.headerAuth });
   }
 
-  public crearRol(body:bodyCrearRol) : Observable<any> {
+  public crearRol(body: bodyCrearRol): Observable<any> {
     return this.http.put<any>(this.apiCreateRol, JSON.stringify(body), { headers: this.headerAuth });
   }
 
-  public RFCUser(body:bodyRFCUser) : Observable<Array<ListaContribuyentes>> {
+  public RFCUser(body: bodyRFCUser): Observable<Array<ListaContribuyentes>> {
     return this.http.post<Array<ListaContribuyentes>>(this.apiRFCUser, JSON.stringify(body), { headers: this.headerAuth });
   }
 
-  public crearRFCCorporativo(body:bodyCrearRFCCorporativo) : Observable<any> {
+  public crearRFCCorporativo(body: bodyCrearRFCCorporativo): Observable<any> {
     return this.http.post<any>(this.apiCrearRFCCorporativo, JSON.stringify(body), { headers: this.headerAuth });
   }
 
-  public editarRFCCorporativo(body:bodyEditarRFCCorporativo) : Observable<any> {
+  public editarRFCCorporativo(body: bodyEditarRFCCorporativo): Observable<any> {
     return this.http.post<any>(this.apiEditarRFCCorporativo, JSON.stringify(body), { headers: this.headerAuth });
+  }
+
+  public listarNivelAcceso(body: bodyGetNivelAcceso): Observable<Array<any>> {
+    return this.http.post<Array<any>>(this.apiListNivelAcceso, JSON.stringify(body), { headers: this.headerAuth });
   }
 }
